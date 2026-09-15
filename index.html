@@ -1,401 +1,3415 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfólio — Amanda Duaibs</title>
-<style>
-  :root{
-    --azul-profundo:#0a1a3f; --azul-medio:#1b3a6b; --azul-claro:#2c5f8a;
-    --dourado:#f5c542; --ambar:#e8a33d; --creme:#f7f4ee; --texto:#2b2b2b;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio — Amanda Duaibs</title>
+
+  <!-- Google Fonts: Caveat & Space Grotesk -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+
+  <!-- Basecoat CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">
+  
+  <!-- Shell system CSS -->
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Complements basecoat; artifacts override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--creme);color:var(--texto);line-height:1.6}
-  h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;color:var(--azul-profundo)}
-  a{color:var(--ambar);text-decoration:none;transition:color .2s}
-  a:hover{color:var(--dourado)}
-  .container{max-width:1100px;margin:0 auto;padding:0 24px}
-  /* ===== Navegação ===== */
-  header{background:linear-gradient(135deg,var(--azul-profundo),var(--azul-medio));padding:18px 0;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(10,26,63,.35)}
-  nav{display:flex;justify-content:space-between;align-items:center;gap:16px}
-  .logo{color:var(--dourado);font-family:Georgia,serif;font-size:1.3rem;font-weight:bold}
-  .menu{display:flex;gap:22px;flex-wrap:wrap}
-  .menu a{color:#e8e4da;font-weight:500;font-size:.95rem}
-  .menu a:hover{color:var(--dourado)}
-  /* ===== Hero ===== */
-  .hero{background:radial-gradient(circle at 80% 20%,var(--azul-claro),var(--azul-profundo) 70%);color:#f0ece2;text-align:center;padding:90px 24px 80px;position:relative;overflow:hidden}
-  .hero::before{content:"";position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.35),transparent 70%)}
-  .hero h1{font-size:3rem;color:#fff;margin-bottom:10px}
-  .hero p{font-size:1.25rem;color:var(--dourado);max-width:640px;margin:0 auto 28px}
-  .btn{display:inline-block;background:var(--dourado);color:var(--azul-profundo);font-weight:600;padding:12px 28px;border-radius:26px 10px 26px 10px;transition:transform .2s,box-shadow .2s}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(245,197,66,.4);color:var(--azul-profundo)}
-  /* ===== Seções ===== */
-  section{padding:70px 0}
-  .section-title{font-size:2rem;text-align:center;margin-bottom:8px}
-  .section-sub{text-align:center;color:#5a5a5a;margin-bottom:44px}
-  .card{background:#fff;border-radius:18px 6px 18px 6px;padding:28px;box-shadow:0 4px 16px rgba(10,26,63,.08);transition:transform .25s,box-shadow .25s}
-  .card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(10,26,63,.14)}
-  /* ===== Sobre ===== */
-  .sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
-  .sobre-grid p{color:#444}
-  .sobre-destaque{font-size:1.15rem;color:var(--azul-medio);font-weight:600;margin-bottom:14px}
-  /* ===== Habilidades ===== */
-  .skills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-  .skill-tag{background:var(--azul-profundo);color:var(--dourado);padding:8px 18px;border-radius:20px 6px 20px 6px;font-size:.9rem;font-weight:500}
-  /* ===== Projetos ===== */
-  .projetos-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-  .projeto-card h3{margin-bottom:8px}
-  .projeto-card p{color:#555;font-size:.95rem;margin-bottom:14px}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-  .tag{background:#eef1f7;color:var(--azul-medio);font-size:.78rem;padding:4px 12px;border-radius:12px 4px 12px 4px}
-  .link-projeto{font-weight:600;color:var(--ambar)}
-  .link-projeto:hover{color:var(--dourado)}
-  /* ===== Artigos ===== */
-  .artigos-lista{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
-  .artigo-item{background:#fff;border-radius:14px 5px 14px 5px;padding:18px 22px;box-shadow:0 3px 12px rgba(10,26,63,.07)}
-  .artigo-item a{font-weight:600;color:var(--azul-medio);font-size:1.02rem}
-  .artigo-item a:hover{color:var(--ambar)}
-  /* ===== Contato ===== */
-  .contato-box{text-align:center;max-width:640px;margin:0 auto;background:#fff;border-radius:22px 8px 22px 8px;padding:44px 32px;box-shadow:0 6px 22px rgba(10,26,63,.1)}
-  .contato-box h2{font-size:1.9rem;margin-bottom:10px}
-  .contato-box p{color:#555;margin-bottom:24px}
-  .contato-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn-contato{display:inline-block;border:2px solid var(--ambar);color:var(--ambar);font-weight:600;padding:10px 24px;border-radius:22px 8px 22px 8px;transition:all .2s}
-  .btn-contato:hover{background:var(--ambar);color:var(--azul-profundo)}
-  /* ===== Rodapé ===== */
-  footer{background:var(--azul-profundo);color:#c9c4b8;text-align:center;padding:26px 0;font-size:.9rem}
-  footer a{color:var(--dourado)}
-  /* ===== Páginas internas ===== */
-  .page{display:none}
-  .page.active{display:block}
-  .page-hero{background:linear-gradient(135deg,var(--azul-profundo),var(--azul-claro));color:#f0ece2;padding:56px 0 44px;text-align:center}
-  .page-hero h1{color:#fff;font-size:2.2rem;margin-bottom:8px}
-  .page-hero p{color:var(--dourado)}
-  .page-body{padding:56px 0}
-  .voltar{display:inline-block;margin-bottom:26px;font-weight:600}
-  .page-body h2{font-size:1.5rem;margin:34px 0 12px;color:var(--azul-medio)}
-  .page-body p{color:#444;margin-bottom:12px}
-  .page-body ol,.page-body ul{margin:0 0 14px 22px;color:#444}
-  .page-body li{margin-bottom:8px}
-  .destaque{background:linear-gradient(135deg,var(--dourado),var(--ambar));color:var(--azul-profundo);border-radius:16px 6px 16px 6px;padding:20px 24px;font-weight:600;margin-top:26px}
-  .demo-box{background:#fff;border:2px solid rgba(232,163,61,.5);border-radius:18px 6px 18px 6px;padding:18px;box-shadow:0 6px 20px rgba(10,26,63,.1);max-width:1000px;margin:18px auto}
-  .demo-box iframe{width:100%;height:520px;border:0;border-radius:12px 4px 12px 4px}
-  .demo-texto{text-align:center;color:#555;margin-bottom:14px}
-  .video-box{position:relative;width:100%;max-width:900px;margin:18px auto;aspect-ratio:16/9;border-radius:18px 6px 18px 6px;overflow:hidden;box-shadow:0 6px 20px rgba(10,26,63,.12)}
-  .video-box iframe{width:100%;height:100%;border:0}
-  .galeria{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:18px 0}
-  .galeria img{width:100%;border-radius:14px 5px 14px 5px;box-shadow:0 4px 14px rgba(10,26,63,.1)}
-  .btn-abrir{display:inline-block;border:2px solid var(--ambar);color:var(--ambar);font-weight:600;padding:10px 22px;border-radius:22px 8px 22px 8px;transition:all .2s;margin-top:14px}
-  .btn-abrir:hover{background:var(--ambar);color:var(--azul-profundo)}
-  .centro{text-align:center}
-  /* ===== Responsivo ===== */
-  @media(max-width:768px){
-    .hero h1{font-size:2.2rem}
-    .sobre-grid,.projetos-grid{grid-template-columns:1fr}
-    .galeria{grid-template-columns:1fr}
-    .demo-box iframe{height:420px}
-    .menu{gap:12px}
-  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: #0a8f3c; }
+.kpi .kpi-delta.down { color: #cf3131; }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
 </style>
+
+  <!-- Shell script (chart helpers & formatters) -->
+  
+
+  <style>
+    :root {
+      --accent: #f5c542;
+      --accent-text: #fde68a;
+      --accent-contrast: #0a1329;
+      --vg-night: #060d1d;
+      --vg-deep-blue: #0a1a3f;
+      --vg-cobalt: #1b3a6b;
+      --vg-sky: #2c5f8a;
+      --vg-gold: #f5c542;
+      --vg-amber: #e8a33d;
+      --vg-terracotta: #e06c43;
+      --vg-card-bg: rgba(10, 26, 63, 0.72);
+      --font-display: 'Caveat', cursive, serif;
+      --font-body: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--vg-night);
+      color: #e2e8f0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      margin: 0;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Vincent van Gogh - Textura Estática e Elegante */
+    .vg-sky-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      background: 
+        radial-gradient(circle at 82% 14%, rgba(245, 197, 66, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 20% 40%, rgba(44, 95, 138, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 50% 0%, #132448 0%, #081329 55%, #050b18 100%);
+    }
+
+    .vg-texture-layer {
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 6px),
+        radial-gradient(ellipse at 60% 85%, rgba(27, 58, 107, 0.22) 0%, transparent 50%);
+      opacity: 0.7;
+    }
+
+    /* Estrelas estáticas e discretas no Hero */
+    .hero-static-stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .static-star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fde68a;
+      box-shadow: 0 0 6px rgba(245, 197, 66, 0.6);
+      opacity: 0.65;
+    }
+
+    /* Scroll reveal leve */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .relative-z {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Expressive Typography */
+    .font-artistic {
+      font-family: var(--font-display);
+      letter-spacing: 0.02em;
+    }
+
+    .font-sans {
+      font-family: var(--font-body);
+    }
+
+    /* Fixed Header with brush stroke bottom border */
+    .header-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6, 13, 29, 0.85);
+      border-bottom: 2px solid rgba(245, 197, 66, 0.22);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 1.85rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .nav-brand-vortex {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(245, 197, 66, 0.5), 0 0 5px rgba(10, 26, 63, 0.8);
+      display: inline-block;
+      flex-shrink: 0;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .nav-brand:hover .nav-brand-vortex {
+      transform: rotate(40deg) scale(1.08);
+      box-shadow: 0 0 14px rgba(245, 197, 66, 0.75);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.25s ease;
+      position: relative;
+      padding: 0.3rem 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--vg-gold);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--vg-gold), var(--vg-amber));
+      border-radius: 4px;
+      transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: rgba(245, 197, 66, 0.1);
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      color: #f8fafc;
+      padding: 0.45rem 0.65rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Cantos orgânicos suaves nos cartões */
+    .vg-card {
+      background: linear-gradient(135deg, rgba(14, 30, 70, 0.75) 0%, rgba(8, 19, 48, 0.85) 100%);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      border-radius: 22px 10px 20px 10px;
+      box-shadow: 0 10px 30px -8px rgba(2, 6, 23, 0.6);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .vg-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 197, 66, 0.4);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75);
+    }
+
+    /* Painterly brush stroke top ribbon */
+    .vg-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--vg-gold), var(--vg-amber), transparent);
+      opacity: 0.4;
+      border-radius: 999px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .vg-card:hover::before {
+      opacity: 1;
+      transform: scaleX(1.1);
+    }
+
+    /* Custom Painterly Buttons */
+    .btn-artistic {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 24px 8px 20px 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .btn-artistic-primary {
+      background: linear-gradient(135deg, #f5c542 0%, #e8a33d 70%, #d97706 100%);
+      color: #081126;
+      border: 1px solid #fde68a;
+      box-shadow: 0 4px 18px rgba(245, 197, 66, 0.4), inset 0 1px 1px rgba(255,255,255,0.6);
+    }
+
+    .btn-artistic-primary:hover {
+      background: linear-gradient(135deg, #fde68a 0%, #f5c542 60%, #e8a33d 100%);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(245, 197, 66, 0.55);
+      color: #040914;
+    }
+
+    .btn-artistic-secondary {
+      background: rgba(27, 58, 107, 0.4);
+      color: #f1f5f9;
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-artistic-secondary:hover {
+      background: rgba(44, 95, 138, 0.55);
+      border-color: var(--vg-gold);
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(44, 95, 138, 0.4);
+    }
+
+    /* Hero section with spinning vortex and Starry Night atmosphere */
+    .hero-container {
+      position: relative;
+      padding: 6.5rem 1.5rem 4.25rem;
+      max-width: 1050px;
+      margin: 0 auto;
+      text-align: center;
+      z-index: 2;
+    }
+
+    /* Fundo suave e estático atrás do hero */
+    .hero-vortex-bg {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      width: 500px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 197, 66, 0.12) 0%, rgba(44, 95, 138, 0.15) 45%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1.15rem;
+      background: rgba(245, 197, 66, 0.1);
+      border: 1px solid rgba(245, 197, 66, 0.28);
+      color: #fde68a;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #34d399;
+      box-shadow: 0 0 6px #34d399;
+    }
+
+    .hero-greeting {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      color: #93c5fd;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-name {
+      font-size: clamp(3.2rem, 8vw, 6.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      margin: 0.4rem 0 1.35rem;
+      color: #fde68a;
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 25%, #f5c542 60%, #e8a33d 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 24px rgba(245, 197, 66, 0.35));
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      color: #bae6fd;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-subtitle .pill-art {
+      background: rgba(44, 95, 138, 0.35);
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      padding: 0.2rem 0.85rem;
+      border-radius: 20px 6px 18px 8px;
+      font-size: 0.95rem;
+      color: #e0f2fe;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+      color: #cbd5e1;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Wavy Paintbrush SVG Dividers */
+    .vg-wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: translateZ(0);
+      position: relative;
+      z-index: 2;
+    }
+
+    .vg-wave-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 52px;
+    }
+
+    .vg-wave-divider.flip {
+      transform: rotate(180deg);
+    }
+
+    /* Section layout */
+    .section-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 5.5rem 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--vg-gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2.3rem, 4.5vw, 3.2rem);
+      color: #ffffff;
+      margin: 0 0 0.6rem;
+      line-height: 1.15;
+    }
+
+    .section-subtext {
+      color: #94a3b8;
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    /* Brush swirl indicator */
+    .swirl-divider {
+      width: 120px;
+      height: 5px;
+      background: linear-gradient(90deg, transparent, #e06c43, #f5c542, #38bdf8, transparent);
+      margin: 1.3rem auto 0;
+      border-radius: 9999px;
+    }
+
+    /* About Section */
+    .about-card-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.8rem 2.8rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      line-height: 1.75;
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .highlight-pill {
+      background: rgba(27, 58, 107, 0.35);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      border-radius: 16px 6px 16px 6px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      transition: border-color 0.25s ease;
+    }
+
+    .highlight-pill:hover {
+      border-color: rgba(245, 197, 66, 0.4);
+    }
+
+    .highlight-icon {
+      color: var(--vg-gold);
+      font-size: 1.35rem;
+    }
+
+    .highlight-text strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 0.9rem;
+    }
+
+    .highlight-text span {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* Skills as Painterly Swatches with vibrant color strokes */
+    .skills-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .skill-card {
+      padding: 2rem 1.8rem;
+      height: 100%;
+      position: relative;
+    }
+
+    /* Painted color stroke ribbons on skill cards */
+    .skill-card.stroke-gold {
+      border-top: 5px solid var(--vg-gold);
+    }
+    .skill-card.stroke-blue {
+      border-top: 5px solid #38bdf8;
+    }
+    .skill-card.stroke-amber {
+      border-top: 5px solid var(--vg-amber);
+    }
+    .skill-card.stroke-terracotta {
+      border-top: 5px solid var(--vg-terracotta);
+    }
+
+    .skill-brush-badge {
+      display: inline-block;
+      width: 36px;
+      height: 6px;
+      border-radius: 4px;
+      margin-bottom: 0.9rem;
+    }
+
+    .skill-icon-header {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .skill-cat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px 6px 14px 6px;
+      background: rgba(245, 197, 66, 0.14);
+      border: 1px solid rgba(245, 197, 66, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--vg-gold);
+      flex-shrink: 0;
+    }
+
+    .skill-card h3 {
+      font-size: 1.35rem;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .skill-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .skill-tag {
+      background: rgba(6, 13, 29, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.85rem;
+      border-radius: 14px 4px 12px 4px;
+      transition: all 0.25s ease;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--vg-gold);
+      color: #fff;
+      background: rgba(27, 58, 107, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Projects Section - Grid Responsivo (2x2 Desktop / 1 Coluna Mobile) */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.85rem;
+      max-width: 1140px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .project-card {
+      padding: 2.5rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      border-radius: 26px 12px 24px 12px;
+      background: linear-gradient(135deg, rgba(16, 34, 78, 0.82) 0%, rgba(8, 20, 52, 0.92) 100%);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      box-shadow: 0 16px 38px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 197, 66, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 197, 66, 0.55);
+      box-shadow: 0 22px 46px -10px rgba(0, 0, 0, 0.8), 0 0 28px rgba(245, 197, 66, 0.2);
+    }
+
+    .project-header {
+      margin-bottom: 1rem;
+    }
+
+    .project-type-tag {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--vg-gold);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+      display: inline-block;
+    }
+
+    .project-title {
+      font-size: 1.55rem;
+      color: #ffffff;
+      margin: 0 0 0.85rem;
+      line-height: 1.25;
+    }
+
+    .project-summary {
+      color: #cbd5e1;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+
+    .project-techs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .project-techs span {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 12px 4px 12px 4px;
+      background: rgba(27, 58, 107, 0.4);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--vg-gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      margin-top: 1.1rem;
+      padding: 0.42rem 0.95rem;
+      background: rgba(245, 197, 66, 0.1);
+      border: 1px solid rgba(245, 197, 66, 0.32);
+      border-radius: 14px 4px 12px 4px;
+      transition: all 0.25s ease;
+      width: fit-content;
+    }
+
+    .project-link:hover {
+      background: rgba(245, 197, 66, 0.2);
+      border-color: var(--vg-gold);
+      color: #fef08a;
+      transform: translateX(3px);
+    }
+
+    .project-link svg {
+      transition: transform 0.25s ease;
+    }
+
+    .project-link:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    .project-card-interactive {
+      cursor: pointer;
+      display: flex;
+      text-align: left;
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      font-family: inherit;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card-interactive:hover .project-link {
+      background: rgba(245, 197, 66, 0.22);
+      border-color: var(--vg-gold);
+      color: #fef08a;
+      transform: translateX(3px);
+    }
+
+    .project-card-interactive:hover .project-link svg {
+      transform: translate(2px, -2px);
+    }
+
+    .project-card-interactive:focus-visible {
+      outline: 2px solid var(--vg-gold);
+      outline-offset: 4px;
+    }
+
+    .project-footer {
+      margin-top: auto;
+    }
+
+    /* Artigos Section */
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(245, 197, 66, 0.45);
+      box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.65), 0 0 16px rgba(245, 197, 66, 0.12);
+    }
+
+    .article-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .article-index {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--vg-gold);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .article-card-title {
+      font-size: 1.22rem;
+      margin: 0 0 0.35rem;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .article-card-title a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+      display: inline-block;
+    }
+
+    .article-card-title a:hover {
+      color: #fde68a;
+      text-shadow: 0 0 10px rgba(245, 197, 66, 0.45);
+    }
+
+    .article-card:hover .article-card-title a {
+      color: #fde68a;
+    }
+
+    .article-theme {
+      color: #94a3b8;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      margin: 0 0 0.45rem;
+    }
+
+    .article-sublink {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--vg-gold);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 0.35rem;
+      transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
+      width: fit-content;
+    }
+
+    .article-sublink:hover {
+      color: #fef08a;
+      text-shadow: 0 0 8px rgba(245, 197, 66, 0.65);
+      transform: translateX(3px);
+    }
+
+    .article-card-title a:focus-visible,
+    .article-sublink:focus-visible,
+    .article-cta:focus-visible {
+      outline: 2px solid var(--vg-gold);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .article-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--vg-gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      padding: 0.55rem 1.15rem;
+      background: rgba(245, 197, 66, 0.1);
+      border: 1px solid rgba(245, 197, 66, 0.32);
+      border-radius: 14px 4px 12px 4px;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .article-cta:hover {
+      background: rgba(245, 197, 66, 0.22);
+      border-color: var(--vg-gold);
+      color: #ffffff;
+      transform: translateX(4px);
+      box-shadow: 0 0 12px rgba(245, 197, 66, 0.3);
+    }
+
+    .articles-footer-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .article-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.4rem 1.3rem;
+        gap: 1.1rem;
+      }
+      .article-cta {
+        align-self: flex-start;
+      }
+    }
+
+    /* Estilos específicos da View Interna do Projeto */
+    .project-detail-view {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-detail-nav {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-back-portfolio {
+      background: rgba(27, 58, 107, 0.45);
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      color: #fde68a;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.55rem 1.25rem;
+      border-radius: 18px 6px 16px 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-back-portfolio:hover {
+      background: rgba(245, 197, 66, 0.2);
+      border-color: var(--vg-gold);
+      color: #ffffff;
+      transform: translateX(-3px);
+    }
+
+    .project-detail-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      padding: 1.5rem 0 1rem;
+    }
+
+    .project-detail-tag {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--vg-gold);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .project-detail-title {
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      color: #ffffff;
+      margin: 0.1rem 0 0.6rem;
+      line-height: 1.15;
+    }
+
+    .project-detail-subtitle {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: #bae6fd;
+      font-weight: 500;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .project-sections-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .detail-section-card {
+      padding: 2.2rem 2.4rem;
+    }
+
+    .detail-section-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .detail-section-heading h3 {
+      font-size: 1.55rem;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .detail-section-heading .heading-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--vg-gold);
+      box-shadow: 0 0 8px rgba(245, 197, 66, 0.6);
+      display: inline-block;
+    }
+
+    .detail-body-text {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .process-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .process-step-item {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      padding: 1.4rem 1.6rem;
+      background: rgba(6, 13, 29, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 18px 8px 16px 8px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .process-step-item:hover {
+      border-color: rgba(245, 197, 66, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50% 35% 50% 35%;
+      background: linear-gradient(135deg, #f5c542 0%, #e8a33d 100%);
+      color: #060d1d;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(245, 197, 66, 0.4);
+    }
+
+    .step-content strong {
+      display: block;
+      color: #ffffff;
+      font-size: 1.12rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .step-content p {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .project-detail-bottom-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(245, 197, 66, 0.2);
+    }
+
+    /* Imagens Integradas do Projeto com Estética Van Gogh */
+    .project-figure {
+      margin: 1.5rem 0 0;
+      background: rgba(6, 13, 29, 0.75);
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 26px rgba(2, 6, 23, 0.6);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-figure:hover {
+      transform: translateY(-3px);
+      border-color: rgba(245, 197, 66, 0.45);
+      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.8), 0 0 14px rgba(245, 197, 66, 0.12);
+    }
+
+    .project-figure-media {
+      width: 100%;
+      background: #030712;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-figure-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .project-figure:hover .project-figure-img {
+      transform: scale(1.015);
+    }
+
+    .project-figure-caption {
+      padding: 0.8rem 1.2rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+      font-style: italic;
+      border-top: 1px solid rgba(245, 197, 66, 0.15);
+      background: linear-gradient(180deg, rgba(10, 26, 63, 0.6) 0%, rgba(6, 13, 29, 0.9) 100%);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      line-height: 1.45;
+    }
+
+    .project-figure-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--vg-gold);
+      flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(245, 197, 66, 0.7);
+    }
+
+    /* Galeria de Imagens do Dashboard em Grid Responsivo (2 colunas desktop, 1 coluna mobile) */
+    .dashboard-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .dashboard-gallery-grid .project-figure {
+      margin: 0;
+    }
+
+    /* Demonstração em Vídeo Responsivo 16:9 */
+    .video-demo-container {
+      max-width: 800px;
+      margin: 1.5rem auto 0;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.75), 0 0 16px rgba(245, 197, 66, 0.1);
+      background: #030712;
+      position: relative;
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-demo-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Looker Studio Embedded Dashboard Container */
+    .looker-embed-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 1rem auto 0;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1.5px solid rgba(245, 197, 66, 0.32);
+      background: linear-gradient(135deg, rgba(16, 34, 78, 0.88) 0%, rgba(10, 24, 58, 0.95) 100%);
+      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(245, 197, 66, 0.12);
+      aspect-ratio: 16 / 10;
+      min-height: 520px;
+      position: relative;
+    }
+
+    .looker-embed-container iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Destaque especial para recrutadores */
+    .recruiter-highlight-box {
+      margin-top: 1.6rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 18px 8px 16px 8px;
+      border: 1.5px solid rgba(245, 197, 66, 0.45);
+      background: linear-gradient(135deg, rgba(245, 197, 66, 0.1) 0%, rgba(27, 58, 107, 0.35) 60%, rgba(10, 26, 63, 0.55) 100%);
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(245, 197, 66, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .recruiter-highlight-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50% 35% 50% 35%;
+      background: linear-gradient(135deg, #f5c542, #e8a33d);
+      color: #060d1d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 12px rgba(245, 197, 66, 0.35);
+    }
+
+    .recruiter-highlight-text {
+      color: #fef08a;
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .looker-embed-container {
+        min-height: 420px;
+        height: 420px;
+        aspect-ratio: auto;
+      }
+      .looker-embed-container iframe {
+        height: 420px !important;
+      }
+      .recruiter-highlight-box {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.15rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .looker-embed-container {
+        min-height: 420px;
+        height: 420px;
+      }
+      .looker-embed-container iframe {
+        height: 420px !important;
+      }
+    }
+
+    /* Contact Section - Canvas / Painting Frame (Quadro em Tela) */
+    .canvas-frame-container {
+      background: linear-gradient(135deg, #1c1308 0%, #30200e 50%, #170f07 100%);
+      padding: 14px;
+      border-radius: 32px 12px 32px 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 12px rgba(245, 197, 66, 0.25);
+      border: 2px solid #b87a28;
+      position: relative;
+    }
+
+    .canvas-matte {
+      background: 
+        radial-gradient(ellipse at 80% 20%, rgba(245, 197, 66, 0.08) 0%, transparent 50%),
+        linear-gradient(145deg, rgba(14, 28, 64, 0.95), rgba(7, 16, 40, 0.95));
+      border: 1px dashed rgba(245, 197, 66, 0.35);
+      border-radius: 24px 8px 24px 8px;
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+
+    .canvas-corner-accent {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--vg-gold);
+    }
+    .canvas-corner-accent.tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+    .canvas-corner-accent.tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+    .canvas-corner-accent.bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+    .canvas-corner-accent.br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .contact-info-block h3 {
+      font-size: 2.6rem;
+      color: #ffffff;
+      margin: 0 0 1rem;
+      line-height: 1.15;
+    }
+
+    .contact-info-block p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item-link {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      padding: 0.9rem 1.35rem;
+      border-radius: 18px 6px 16px 6px;
+      background: rgba(6, 13, 31, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .contact-item-link:hover {
+      background: rgba(27, 58, 107, 0.55);
+      border-color: var(--vg-gold);
+      color: #ffffff;
+      transform: translateX(6px);
+      box-shadow: 0 4px 18px rgba(245, 197, 66, 0.15);
+    }
+
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50% 30% 50% 30%;
+      background: rgba(245, 197, 66, 0.18);
+      color: var(--vg-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Interactive message mockup form */
+    .quick-message-form {
+      background: rgba(6, 13, 31, 0.85);
+      padding: 2.2rem;
+      border-radius: 24px 8px 24px 8px;
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.8rem 1.1rem;
+      background: rgba(14, 25, 54, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 12px 4px 12px 4px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--vg-gold);
+      box-shadow: 0 0 0 3px rgba(245, 197, 66, 0.25);
+    }
+
+    /* Links rápidos de Contato (LinkedIn & GitHub) */
+    .contact-social-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-quick-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.15rem;
+      border-radius: 16px 6px 14px 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--vg-gold);
+      background: rgba(245, 197, 66, 0.08);
+      border: 1px solid rgba(245, 197, 66, 0.45);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .contact-quick-btn:hover {
+      background: rgba(245, 197, 66, 0.22);
+      border-color: var(--vg-gold);
+      color: #ffffff;
+      box-shadow: 0 0 14px rgba(245, 197, 66, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .contact-quick-btn:focus-visible,
+    .nav-social-btn:focus-visible,
+    .footer-social-link:focus-visible {
+      outline: 2px solid var(--vg-gold);
+      outline-offset: 3px;
+    }
+
+    /* Ícones sociais na navegação */
+    .nav-social-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px 4px 10px 4px;
+      color: #cbd5e1;
+      background: rgba(245, 197, 66, 0.08);
+      border: 1px solid rgba(245, 197, 66, 0.28);
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .nav-social-btn:hover {
+      color: var(--vg-gold);
+      border-color: var(--vg-gold);
+      background: rgba(245, 197, 66, 0.2);
+      box-shadow: 0 0 10px rgba(245, 197, 66, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .portfolio-footer {
+      border-top: 1px solid rgba(245, 158, 11, 0.15);
+      background: rgba(6, 13, 31, 0.95);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .footer-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.1rem;
+      margin-bottom: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-social-link {
+      color: #94a3b8;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .footer-social-link:hover {
+      color: var(--vg-gold);
+      text-shadow: 0 0 8px rgba(245, 197, 66, 0.45);
+    }
+
+    .footer-copy {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #081126;
+        flex-direction: column;
+        padding: 1.5rem;
+        border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+        gap: 1rem;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .project-card {
+        padding: 1.8rem 1.4rem;
+      }
+      .about-card-wrap {
+        padding: 2rem 1.4rem;
+      }
+      .about-highlights {
+        grid-template-columns: 1fr;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .canvas-matte {
+        padding: 2rem 1.25rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ===== CABEÇALHO ===== -->
-<header>
-  <div class="container">
-    <nav>
-      <span class="logo">Amanda Duaibs</span>
-      <div class="menu">
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#habilidades">Habilidades</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#artigos">Artigos</a>
-        <a href="#contato">Contato</a>
+  <!-- Fundo van Gogh com textura estática sutil -->
+  <div class="vg-sky-canvas" aria-hidden="true">
+    <div class="vg-texture-layer"></div>
+  </div>
+
+  <div class="relative-z">
+    <!-- Header / Navigation -->
+    <header class="header-nav">
+      <div class="nav-container">
+        <a href="#hero" class="nav-brand font-artistic">
+          <!-- Redemoinho Van Gogh Noite Estrelada integrado ao cabeçalho -->
+          <svg class="nav-brand-vortex" viewBox="0 0 120 120" width="24" height="24" role="img" aria-hidden="true">
+            <defs>
+              <radialGradient id="navVgCenter" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="35%" stop-color="#f5c542"/>
+                <stop offset="65%" stop-color="#e8a33d"/>
+                <stop offset="85%" stop-color="#1b3a6b"/>
+                <stop offset="100%" stop-color="#0a1a3f"/>
+              </radialGradient>
+              <linearGradient id="navVgGoldSwirl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde68a"/>
+                <stop offset="50%" stop-color="#f5c542"/>
+                <stop offset="100%" stop-color="#d97706"/>
+              </linearGradient>
+            </defs>
+            <!-- Base circular com gradiente cósmico -->
+            <circle cx="60" cy="60" r="58" fill="url(#navVgCenter)" stroke="#f5c542" stroke-width="2" />
+            
+            <!-- Pinceladas espiraladas em azul-noite e azul-cobalto -->
+            <path d="M 60,60 m -10,-5 a 12,12 0 1,0 22,8 a 22,20 0 1,0 -36,-16 a 34,32 0 1,0 52,24 a 46,44 0 1,0 -68,-34" fill="none" stroke="#1b3a6b" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="14 7" opacity="0.88"/>
+            <path d="M 60,60 m -5,8 a 15,15 0 1,1 18,-15 a 26,26 0 1,1 -30,22 a 40,40 0 1,1 46,-32" fill="none" stroke="#0a1a3f" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="10 5" opacity="0.95"/>
+            <path d="M 60,60 m -15,-2 a 18,18 0 1,0 26,14 a 30,30 0 1,0 -42,-22 a 44,44 0 1,0 58,32" fill="none" stroke="#2c5f8a" stroke-width="3" stroke-linecap="round" stroke-dasharray="12 6" opacity="0.9"/>
+            <path d="M 60,60 m -8,3 a 10,10 0 1,1 12,-10 a 20,20 0 1,1 -18,14 a 32,32 0 1,1 28,-22" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.85"/>
+
+            <!-- Pinceladas espiraladas em dourado e âmbar -->
+            <path d="M 60,60 m -6,-6 a 8,8 0 1,0 12,5 a 16,16 0 1,0 -20,-11 a 28,27 0 1,0 36,18 a 42,40 0 1,0 -50,-26" fill="none" stroke="url(#navVgGoldSwirl)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="15 6"/>
+            <path d="M 60,60 m 4,4 a 14,14 0 1,1 -15,-12 a 24,24 0 1,1 24,18 a 38,38 0 1,1 -34,-26" fill="none" stroke="#e8a33d" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="9 7" opacity="0.95"/>
+            <path d="M 60,60 m -3,1 a 6,6 0 1,0 7,6 a 12,12 0 1,0 -11,-9 a 22,22 0 1,0 18,14 a 36,36 0 1,0 -26,-20" fill="none" stroke="#fef08a" stroke-width="2" stroke-linecap="round" stroke-dasharray="7 5"/>
+            
+            <!-- Núcleo luminoso -->
+            <circle cx="60" cy="60" r="5" fill="#ffffff" opacity="0.9"/>
+            <circle cx="60" cy="60" r="8" fill="#fde68a" opacity="0.45"/>
+          </svg>
+          <span>Amanda Duaibs</span>
+        </a>
+
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Abrir menu de navegação">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+            <li><a href="#projetos" class="nav-link">Projetos</a></li>
+            <li><a href="#artigos" class="nav-link">Artigos</a></li>
+            <li><a href="#contato" class="nav-link">Contato</a></li>
+            <li class="nav-social-wrap">
+              <a href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener" class="nav-social-btn" aria-label="LinkedIn de Amanda Duaibs (abre em nova aba)">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener" class="nav-social-btn" aria-label="GitHub de Amanda Duaibs (abre em nova aba)">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#contato" class="btn-artistic btn-artistic-primary" style="padding: 0.45rem 1.1rem; font-size: 0.85rem;">
+                Fale comigo
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </nav>
-  </div>
-</header>
+    </header>
 
-<!-- ===== HERO ===== -->
-<div class="hero" id="inicio">
-  <div class="container">
-    <h1>Amanda Duaibs</h1>
-    <p>Transformo dados em decisões — SQL, Python, Power BI e ETL.</p>
-    <a href="#projetos" class="btn">Ver projetos</a>
-  </div>
-</div>
+    <main>
+      <!-- View Principal: Portfólio Completo -->
+      <div id="viewPortfolio">
+      <!-- Hero Section com atmosfera sutil e elegante -->
+      <section id="hero" class="hero-container reveal">
+        <!-- Estrelas discretas e estáticas exclusivas do Hero -->
+        <div class="hero-static-stars" aria-hidden="true">
+          <span class="static-star" style="top: 15%; left: 12%; width: 3px; height: 3px;"></span>
+          <span class="static-star" style="top: 28%; left: 86%; width: 4px; height: 4px; opacity: 0.8;"></span>
+          <span class="static-star" style="top: 72%; left: 8%; width: 3px; height: 3px; opacity: 0.5;"></span>
+          <span class="static-star" style="top: 18%; left: 74%; width: 2.5px; height: 2.5px; opacity: 0.6;"></span>
+          <span class="static-star" style="top: 82%; left: 91%; width: 3.5px; height: 3.5px; opacity: 0.75;"></span>
+          <span class="static-star" style="top: 60%; left: 82%; width: 2px; height: 2px; opacity: 0.45;"></span>
+          <span class="static-star" style="top: 35%; left: 22%; width: 2px; height: 2px; opacity: 0.5;"></span>
+        </div>
 
-<!-- ===== SOBRE ===== -->
-<section id="sobre">
-  <div class="container">
-    <h2 class="section-title">Sobre mim</h2>
-    <p class="section-sub">Engenheira da Computação e estudante de Ciência de Dados</p>
-    <div class="sobre-grid">
-      <div>
-        <p class="sobre-destaque">Motivada pela paixão por aprendizado contínuo e pela busca por inovação digital.</p>
-        <p>Atuo com análise de dados e BI, transformando dados brutos em informações que apoiam decisões. Tenho experiência prática com SQL, Python, Power BI e Looker Studio, construindo dashboards, pipelines e análises orientadas a resultado.</p>
-      </div>
-      <div>
-        <p>Meu foco é gerar valor a partir dos dados: entender o problema, modelar a informação e entregar visualizações que contam uma história clara — do dado à decisão.</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="hero-vortex-bg" aria-hidden="true"></div>
 
-<!-- ===== HABILIDADES ===== -->
-<section id="habilidades" style="background:#eef1f7">
-  <div class="container">
-    <h2 class="section-title">Habilidades</h2>
-    <p class="section-sub">Tecnologias e ferramentas do meu dia a dia</p>
-    <div class="skills">
-      <span class="skill-tag">SQL</span>
-      <span class="skill-tag">Python</span>
-      <span class="skill-tag">Power BI</span>
-      <span class="skill-tag">Looker Studio</span>
-      <span class="skill-tag">DAX</span>
-      <span class="skill-tag">ETL</span>
-      <span class="skill-tag">Modelagem de dados</span>
-      <span class="skill-tag">Análise de dados</span>
-    </div>
-  </div>
-</section>
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          <span>Disponível para novas oportunidades &bull; São Paulo / Remoto</span>
+        </div>
 
-<!-- ===== PROJETOS ===== -->
-<section id="projetos">
-  <div class="container">
-    <h2 class="section-title">Projetos</h2>
-    <p class="section-sub">Análise de dados e BI — cada um com página própria de detalhes</p>
-    <div class="projetos-grid">
+        <h1 class="hero-name font-artistic">
+          Amanda Duaibs
+        </h1>
 
-      <div class="card projeto-card">
-        <h3>Análise de Vendas entre Filiais</h3>
-        <p>Dashboard em Power BI comparando o desempenho de vendas entre filiais, com indicadores e análises autorais.</p>
-        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">KPIs de vendas</span></div>
-        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto1');return false;">Ver projeto →</a>
+        <div class="hero-subtitle">
+          <span class="pill-art">Analista de Dados</span>
+          <span style="color:var(--vg-gold);">&bull;</span>
+          <span class="pill-art">Business Intelligence</span>
+          <span style="color:var(--vg-gold);">&bull;</span>
+          <span class="pill-art">Engenharia de Dados</span>
+        </div>
+
+        <p class="hero-desc">
+          Transformo dados em decisões — SQL, Python, Power BI e ETL.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projetos" class="btn-artistic btn-artistic-primary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg>
+            Conhecer Projetos
+          </a>
+          <a href="#contato" class="btn-artistic btn-artistic-secondary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Fale Comigo
+          </a>
+        </div>
+      </section>
+
+      <!-- Wavy Brushstroke Divider -->
+      <div class="vg-wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(10, 26, 63, 0.45)"></path>
+        </svg>
       </div>
 
-      <div class="card projeto-card">
-        <h3>Análise de Vendas Internas — Gatito PetShop</h3>
-        <p>Dashboard em Power BI de uma empresa fictícia de pet shop, com vídeo de demonstração e análises de vendas internas.</p>
-        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Vendas</span></div>
-        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto2');return false;">Ver projeto →</a>
+      <!-- Sobre Section -->
+      <section id="sobre" class="section-wrap reveal">
+        <div class="section-header">
+          <span class="section-tag font-artistic">Trajetória &amp; Essência</span>
+          <h2 class="section-title font-artistic">Sobre Mim</h2>
+          <p class="section-subtext">A paixão pela exatidão da engenharia unida à arte de contar histórias estratégicas com dados.</p>
+          <div class="swirl-divider"></div>
+        </div>
+
+        <div class="vg-card about-card-wrap">
+          <div class="about-text">
+            <p>
+              Sou formada em <strong>Engenharia da Computação</strong> e atualmente graduanda em <strong>Ciência de Dados</strong>. Meu trabalho consiste em conectar o universo técnico da engenharia de dados à tomada de decisão de negócios.
+            </p>
+            <p>
+              Com sólida vivência prática em <strong>SQL</strong>, <strong>Power BI</strong>, <strong>modelagem dimensional</strong> e fluxos de <strong>ETL</strong>, utilizo <strong>Python</strong> e <strong>JavaScript</strong> para automações, manipulação de conjuntos complexos e visualizações sob medida. Trabalho guiada por metodologias ágeis (Scrum/Kanban), assegurando entregas iterativas, claras e com valor imediato para a liderança.
+            </p>
+            <p>
+              Estou ativamente aberta a oportunidades desafiadoras em <strong>Business Intelligence</strong> e <strong>Análise de Dados</strong>, na região de São Paulo ou em regime 100% remoto.
+            </p>
+
+            <div class="about-highlights">
+              <div class="highlight-pill">
+                <div class="highlight-icon">🎓</div>
+                <div class="highlight-text">
+                  <strong>Eng. da Computação</strong>
+                  <span>Graduanda em Ciência de Dados</span>
+                </div>
+              </div>
+              <div class="highlight-pill">
+                <div class="highlight-icon">📍</div>
+                <div class="highlight-text">
+                  <strong>São Paulo, SP</strong>
+                  <span>Atuação Presencial ou Remota</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Habilidades Section -->
+      <section id="habilidades" class="section-wrap reveal">
+        <div class="section-header">
+          <span class="section-tag">Competências Técnicas</span>
+          <h2 class="section-title font-artistic">Habilidades & Ferramentas</h2>
+          <p class="section-subtext">Do desenho do esquema relacional à entrega do relatório executivo interativo.</p>
+          <div class="swirl-divider"></div>
+        </div>
+
+        <div class="skills-category-grid">
+          <!-- Categoria 1: BI (Traço Dourado) -->
+          <div class="vg-card skill-card stroke-gold">
+            <div class="skill-brush-badge" style="background:var(--vg-gold);"></div>
+            <div class="skill-icon-header">
+              <div class="skill-cat-icon">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+              </div>
+              <h3 class="font-artistic">Análise &amp; BI</h3>
+            </div>
+            <div class="skill-pill-list">
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">DAX Avançado</span>
+              <span class="skill-tag">Power Query</span>
+              <span class="skill-tag">SQL Analítico</span>
+              <span class="skill-tag">Star Schema</span>
+              <span class="skill-tag">Data Storytelling</span>
+              <span class="skill-tag">KPIs Estratégicos</span>
+            </div>
+          </div>
+
+          <!-- Categoria 2: Engenharia de Dados (Traço Azul Celeste) -->
+          <div class="vg-card skill-card stroke-blue">
+            <div class="skill-brush-badge" style="background:#38bdf8;"></div>
+            <div class="skill-icon-header">
+              <div class="skill-cat-icon" style="color:#38bdf8; background:rgba(56,189,248,0.15); border-color:rgba(56,189,248,0.35);">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+              </div>
+              <h3 class="font-artistic">Engenharia de Dados</h3>
+            </div>
+            <div class="skill-pill-list">
+              <span class="skill-tag">Pipelines de ETL</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">SQL Server</span>
+              <span class="skill-tag">Bancos Relacionais</span>
+              <span class="skill-tag">Limpeza de Dados</span>
+              <span class="skill-tag">Data Warehousing</span>
+            </div>
+          </div>
+
+          <!-- Categoria 3: Programação (Traço Âmbar) -->
+          <div class="vg-card skill-card stroke-amber">
+            <div class="skill-brush-badge" style="background:var(--vg-amber);"></div>
+            <div class="skill-icon-header">
+              <div class="skill-cat-icon" style="color:var(--vg-amber); background:rgba(232,163,61,0.15); border-color:rgba(232,163,61,0.35);">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+              </div>
+              <h3 class="font-artistic">Programação</h3>
+            </div>
+            <div class="skill-pill-list">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">NumPy</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">APIs REST</span>
+              <span class="skill-tag">Automação de Scripts</span>
+              <span class="skill-tag">Git / GitHub</span>
+            </div>
+          </div>
+
+          <!-- Categoria 4: Métodos (Traço Terracota) -->
+          <div class="vg-card skill-card stroke-terracotta">
+            <div class="skill-brush-badge" style="background:var(--vg-terracotta);"></div>
+            <div class="skill-icon-header">
+              <div class="skill-cat-icon" style="color:var(--vg-terracotta); background:rgba(224,108,67,0.15); border-color:rgba(224,108,67,0.35);">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h3 class="font-artistic">Métodos &amp; Processos</h3>
+            </div>
+            <div class="skill-pill-list">
+              <span class="skill-tag">Análise Exploratória (EDA)</span>
+              <span class="skill-tag">Metodologias Ágeis</span>
+              <span class="skill-tag">Scrum / Kanban</span>
+              <span class="skill-tag">Métricas de Negócio</span>
+              <span class="skill-tag">Documentação Técnica</span>
+              <span class="skill-tag">Visão Estratégica</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wavy Brushstroke Divider 2 -->
+      <div class="vg-wave-divider flip" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C200,90 400,-20 600,60 C800,120 1000,20 1200,80 L1200,120 L0,120 Z" fill="rgba(6, 13, 29, 0.4)"></path>
+        </svg>
       </div>
 
-      <div class="card projeto-card">
-        <h3>Análise de Performance de Campanha — Tráfego e Aquisição</h3>
-        <p>Dashboard em Looker Studio de uma empresa fictícia: composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição, com recomendações estratégicas.</p>
-        <div class="tags"><span class="tag">Looker Studio</span><span class="tag">KPIs de tráfego</span></div>
-        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto3');return false;">Ver projeto →</a>
+      <!-- Projetos Section -->
+      <section id="projetos" class="section-wrap reveal">
+        <div class="section-header">
+          <span class="section-tag">Portfólio Aplicado</span>
+          <h2 class="section-title font-artistic">Projetos em Destaque</h2>
+          <p class="section-subtext">Quatro projetos de análise de dados e BI — cada um com página própria de detalhes.</p>
+          <div class="swirl-divider"></div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Card 1: Análise de Vendas entre Filiais (Abre página interna de detalhes) -->
+          <div class="vg-card project-card project-card-interactive" id="cardProjectVendas" role="button" tabindex="0" aria-label="Ver detalhes do projeto: Análise de Vendas entre Filiais">
+            <div>
+              <div class="project-header">
+                <span class="project-type-tag">Inteligência de Mercado</span>
+                <h3 class="project-title font-artistic">Análise de Vendas entre Filiais</h3>
+              </div>
+              <p class="project-summary">
+                Desafio de Inteligência de Mercado no varejo de moda: análise estruturada de dados de vendas, demografia, campanhas de marketing e feedbacks de clientes no Power BI, com segmentação de perfis de consumo, identificação de padrões regionais e recomendações práticas para distribuição de produtos e estratégias de marketing, apoiadas por KPIs de monitoramento.
+              </p>
+            </div>
+
+            <div class="project-footer">
+              <div class="project-techs">
+                <span>Power BI</span>
+                <span>Segmentação</span>
+                <span>KPIs</span>
+              </div>
+
+              <span class="project-link">
+                <span>Ver projeto &rarr;</span>
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 2: Análise de Vendas Internas — Gatito PetShop (Abre página interna de detalhes) -->
+          <div class="vg-card project-card project-card-interactive" id="cardProjectGatito" role="button" tabindex="0" aria-label="Ver detalhes do projeto: Análise de Vendas Internas — Gatito PetShop">
+            <div>
+              <div class="project-header">
+                <span class="project-type-tag">Business Intelligence</span>
+                <h3 class="project-title font-artistic">Análise de Vendas Internas — Gatito PetShop</h3>
+              </div>
+              <p class="project-summary">
+                Dashboard interativo em Power BI para uma marca fictícia de pet shop: faturamento, perfil dos clientes e oportunidades para otimizar estratégias de marketing e vendas.
+              </p>
+            </div>
+
+            <div class="project-footer">
+              <div class="project-techs">
+                <span>Power BI</span>
+                <span>Segmentação</span>
+                <span>Filtros</span>
+                <span>KPIs</span>
+              </div>
+
+              <span class="project-link">
+                <span>Ver projeto &rarr;</span>
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 3: Análise de Performance de Campanha — Tráfego e Aquisição (Abre página interna de detalhes) -->
+          <div class="vg-card project-card project-card-interactive" id="cardProjectCampanha" role="button" tabindex="0" aria-label="Ver detalhes do projeto: Análise de Performance de Campanha — Tráfego e Aquisição">
+            <div>
+              <div class="project-header">
+                <span class="project-type-tag">Tráfego &amp; Aquisição</span>
+                <h3 class="project-title font-artistic">Análise de Performance de Campanha — Tráfego e Aquisição</h3>
+              </div>
+              <p class="project-summary">
+                Dashboard em Looker Studio de uma empresa fictícia: composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição, com recomendações estratégicas.
+              </p>
+            </div>
+
+            <div class="project-footer">
+              <div class="project-techs">
+                <span>Looker Studio</span>
+                <span>KPIs de tráfego</span>
+              </div>
+
+              <span class="project-link">
+                <span>Ver projeto &rarr;</span>
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 4: Análise de Logística — Hermex Logística (Abre página interna de detalhes) -->
+          <div class="vg-card project-card project-card-interactive" id="cardProjectLogistica" role="button" tabindex="0" aria-label="Ver detalhes do projeto: Análise de Logística — Hermex Logística">
+            <div>
+              <div class="project-header">
+                <span class="project-type-tag">Logística &amp; Operações</span>
+                <h3 class="project-title font-artistic">Análise de Logística — Hermex Logística</h3>
+              </div>
+              <p class="project-summary">
+                Dashboard em Looker Studio de uma empresa fictícia de logística: entregas no prazo e em atraso, disponibilidade de frota e evolução da média de dias S2D entre 2019 e 2021.
+              </p>
+            </div>
+
+            <div class="project-footer">
+              <div class="project-techs">
+                <span>Looker Studio</span>
+                <span>KPIs logísticos</span>
+                <span>Análise temporal</span>
+              </div>
+
+              <span class="project-link">
+                <span>Ver projeto &rarr;</span>
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wavy Brushstroke Divider 3 -->
+      <div class="vg-wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(10, 26, 63, 0.45)"></path>
+        </svg>
       </div>
 
-      <div class="card projeto-card">
-        <h3>Análise de Logística — Hermex Logística</h3>
-        <p>Dashboard em Looker Studio de uma empresa fictícia de logística: entregas no prazo e em atraso, disponibilidade de frota e evolução da média de dias S2D entre 2019 e 2021.</p>
-        <div class="tags"><span class="tag">Looker Studio</span><span class="tag">KPIs logísticos</span><span class="tag">Análise temporal</span></div>
-        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto4');return false;">Ver projeto →</a>
+      <!-- Artigos Section -->
+      <section id="artigos" class="section-wrap reveal">
+        <div class="section-header">
+          <span class="section-tag font-artistic">Publicações &amp; Ensaios</span>
+          <h2 class="section-title font-artistic">Artigos</h2>
+          <p class="section-subtext">Reflexões e aprendizados sobre dados, BI e análise — publicados no Medium.</p>
+          <div class="swirl-divider"></div>
+        </div>
+
+        <div class="articles-list">
+          <!-- Artigo 1 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#01 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener">Média mente: quando seu dashboard esconde a verdade dos dados</a>
+              </h3>
+              <p class="article-theme">Como médias podem mascarar a realidade nos dashboards.</p>
+              <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Média mente: quando seu dashboard esconde a verdade dos dados (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Artigo 2 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#02 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener">O número estava certo. A história estava errada.</a>
+              </h3>
+              <p class="article-theme">A importância da narrativa correta por trás dos dados.</p>
+              <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: O número estava certo. A história estava errada. (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Artigo 3 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#03 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener">Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra</a>
+              </h3>
+              <p class="article-theme">Estrutura de pipelines de campanhas orientados a dados.</p>
+              <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Artigo 4 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#04 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener">Como usar IA para otimizar suas análises de dados (sem virar refém do hype)</a>
+              </h3>
+              <p class="article-theme">Uso pragmático de IA em análises de dados.</p>
+              <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Como usar IA para otimizar suas análises de dados (sem virar refém do hype) (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Artigo 5 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#05 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener">Detectar Fake News Automaticamente é Possível?</a>
+              </h3>
+              <p class="article-theme">Detecção automática de fake news.</p>
+              <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Detectar Fake News Automaticamente é Possível? (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Artigo 6 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#06 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener">Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede</a>
+              </h3>
+              <p class="article-theme">TCC com RoBERTa e Graph Neural Networks.</p>
+              <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Artigo 7 -->
+          <div class="vg-card article-card">
+            <div class="article-content">
+              <span class="article-index font-artistic">#07 &bull; Medium</span>
+              <h3 class="article-card-title">
+                <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener">O Poder da Análise de Dados para Tomada de Decisões</a>
+              </h3>
+              <p class="article-theme">Dados como base para decisões estratégicas.</p>
+              <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener" class="article-sublink">
+                Ler no Medium ↗
+              </a>
+            </div>
+            <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: O Poder da Análise de Dados para Tomada de Decisões (abre em nova aba)">
+              <span>Ler no Medium ↗</span>
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="articles-footer-cta">
+          <a href="https://medium.com/@amanda.duaibs" target="_blank" rel="noopener" class="btn-artistic btn-artistic-primary">
+            <span>Ver todos os artigos no Medium</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Contato Section: Moldura de Quadro com Textura de Tela de Pintura -->
+      <section id="contato" class="section-wrap reveal">
+        <div class="canvas-frame-container">
+          <div class="canvas-matte">
+            <div class="canvas-corner-accent tl" aria-hidden="true"></div>
+            <div class="canvas-corner-accent tr" aria-hidden="true"></div>
+            <div class="canvas-corner-accent bl" aria-hidden="true"></div>
+            <div class="canvas-corner-accent br" aria-hidden="true"></div>
+
+            <div class="contact-grid">
+              <div class="contact-info-block">
+                <span class="section-tag font-artistic" style="margin-bottom:0.2rem;">Uma tela em branco para o seu negócio</span>
+                <h2 class="font-artistic" style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 0.2rem 0 1rem; color:#fff;">
+                  Vamos criar algo extraordinário juntos?
+                </h2>
+                <p>
+                  Estou aberta a oportunidades de atuação como <strong>Analista de Dados / BI</strong>, desafios de modelagem dimensional e estruturação de inteligência analítica para empresas em crescimento.
+                </p>
+
+              <div class="contact-links-list">
+                <!-- E-mail -->
+                <a href="mailto:amanda.duaibs@gmail.com" class="contact-item-link" id="emailContactLink">
+                  <div class="contact-item-icon">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                  </div>
+                  <div>
+                    <span style="font-size:0.75rem; color:#94a3b8; display:block;">E-mail direto</span>
+                    <strong style="color:#ffffff;">amanda.duaibs@gmail.com</strong>
+                  </div>
+                </a>
+
+                <!-- Botões/Links Rápidos: LinkedIn e GitHub logo abaixo do e-mail -->
+                <div class="contact-social-buttons">
+                  <a href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener" class="contact-quick-btn" id="quickLinkedinBtn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <span>LinkedIn ↗</span>
+                  </a>
+                  <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener" class="contact-quick-btn" id="quickGithubBtn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    <span>GitHub ↗</span>
+                  </a>
+                </div>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener" class="contact-item-link" id="linkedinContactLink">
+                  <div class="contact-item-icon">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  </div>
+                  <div>
+                    <span style="font-size:0.75rem; color:#94a3b8; display:block;">Conexões Profissionais</span>
+                    <strong style="color:#ffffff;">linkedin.com/in/amanda-duaibs ↗</strong>
+                  </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener" class="contact-item-link" id="githubContactLink">
+                  <div class="contact-item-icon">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  </div>
+                  <div>
+                    <span style="font-size:0.75rem; color:#94a3b8; display:block;">Repositórios &amp; Código</span>
+                    <strong style="color:#ffffff;">github.com/amandaDuaibs ↗</strong>
+                  </div>
+                </a>
+
+                <!-- Medium -->
+                <a href="https://medium.com/@amanda.duaibs" target="_blank" rel="noopener" class="contact-item-link" id="mediumContactLink">
+                  <div class="contact-item-icon">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+                  </div>
+                  <div>
+                    <span style="font-size:0.75rem; color:#94a3b8; display:block;">Artigos &amp; Insights de BI</span>
+                    <strong style="color:#ffffff;">@amanda.duaibs ↗</strong>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Formulário interativo rápido -->
+            <div class="quick-message-form">
+              <h3 style="font-size:1.75rem; color:#ffffff; margin:0 0 1.25rem;" class="font-artistic">Envie uma mensagem direta</h3>
+              
+              <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                  <label for="userName">Seu Nome / Empresa</label>
+                  <input type="text" id="userName" class="form-input" placeholder="Ex: Lucas / Tech Corp" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="userEmail">Seu E-mail</label>
+                  <input type="email" id="userEmail" class="form-input" placeholder="Ex: contato@empresa.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="userMessage">Como podemos colaborar?</label>
+                  <textarea id="userMessage" class="form-input" rows="3" placeholder="Gostaria de conversar sobre uma oportunidade em BI..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-artistic btn-artistic-primary" style="width: 100%;">
+                  Enviar mensagem &rarr;
+                </button>
+              </form>
+
+              <div id="formFeedback" style="display:none; margin-top:1rem; padding:0.75rem; border-radius:12px; font-size:0.9rem; text-align:center;"></div>
+            </div>
+          </div>
+        </div>
       </div>
+      </section>
+      </div><!-- /viewPortfolio -->
 
-    </div>
-  </div>
-</section>
+      <!-- View Interna: Detalhes do Projeto "Análise de Vendas entre Filiais" -->
+      <section id="viewProjectDetails" class="project-detail-view" style="display: none;" aria-label="Detalhes do Projeto: Análise de Vendas entre Filiais">
+        <!-- Navegação superior interna -->
+        <div class="project-detail-nav">
+          <button type="button" class="btn-back-portfolio back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+          
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+            Estilo Van Gogh
+          </span>
+        </div>
 
-<!-- ===== ARTIGOS ===== -->
-<section id="artigos" style="background:#eef1f7">
-  <div class="container">
-    <h2 class="section-title">Artigos</h2>
-    <p class="section-sub">Escritos no Medium sobre dados, BI e tecnologia</p>
-    <div class="artigos-lista">
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener">Média mente: quando seu dashboard esconde a verdade dos dados</a></div>
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener">O número estava certo. A história estava errada.</a></div>
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener">Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra</a></div>
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener">Como usar IA para otimizar suas análises de dados (sem virar refém do hype)</a></div>
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener">Detectar Fake News Automaticamente é Possível?</a></div>
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener">Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede</a></div>
-      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener">O Poder da Análise de Dados para Tomada de Decisões</a></div>
-    </div>
-  </div>
-</section>
+        <!-- Cabeçalho do Projeto -->
+        <header class="project-detail-header">
+          <span class="project-detail-tag">Case de Sucesso</span>
+          <h1 class="project-detail-title font-artistic">Análise de Vendas entre Filiais</h1>
+          <p class="project-detail-subtitle">Desafio de Inteligência de Mercado — Varejo de Moda</p>
+          <div class="swirl-divider"></div>
+        </header>
 
-<!-- ===== CONTATO ===== -->
-<section id="contato">
-  <div class="container">
-    <div class="contato-box">
-      <h2>Vamos criar algo extraordinário juntos?</h2>
-      <p>Fale comigo pelo e-mail ou pelas redes abaixo — respondo rápido.</p>
-      <div class="contato-links">
-        <a class="btn-contato" href="mailto:amanda.duaibs@gmail.com">amanda.duaibs@gmail.com</a>
-        <a class="btn-contato" href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="btn-contato" href="https://github.com/amandaDuaibs" target="_blank" rel="noopener">GitHub ↗</a>
+        <div class="project-sections-grid">
+          <!-- Seção Objetivo -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+            </div>
+            <p class="detail-body-text">
+              Transformar dados brutos de um varejista de moda em insights acionáveis por meio do Power BI, apoiando decisões estratégicas de vendas e marketing.
+            </p>
+          </article>
+
+          <!-- Seção Contexto -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+            </div>
+            <p class="detail-body-text">
+              Análise de dados de vendas, demografia, campanhas de marketing e feedbacks de clientes de um varejista de moda, com o desafio de identificar padrões de vendas, diferenças regionais e o impacto real das campanhas anteriores.
+            </p>
+          </article>
+
+          <!-- Seção Dashboard (Galeria de 4 imagens em grid responsivo) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Dashboard</h2>
+            </div>
+            
+            <div class="dashboard-gallery-grid">
+              <!-- Imagem 1: Visão geral dos indicadores -->
+              <figure class="project-figure">
+                <div class="project-figure-media">
+                  <img 
+                    src="https://adapta-one-prod.s3.sa-east-1.amazonaws.com/amanda.duaibs%40gmail.com/png/image-01a0a1ea-74ad-7039-b70e-32255cad9d60.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3FLD6RMYLYFE2L2Q%2F20260914%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260914T215530Z&X-Amz-Expires=3600&X-Amz-Signature=f3730117dbedcaa0285da4a4aaa58a3863be2ec0703307893e7d5664e83b7e61&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" 
+                    alt="Segmentação por filial: faturamento por mês e filial e quantidade de clientes por filial" 
+                    class="project-figure-img" 
+                    loading="lazy">
+                </div>
+                <figcaption class="project-figure-caption">
+                  <span class="project-figure-bullet" aria-hidden="true"></span>
+                  <span>Segmentação por filial — visão geral dos indicadores</span>
+                </figcaption>
+              </figure>
+
+              <!-- Imagem 2: Performance de Vendas por Região e Oportunidades de Campanhas -->
+              <figure class="project-figure">
+                <div class="project-figure-media">
+                  <img 
+                    src="https://adapta-one-prod.s3.sa-east-1.amazonaws.com/amanda.duaibs%40gmail.com/png/image-01a0a1fb-6c79-75b6-b194-b63d2ec93ba5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3FLD6RMYLYFE2L2Q%2F20260914%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260914T221406Z&X-Amz-Expires=3600&X-Amz-Signature=24a8495fb02886ea5762c382fa824f035130e14c343352216d11ebec3bb77063&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" 
+                    alt="Faturamento total segmentado por mês e filial — destaque para a Filial 2" 
+                    class="project-figure-img" 
+                    loading="lazy">
+                </div>
+                <figcaption class="project-figure-caption">
+                  <span class="project-figure-bullet" aria-hidden="true"></span>
+                  <span>Performance de Vendas por Região e Oportunidades de Campanhas</span>
+                </figcaption>
+              </figure>
+
+              <!-- Imagem 3: Segmentação de perfis de consumo -->
+              <figure class="project-figure">
+                <div class="project-figure-media">
+                  <img 
+                    src="https://adapta-one-prod.s3.sa-east-1.amazonaws.com/amanda.duaibs%40gmail.com/png/image-01a0a1fd-6edc-74c9-91ee-0ae5ee042c0b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3FLD6RMYLYFE2L2Q%2F20260914%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260914T221618Z&X-Amz-Expires=3600&X-Amz-Signature=f23f942673d037b9dd30f0d994b0e589cc2aaea11dc78e9aaf044f4c295e0dcf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" 
+                    alt="Produto mais vendido por filial — Camiseta Básica de Algodão e Bolsa de Couro" 
+                    class="project-figure-img" 
+                    loading="lazy">
+                </div>
+                <figcaption class="project-figure-caption">
+                  <span class="project-figure-bullet" aria-hidden="true"></span>
+                  <span>Segmentação de perfis de consumo</span>
+                </figcaption>
+              </figure>
+
+              <!-- Imagem 4: Recomendações e KPIs de monitoramento -->
+              <figure class="project-figure">
+                <div class="project-figure-media">
+                  <img 
+                    src="https://adapta-one-prod.s3.sa-east-1.amazonaws.com/amanda.duaibs%40gmail.com/png/image-01a0a1ff-d3a1-7048-b9a0-ece766b15492.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3FLD6RMYLYFE2L2Q%2F20260914%2Fsa-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260914T221832Z&X-Amz-Expires=3600&X-Amz-Signature=70f8df2df82c407fd0bf96d206fd41294bbeb42396e024d59232815fa4a3cd5e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject" 
+                    alt="KPIs de monitoramento: faturamento, ticket médio, clientes e frequência de compra" 
+                    class="project-figure-img" 
+                    loading="lazy">
+                </div>
+                <figcaption class="project-figure-caption">
+                  <span class="project-figure-bullet" aria-hidden="true"></span>
+                  <span>Recomendações e KPIs de monitoramento</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- Seção Demonstração (Vídeo do YouTube em iframe responsivo) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+            </div>
+            <p class="detail-body-text">
+              Assista à demonstração do dashboard e ao passo a passo da análise.
+            </p>
+            <div class="video-demo-container">
+              <iframe 
+                src="https://www.youtube.com/embed/1lLl-93JZp0" 
+                title="Demonstração do Dashboard — Análise de Vendas entre Filiais" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </article>
+
+          <!-- Seção Processo (3 etapas numeradas — apenas texto, sem imagens) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+            </div>
+            
+            <div class="process-steps-list">
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">1</div>
+                <div class="step-content">
+                  <strong>Exame e análise inicial dos dados</strong>
+                  <p>
+                    Importação e limpeza dos dados; uso de gráficos de barras, mapas e matrizes para identificar padrões de vendas, diferenças regionais e o retorno das campanhas de marketing.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">2</div>
+                <div class="step-content">
+                  <strong>Segmentação e análise de perfis de consumidores</strong>
+                  <p>
+                    Categorização dos clientes por dados demográficos, comportamento de compra e frequência de interação com as lojas; painéis dinâmicos para visualizar preferências regionais e sazonalidade de compras.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">3</div>
+                <div class="step-content">
+                  <strong>Recomendações práticas baseadas nos insights</strong>
+                  <p>
+                    Painéis com sugestões de ajustes na distribuição de produtos e estratégias de marketing, incluindo promoções para segmentos de maior potencial e redistribuição de produtos para regiões de maior demanda; KPIs destacados para monitorar a evolução das estratégias.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Seção Tecnologias -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+            </div>
+            <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
+              <span>Power BI</span>
+              <span>Segmentação</span>
+              <span>KPIs</span>
+            </div>
+          </article>
+
+          <!-- Seção Resultados (Sem imagem, com box dourado) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados</h2>
+            </div>
+            <p class="detail-body-text">
+              A análise transformou os dados brutos em uma visualização clara e orientada a decisões estratégicas, promovendo aumento de vendas e melhoria na satisfação dos clientes.
+            </p>
+
+            <div class="recruiter-highlight-box">
+              <div class="recruiter-highlight-icon" aria-hidden="true">⚡</div>
+              <div class="recruiter-highlight-text">
+                Análise completa: dados brutos &rarr; insights acionáveis &rarr; recomendações estratégicas com KPIs de monitoramento.
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Botão inferior de retorno ao portfólio -->
+        <div class="project-detail-bottom-actions">
+          <button type="button" class="btn-artistic btn-artistic-secondary back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- View Interna: Detalhes do Projeto "Análise de Vendas Internas — Gatito PetShop" -->
+      <section id="viewProjectGatitoDetails" class="project-detail-view" style="display: none;" aria-label="Detalhes do Projeto: Análise de Vendas Internas — Gatito PetShop">
+        <!-- Navegação superior interna -->
+        <div class="project-detail-nav">
+          <button type="button" class="btn-back-portfolio back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+          
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+            Power BI Desktop
+          </span>
+        </div>
+
+        <!-- Cabeçalho do Projeto -->
+        <header class="project-detail-header">
+          <span class="project-detail-tag">Business Intelligence</span>
+          <h1 class="project-detail-title font-artistic">Análise de Vendas Internas — Gatito PetShop</h1>
+          <p class="project-detail-subtitle">Análise do Dashboard no Power BI – Gatito PetShop</p>
+          <div class="swirl-divider"></div>
+        </header>
+
+        <div class="project-sections-grid">
+          <!-- Seção Objetivo -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+            </div>
+            <p class="detail-body-text">
+              Consolidar os dados de vendas do Gatito PetShop em um painel interativo no Power BI, permitindo acompanhar indicadores financeiros, compreender o perfil dos clientes e identificar oportunidades para otimizar as estratégias de marketing e vendas.
+            </p>
+          </article>
+
+          <!-- Seção Contexto -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+            </div>
+            <p class="detail-body-text">
+              Dashboard desenvolvido para uma marca fictícia de pet shop, a partir do curso 'Power BI Desktop: construindo meu 1º dashboard'. Os dados já vieram tratados, mas as análises foram feitas de maneira autoral a partir do dashboard pronto.
+            </p>
+          </article>
+
+          <!-- Seção Processo (3 etapas numeradas — apenas texto) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+            </div>
+            
+            <div class="process-steps-list">
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">1</div>
+                <div class="step-content">
+                  <strong>Exame e análise inicial dos dados</strong>
+                  <p>
+                    O pet shop obteve faturamento total de R$ 2,03 milhões, aproximadamente 57 mil vendas e média de 2,61 pets por cliente, indicando que boa parte dos consumidores possui mais de um animal de estimação. O painel disponibiliza filtros por período de compra e marca, permitindo comparar o desempenho das vendas ao longo do tempo ou entre fabricantes. O gráfico de evolução do faturamento demonstra crescimento consistente entre 2020 e 2022, com destaque para os primeiros trimestres de 2022, quando a receita atingiu aproximadamente R$ 350 mil por trimestre.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">2</div>
+                <div class="step-content">
+                  <strong>Segmentação e análise do perfil dos consumidores</strong>
+                  <p>
+                    A análise por gênero mostra distribuição equilibrada: 54,78% do faturamento do público feminino e 45,22% do masculino. A segmentação por bairro evidencia diferenças na concentração das vendas: Itaquera apresenta o maior faturamento, seguida por Guaianases, enquanto São Miguel Paulista e Vila Prudente apresentam menor participação. O painel conta com filtro de produtos para análises mais detalhadas.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">3</div>
+                <div class="step-content">
+                  <strong>Recomendações estratégicas baseadas nos insights</strong>
+                  <p>
+                    Com base nas informações do dashboard, é possível definir ações voltadas para marketing e gestão comercial, considerando a comunicação para os dois perfis de público e as regiões com potencial de expansão.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Seção Demonstração (Vídeo do YouTube em iframe responsivo) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+            </div>
+            <p class="detail-body-text">
+              Assista à demonstração do dashboard e ao passo a passo da análise.
+            </p>
+            <div class="video-demo-container">
+              <iframe 
+                src="https://www.youtube.com/embed/RolK604lfxA" 
+                title="Demonstração — Análise de Vendas Internas Gatito PetShop" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div style="margin-top: 1rem; display: flex; justify-content: center;">
+              <a href="https://www.youtube.com/watch?v=RolK604lfxA" target="_blank" rel="noopener" class="project-link" style="margin-top: 0;" aria-label="Ver demonstração no YouTube (abre em nova aba)">
+                <span>Ver no YouTube ↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Seção Tecnologias -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+            </div>
+            <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
+              <span>Power BI</span>
+              <span>Segmentação</span>
+              <span>Filtros</span>
+              <span>KPIs</span>
+            </div>
+          </article>
+
+          <!-- Seção Resultados -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados</h2>
+            </div>
+            <p class="detail-body-text">
+              O dashboard consolidou os indicadores do Gatito PetShop em uma visualização clara e interativa: R$ 2,03 milhões em faturamento, cerca de 57 mil vendas e média de 2,61 pets por cliente, com crescimento consistente entre 2020 e 2022.
+            </p>
+
+            <div class="recruiter-highlight-box">
+              <div class="recruiter-highlight-icon" aria-hidden="true">✨</div>
+              <div class="recruiter-highlight-text">
+                Dados &rarr; Dashboard interativo &rarr; Recomendações estratégicas para marketing e vendas.
+              </div>
+            </div>
+
+            <div style="margin-top: 1.8rem; display: flex; align-items: center;">
+              <a href="https://sites.google.com/view/amandaduaibs/projetos/vendas-internas" target="_blank" rel="noopener" class="project-link" style="margin-top:0; padding: 0.55rem 1.15rem;" aria-label="Ver projeto publicado no Google Sites (abre em nova aba)">
+                <span>Ver projeto publicado no Google Sites</span>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Botão inferior de retorno ao portfólio -->
+        <div class="project-detail-bottom-actions">
+          <button type="button" class="btn-artistic btn-artistic-secondary back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- View Interna: Detalhes do Projeto "Análise de Performance de Campanha — Tráfego e Aquisição" -->
+      <section id="viewProjectCampanhaDetails" class="project-detail-view" style="display: none;" aria-label="Detalhes do Projeto: Análise de Performance de Campanha — Tráfego e Aquisição">
+        <!-- Navegação superior interna -->
+        <div class="project-detail-nav">
+          <button type="button" class="btn-back-portfolio back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+          
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+            Looker Studio
+          </span>
+        </div>
+
+        <!-- Cabeçalho do Projeto -->
+        <header class="project-detail-header">
+          <span class="project-detail-tag">Tráfego &amp; Aquisição</span>
+          <h1 class="project-detail-title font-artistic">Análise de Performance de Campanha — Tráfego e Aquisição</h1>
+          <p class="project-detail-subtitle">Dashboard de tráfego e aquisição de uma empresa fictícia — Looker Studio</p>
+          <div class="swirl-divider"></div>
+        </header>
+
+        <div class="project-sections-grid">
+          <!-- Seção Objetivo -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+            </div>
+            <p class="detail-body-text">
+              Analisar o desempenho de uma campanha de aquisição de tráfego de uma empresa fictícia, identificando quais canais realmente trazem visitantes, como o público se comporta ao longo do tempo e quais ações são prioritárias para sustentar o crescimento.
+            </p>
+          </article>
+
+          <!-- Seção Contexto -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+            </div>
+            <p class="detail-body-text">
+              Dashboard desenvolvido no Looker Studio a partir dos dados de campanha de uma marca fictícia, com análises autorais sobre composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição.
+            </p>
+          </article>
+
+          <!-- Seção Processo (3 etapas numeradas — apenas texto) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+            </div>
+            
+            <div class="process-steps-list">
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">1</div>
+                <div class="step-content">
+                  <strong>Análise da composição de tráfego</strong>
+                  <p>
+                    As redes sociais respondem por 51,03% do tráfego, seguidas por visitas diretas (19,63%) e pesquisas (8,83%). O tráfego pago é praticamente inexpressivo: cliques pagos em 0,01 e CTR de 0,52, indicando baixa eficiência do investimento pago frente ao volume gerado.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">2</div>
+                <div class="step-content">
+                  <strong>Análise temporal dos novos usuários</strong>
+                  <p>
+                    O gráfico de novos usuários únicos mostra picos de aquisição entre julho e setembro, seguidos de queda constante e estabilização em um patamar baixo a partir de outubro. A campanha atrai atenção em momentos pontuais, mas não sustenta o volume.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">3</div>
+                <div class="step-content">
+                  <strong>Diagnóstico</strong>
+                  <p>
+                    O canal orgânico (redes sociais) é o motor real de aquisição, mas o tráfego conquistado não é retido: os picos não se transformam em base recorrente.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Seção Demonstração (Dashboard Interativo Looker Studio em destaque) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+            </div>
+            <p class="detail-body-text">
+              Dashboard interativo publicado no Looker Studio — explore os filtros e a composição de tráfego em tempo real.
+            </p>
+
+            <!-- Dashboard Interativo Incorporado (Looker Studio) -->
+            <div class="looker-embed-container" style="margin-top: 1.5rem;">
+              <iframe width="100%" height="520" src="https://datastudio.google.com/embed/reporting/eaa9732e-2099-4456-9e2f-971146099498/page/cC15F" frameborder="0" style="border:0; width:100%; height:520px;" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" loading="lazy" title="Dashboard interativo — Análise de Performance de Campanha (Looker Studio)"></iframe>
+            </div>
+
+            <!-- Acesso alternativo ao dashboard (tela cheia / mobile) -->
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <a href="https://datastudio.google.com/reporting/eaa9732e-2099-4456-9e2f-971146099498" 
+                 target="_blank" 
+                 rel="noopener" 
+                 class="btn-artistic btn-artistic-primary"
+                 style="font-size: 0.95rem; padding: 0.75rem 1.8rem;"
+                 aria-label="Abrir dashboard interativo no Looker Studio em nova aba">
+                <span>Abrir dashboard interativo ↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Seção Tecnologias -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+            </div>
+            <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
+              <span>Looker Studio</span>
+              <span>Modelagem de dados</span>
+              <span>KPIs de tráfego</span>
+            </div>
+          </article>
+
+          <!-- Seção Resultados — Recomendações a partir da análise -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados — Recomendações a partir da análise</h2>
+            </div>
+
+            <div class="process-steps-list" style="margin-top:0.5rem; margin-bottom: 1.6rem;">
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">1</div>
+                <div class="step-content">
+                  <strong>Realocar o orçamento pago</strong>
+                  <p>
+                    Com cliques pagos em 0,01 e CTR de 0,52, o investimento em anúncios não traz retorno proporcional. A recomendação é reduzir o gasto pago e direcionar o esforço para redes sociais, o canal de aquisição comprovadamente eficaz.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">2</div>
+                <div class="step-content">
+                  <strong>Sustentar o tráfego com remarketing e CRM</strong>
+                  <p>
+                    Os picos de novos usuários mostram que a campanha sabe atrair, mas não reter. Estratégias de remarketing e CRM são a prioridade para transformar visitantes ocasionais em usuários recorrentes e combater a queda observada a partir de outubro.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">3</div>
+                <div class="step-content">
+                  <strong>Investigar a conversão</strong>
+                  <p>
+                    O tráfego chega, mas o CTR baixo sugere desalinhamento entre anúncio, CTA e página de destino. Revisar call-to-action e landing page antes de ampliar investimento.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="recruiter-highlight-box">
+              <div class="recruiter-highlight-icon" aria-hidden="true">🎯</div>
+              <div class="recruiter-highlight-text">
+                Diagnóstico &rarr; Recomendação &rarr; Ação: o tráfego vem das redes sociais, os picos não se sustentam e o pago não converte — o caminho é reforçar o canal que funciona, reter quem já veio e corrigir a conversão.
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Botão inferior de retorno ao portfólio -->
+        <div class="project-detail-bottom-actions">
+          <button type="button" class="btn-artistic btn-artistic-secondary back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- View Interna: Detalhes do Projeto "Análise de Logística — Hermex Logística" -->
+      <section id="viewProjectLogisticaDetails" class="project-detail-view" style="display: none;" aria-label="Detalhes do Projeto: Análise de Logística — Hermex Logística">
+        <!-- Navegação superior interna -->
+        <div class="project-detail-nav">
+          <button type="button" class="btn-back-portfolio back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+          
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+            Looker Studio
+          </span>
+        </div>
+
+        <!-- Cabeçalho do Projeto -->
+        <header class="project-detail-header">
+          <span class="project-detail-tag">Logística &amp; Operações</span>
+          <h1 class="project-detail-title font-artistic">Análise de Logística — Hermex Logística</h1>
+          <p class="project-detail-subtitle">Dashboard de logística de uma empresa fictícia — Looker Studio</p>
+          <div class="swirl-divider"></div>
+        </header>
+
+        <div class="project-sections-grid">
+          <!-- Seção Objetivo -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+            </div>
+            <p class="detail-body-text">
+              Analisar a operação logística de uma empresa fictícia, com foco no problema central: entender por que as entregas atrasam e como evolui a média de dias S2D (do envio à entrega ao cliente), para embasar decisões de melhoria operacional.
+            </p>
+          </article>
+
+          <!-- Seção Contexto -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+            </div>
+            <p class="detail-body-text">
+              Dashboard desenvolvido no Looker Studio a partir dos dados operacionais de uma empresa fictícia de logística, com análises autorais sobre entregas, disponibilidade de frota e tempo médio de entrega ao longo de 2019–2021.
+            </p>
+          </article>
+
+          <!-- Seção Processo (3 etapas numeradas) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+            </div>
+            
+            <div class="process-steps-list">
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">1</div>
+                <div class="step-content">
+                  <strong>Análise de entregas e atrasos</strong>
+                  <p>
+                    O painel compara entregas no prazo e em atraso e traz um comparativo anual de 2019 a 2021, permitindo identificar se a operação está absorvendo o crescimento da demanda ou acumulando atraso.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">2</div>
+                <div class="step-content">
+                  <strong>Análise da frota e cobertura</strong>
+                  <p>
+                    Os indicadores de disponibilidade de veículos, cruzados com o mapa da América Latina, mostram se a capacidade da frota acompanha a distribuição geográfica das entregas ou se há gargalo onde a operação mais precisa.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">3</div>
+                <div class="step-content">
+                  <strong>Evolução da média de dias S2D</strong>
+                  <p>
+                    O gráfico de linha (jan/2019 a jan/2021) é o coração da análise: mostra a tendência do tempo médio entre envio e entrega. É aqui que o problema fica visível — a leitura do comportamento da curva revela se o tempo de entrega está crescendo, estagnado ou melhorando ao longo do período.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Seção Demonstração (Dashboard Interativo Looker Studio Incorporado) -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+            </div>
+            <p class="detail-body-text">
+              Dashboard interativo publicado no Looker Studio — explore as entregas, a frota e a evolução da média de dias S2D.
+            </p>
+
+            <!-- Dashboard Interativo Incorporado (Looker Studio) -->
+            <div class="looker-embed-container" style="margin-top: 1.5rem;">
+              <iframe width="100%" height="520" src="https://datastudio.google.com/embed/reporting/d8ee60e5-c4e5-4868-8abb-2e37d360cb0b/page/Um15F" frameborder="0" style="border:0; width:100%; height:520px;" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" loading="lazy" title="Dashboard interativo — Análise de Logística Hermex (Looker Studio)"></iframe>
+            </div>
+
+            <!-- Acesso alternativo ao dashboard (tela cheia / mobile) -->
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <a href="https://datastudio.google.com/reporting/d8ee60e5-c4e5-4868-8abb-2e37d360cb0b/page/Um15F" 
+                 target="_blank" 
+                 rel="noopener" 
+                 class="btn-artistic btn-artistic-primary"
+                 style="font-size: 0.95rem; padding: 0.75rem 1.8rem;"
+                 aria-label="Abrir dashboard interativo no Looker Studio em nova aba">
+                <span>Abrir dashboard interativo ↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Seção Tecnologias -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+            </div>
+            <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
+              <span>Looker Studio</span>
+              <span>Modelagem de dados</span>
+              <span>KPIs logísticos</span>
+              <span>Análise temporal</span>
+            </div>
+          </article>
+
+          <!-- Seção Resultados — leitura do problema e recomendação -->
+          <article class="vg-card detail-section-card">
+            <div class="detail-section-heading">
+              <span class="heading-dot" aria-hidden="true"></span>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados — leitura do problema e recomendação</h2>
+            </div>
+            <p class="detail-body-text" style="margin-bottom: 1.25rem;">
+              A análise aponta que o ponto crítico da operação está no tempo de entrega (S2D) e no volume de atrasos, não na capacidade de demanda. A recomendação é atacar o gargalo em três frentes:
+            </p>
+
+            <div class="process-steps-list" style="margin-top:0.5rem; margin-bottom: 1.6rem;">
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">1</div>
+                <div class="step-content">
+                  <strong>Investigar as causas do S2D</strong>
+                  <p>
+                    Cruzar a curva da média de dias S2D com os períodos de maior atraso e menor disponibilidade de frota, para isolar se o problema é de rota, de capacidade ou de processo.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">2</div>
+                <div class="step-content">
+                  <strong>Priorizar por região</strong>
+                  <p>
+                    Usar o mapa para concentrar o esforço de melhoria nas áreas com maior volume e pior desempenho, em vez de tratar a operação como um todo homogêneo.
+                  </p>
+                </div>
+              </div>
+
+              <div class="process-step-item">
+                <div class="step-number" aria-hidden="true">3</div>
+                <div class="step-content">
+                  <strong>Monitorar continuamente</strong>
+                  <p>
+                    Manter os indicadores de prazo, atraso e S2D no painel como acompanhamento recorrente, para validar se as ações realmente movem a curva.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="recruiter-highlight-box">
+              <div class="recruiter-highlight-icon" aria-hidden="true">🚚</div>
+              <div class="recruiter-highlight-text">
+                Problema &rarr; Causa &rarr; Ação: o dashboard não só mostra os atrasos — ele localiza onde o tempo de entrega piora e direciona o esforço para as frentes que podem mudar a média de dias S2D.
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Botão inferior de retorno ao portfólio -->
+        <div class="project-detail-bottom-actions">
+          <button type="button" class="btn-artistic btn-artistic-secondary back-to-portfolio-btn" aria-label="Voltar para a página principal do portfólio">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>← Voltar ao portfólio</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="portfolio-footer">
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener" class="footer-social-link">
+          LinkedIn ↗
+        </a>
+        <span style="color:#475569;" aria-hidden="true">&bull;</span>
+        <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener" class="footer-social-link">
+          GitHub ↗
+        </a>
+        <span style="color:#475569;" aria-hidden="true">&bull;</span>
+        <a href="https://medium.com/@amanda.duaibs" target="_blank" rel="noopener" class="footer-social-link">
+          Medium ↗
+        </a>
       </div>
-    </div>
+      <p class="footer-copy">
+        &copy; <span id="currentYear"></span> Amanda Duaibs &bull; Analista de Dados &amp; BI. Inspirado no universo artístico de Vincent van Gogh.
+      </p>
+    </footer>
   </div>
-</section>
 
-<!-- ===== RODAPÉ ===== -->
-<footer>
-  <div class="container">
-    <p>© 2026 Amanda Duaibs · <a href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener">GitHub</a> · <a href="https://medium.com/@amanda.duaibs" target="_blank" rel="noopener">Medium</a></p>
-  </div>
-</footer>
+  <script>
+    // Configurações, scroll reveal e interatividade contida
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ano no rodapé
+      const yearEl = document.getElementById('currentYear');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-<!-- ===== PÁGINA INTERNA 1: VENDAS ENTRE FILIAIS ===== -->
-<div class="page" id="projeto1">
-  <div class="page-hero">
-    <div class="container">
-      <h1>Análise de Vendas entre Filiais</h1>
-      <p>Dashboard de vendas — Power BI</p>
-    </div>
-  </div>
-  <div class="page-body">
-    <div class="container">
-      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
-      <h2>Objetivo</h2>
-      <p>Analisar o desempenho de vendas entre filiais, identificando padrões de resultado e oportunidades de melhoria para cada unidade.</p>
-      <h2>Contexto</h2>
-      <p>Dashboard desenvolvido no Power BI com análises autorais sobre o desempenho comparativo das filiais.</p>
-      <h2>Processo</h2>
-      <ol>
-        <li>Levantamento e modelagem dos dados de vendas por filial.</li>
-        <li>Construção de indicadores de desempenho e comparativos.</li>
-        <li>Análise dos resultados e identificação de oportunidades.</li>
-      </ol>
-      <h2>Tecnologias</h2>
-      <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Modelagem de dados</span><span class="tag">KPIs de vendas</span></div>
-      <h2>Resultados</h2>
-      <p>O dashboard permite comparar o desempenho entre filiais, evidenciando quais unidades apresentam melhor resultado e onde estão as oportunidades de melhoria.</p>
-      <div class="destaque">Dado → Indicador → Decisão: comparar filiais lado a lado revela onde replicar o que funciona e onde corrigir o que não funciona.</div>
-    </div>
-  </div>
-</div>
+      // Scroll reveal leve
+      initScrollReveal();
 
-<!-- ===== PÁGINA INTERNA 2: GATITO PETSHOP ===== -->
-<div class="page" id="projeto2">
-  <div class="page-hero">
-    <div class="container">
-      <h1>Análise de Vendas Internas — Gatito PetShop</h1>
-      <p>Dashboard de vendas — Power BI</p>
-    </div>
-  </div>
-  <div class="page-body">
-    <div class="container">
-      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
-      <h2>Objetivo</h2>
-      <p>Analisar as vendas internas de uma empresa fictícia de pet shop, mapeando o desempenho por produto, categoria e período.</p>
-      <h2>Contexto</h2>
-      <p>Dashboard desenvolvido no Power BI a partir dos dados de vendas de uma empresa fictícia, com análises autorais e vídeo de demonstração.</p>
-      <h2>Processo</h2>
-      <ol>
-        <li>Modelagem dos dados de vendas internas.</li>
-        <li>Construção de indicadores e visualizações por categoria e período.</li>
-        <li>Análise dos resultados e recomendações.</li>
-      </ol>
-      <h2>Demonstração</h2>
-      <p class="demo-texto">Vídeo de demonstração do dashboard.</p>
-      <div class="video-box">
-        <iframe src="https://www.youtube.com/embed/RolK604lfxA" title="Demonstração — Gatito PetShop" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <h2>Tecnologias</h2>
-      <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Modelagem de dados</span><span class="tag">Vendas</span></div>
-      <h2>Resultados</h2>
-      <p>O dashboard entrega uma visão completa das vendas internas, apoiando decisões de mix de produtos e priorização de categorias.</p>
-      <div class="destaque">Dado → Indicador → Decisão: entender o que vende, quando vende e para quem vende orienta o estoque e as promoções.</div>
-    </div>
-  </div>
-</div>
+      // Menu mobile toggle
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+        });
 
-<!-- ===== PÁGINA INTERNA 3: PERFORMANCE DE CAMPANHA ===== -->
-<div class="page" id="projeto3">
-  <div class="page-hero">
-    <div class="container">
-      <h1>Análise de Performance de Campanha — Tráfego e Aquisição</h1>
-      <p>Dashboard de tráfego e aquisição de uma empresa fictícia — Looker Studio</p>
-    </div>
-  </div>
-  <div class="page-body">
-    <div class="container">
-      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
-      <h2>Objetivo</h2>
-      <p>Analisar o desempenho de uma campanha de aquisição de tráfego de uma empresa fictícia, identificando quais canais realmente trazem visitantes, como o público se comporta ao longo do tempo e quais ações são prioritárias para sustentar o crescimento.</p>
-      <h2>Contexto</h2>
-      <p>Dashboard desenvolvido no Looker Studio a partir dos dados de campanha de uma marca fictícia, com análises autorais sobre composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição.</p>
-      <h2>Processo</h2>
-      <ol>
-        <li>Análise da composição de tráfego — as redes sociais respondem por 51,03% do tráfego, seguidas por visitas diretas (19,63%) e pesquisas (8,83%). O tráfego pago é praticamente inexpressivo: cliques pagos em 0,01 e CTR de 0,52, indicando baixa eficiência do investimento pago frente ao volume gerado.</li>
-        <li>Análise temporal dos novos usuários — o gráfico de novos usuários únicos mostra picos de aquisição entre julho e setembro, seguidos de queda constante e estabilização em um patamar baixo a partir de outubro. A campanha atrai atenção em momentos pontuais, mas não sustenta o volume.</li>
-        <li>Diagnóstico — o canal orgânico (redes sociais) é o motor real de aquisição, mas o tráfego conquistado não é retido: os picos não se transformam em base recorrente.</li>
-      </ol>
-      <h2>Demonstração</h2>
-      <p class="demo-texto">Dashboard interativo publicado no Looker Studio — explore os filtros e a composição de tráfego em tempo real.</p>
-      <div class="demo-box">
-        <iframe src="https://datastudio.google.com/embed/reporting/eaa9732e-2099-4456-9e2f-971146099498/page/cC15F" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" loading="lazy" title="Dashboard interativo — Análise de Performance de Campanha (Looker Studio)"></iframe>
-      </div>
-      <div class="centro">
-        <a class="btn-abrir" href="https://datastudio.google.com/reporting/eaa9732e-2099-4456-9e2f-971146099498" target="_blank" rel="noopener">Abrir dashboard interativo ↗</a>
-      </div>
-      <h2>Tecnologias</h2>
-      <div class="tags"><span class="tag">Looker Studio</span><span class="tag">Modelagem de dados</span><span class="tag">KPIs de tráfego</span></div>
-      <h2>Resultados — Recomendações a partir da análise</h2>
-      <ol>
-        <li>Realocar o orçamento pago — com cliques pagos em 0,01 e CTR de 0,52, o investimento em anúncios não traz retorno proporcional. A recomendação é reduzir o gasto pago e direcionar o esforço para redes sociais, o canal de aquisição comprovadamente eficaz.</li>
-        <li>Sustentar o tráfego com remarketing e CRM — os picos de novos usuários mostram que a campanha sabe atrair, mas não reter. Estratégias de remarketing e CRM são a prioridade para transformar visitantes ocasionais em usuários recorrentes e combater a queda observada a partir de outubro.</li>
-        <li>Investigar a conversão — o tráfego chega, mas o CTR baixo sugere desalinhamento entre anúncio, CTA e página de destino. Revisar call-to-action e landing page antes de ampliar investimento.</li>
-      </ol>
-      <div class="destaque">Diagnóstico → Recomendação → Ação: o tráfego vem das redes sociais, os picos não se sustentam e o pago não converte — o caminho é reforçar o canal que funciona, reter quem já veio e corrigir a conversão.</div>
-    </div>
-  </div>
-</div>
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+          });
+        });
+      }
 
-<!-- ===== PÁGINA INTERNA 4: LOGÍSTICA HERMEX ===== -->
-<div class="page" id="projeto4">
-  <div class="page-hero">
-    <div class="container">
-      <h1>Análise de Logística — Hermex Logística</h1>
-      <p>Dashboard de logística de uma empresa fictícia — Looker Studio</p>
-    </div>
-  </div>
-  <div class="page-body">
-    <div class="container">
-      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
-      <h2>Objetivo</h2>
-      <p>Analisar a operação logística de uma empresa fictícia, com foco no problema central: entender por que as entregas atrasam e como evolui a média de dias S2D (do envio à entrega ao cliente), para embasar decisões de melhoria operacional.</p>
-      <h2>Contexto</h2>
-      <p>Dashboard desenvolvido no Looker Studio a partir dos dados operacionais de uma empresa fictícia de logística, com análises autorais sobre entregas, disponibilidade de frota e tempo médio de entrega ao longo de 2019–2021.</p>
-      <h2>Processo</h2>
-      <ol>
-        <li>Análise de entregas e atrasos — o painel compara entregas no prazo e em atraso e traz um comparativo anual de 2019 a 2021, permitindo identificar se a operação está absorvendo o crescimento da demanda ou acumulando atraso.</li>
-        <li>Análise da frota e cobertura — os indicadores de disponibilidade de veículos, cruzados com o mapa da América Latina, mostram se a capacidade da frota acompanha a distribuição geográfica das entregas ou se há gargalo onde a operação mais precisa.</li>
-        <li>Evolução da média de dias S2D — o gráfico de linha (jan/2019 a jan/2021) é o coração da análise: mostra a tendência do tempo médio entre envio e entrega. É aqui que o problema fica visível — a leitura do comportamento da curva revela se o tempo de entrega está crescendo, estagnado ou melhorando ao longo do período.</li>
-      </ol>
-      <h2>Demonstração</h2>
-      <p class="demo-texto">Dashboard interativo publicado no Looker Studio — explore as entregas, a frota e a evolução da média de dias S2D.</p>
-      <div class="demo-box">
-        <iframe src="https://datastudio.google.com/embed/reporting/d8ee60e5-c4e5-4868-8abb-2e37d360cb0b/page/Um15F" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" loading="lazy" title="Dashboard interativo — Análise de Logística Hermex (Looker Studio)"></iframe>
-      </div>
-      <div class="centro">
-        <a class="btn-abrir" href="https://datastudio.google.com/reporting/d8ee60e5-c4e5-4868-8abb-2e37d360cb0b" target="_blank" rel="noopener">Abrir dashboard interativo ↗</a>
-      </div>
-      <h2>Tecnologias</h2>
-      <div class="tags"><span class="tag">Looker Studio</span><span class="tag">Modelagem de dados</span><span class="tag">KPIs logísticos</span><span class="tag">Análise temporal</span></div>
-      <h2>Resultados — leitura do problema e recomendação</h2>
-      <p>A análise aponta que o ponto crítico da operação está no tempo de entrega (S2D) e no volume de atrasos, não na capacidade de demanda. A recomendação é atacar o gargalo em três frentes:</p>
-      <ol>
-        <li>Investigar as causas do S2D — cruzar a curva da média de dias S2D com os períodos de maior atraso e menor disponibilidade de frota, para isolar se o problema é de rota, de capacidade ou de processo.</li>
-        <li>Priorizar por região — usar o mapa para concentrar o esforço de melhoria nas áreas com maior volume e pior desempenho, em vez de tratar a operação como um todo homogêneo.</li>
-        <li>Monitorar continuamente — manter os indicadores de prazo, atraso e S2D no painel como acompanhamento recorrente, para validar se as ações realmente movem a curva.</li>
-      </ol>
-      <div class="destaque">Problema → Causa → Ação: o dashboard não só mostra os atrasos — ele localiza onde o tempo de entrega piora e direciona o esforço para as frentes que podem mudar a média de dias S2D.</div>
-    </div>
-  </div>
-</div>
+      // Suavização do scroll com compensação de cabeçalho
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          // Se qualquer view de detalhes estiver aberta, volta para o portfólio primeiro
+          const detailVendas = document.getElementById('viewProjectDetails');
+          const detailGatito = document.getElementById('viewProjectGatitoDetails');
+          const detailCampanha = document.getElementById('viewProjectCampanhaDetails');
+          const detailLogistica = document.getElementById('viewProjectLogisticaDetails');
+          const portfolioView = document.getElementById('viewPortfolio');
+          if (detailVendas) detailVendas.style.display = 'none';
+          if (detailGatito) detailGatito.style.display = 'none';
+          if (detailCampanha) detailCampanha.style.display = 'none';
+          if (detailLogistica) detailLogistica.style.display = 'none';
+          if (portfolioView) portfolioView.style.display = 'block';
 
+          const targetElem = document.querySelector(targetId);
+          if (targetElem) {
+            e.preventDefault();
+            const headerOffset = 76;
+            const elementPosition = targetElem.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Alternância de views (Portfólio principal vs Detalhes dos Projetos)
+      initProjectViewSwitch();
+    });
+
+    // Gerenciamento de views entre Portfólio e Páginas Internas de Projetos
+    function initProjectViewSwitch() {
+      const portfolioView = document.getElementById('viewPortfolio');
+      const detailVendas = document.getElementById('viewProjectDetails');
+      const detailGatito = document.getElementById('viewProjectGatitoDetails');
+      const detailCampanha = document.getElementById('viewProjectCampanhaDetails');
+      const detailLogistica = document.getElementById('viewProjectLogisticaDetails');
+      const cardProjectVendas = document.getElementById('cardProjectVendas');
+      const cardProjectGatito = document.getElementById('cardProjectGatito');
+      const cardProjectCampanha = document.getElementById('cardProjectCampanha');
+      const cardProjectLogistica = document.getElementById('cardProjectLogistica');
+      const backButtons = document.querySelectorAll('.back-to-portfolio-btn');
+
+      function openView(viewToShow) {
+        if (!portfolioView || !viewToShow) return;
+        portfolioView.style.display = 'none';
+        if (detailVendas) detailVendas.style.display = 'none';
+        if (detailGatito) detailGatito.style.display = 'none';
+        if (detailCampanha) detailCampanha.style.display = 'none';
+        if (detailLogistica) detailLogistica.style.display = 'none';
+        viewToShow.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function returnToPortfolio(scrollToProjects = false) {
+        if (!portfolioView) return;
+        if (detailVendas) detailVendas.style.display = 'none';
+        if (detailGatito) detailGatito.style.display = 'none';
+        if (detailCampanha) detailCampanha.style.display = 'none';
+        if (detailLogistica) detailLogistica.style.display = 'none';
+        portfolioView.style.display = 'block';
+
+        if (scrollToProjects) {
+          const projetosSec = document.getElementById('projetos');
+          if (projetosSec) {
+            const headerOffset = 76;
+            const elementPosition = projetosSec.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            return;
+          }
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      if (cardProjectVendas) {
+        cardProjectVendas.addEventListener('click', () => {
+          openView(detailVendas);
+        });
+        cardProjectVendas.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openView(detailVendas);
+          }
+        });
+      }
+
+      if (cardProjectGatito) {
+        cardProjectGatito.addEventListener('click', () => {
+          openView(detailGatito);
+        });
+        cardProjectGatito.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openView(detailGatito);
+          }
+        });
+      }
+
+      if (cardProjectCampanha) {
+        cardProjectCampanha.addEventListener('click', () => {
+          openView(detailCampanha);
+        });
+        cardProjectCampanha.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openView(detailCampanha);
+          }
+        });
+      }
+
+      if (cardProjectLogistica) {
+        cardProjectLogistica.addEventListener('click', () => {
+          openView(detailLogistica);
+        });
+        cardProjectLogistica.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openView(detailLogistica);
+          }
+        });
+      }
+
+      backButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          returnToPortfolio(true);
+        });
+      });
+    }
+
+    // Scroll reveal suave com IntersectionObserver
+    function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(el => observer.observe(el));
+      } else {
+        // Fallback imediato
+        revealElements.forEach(el => el.classList.add('revealed'));
+      }
+    }
+
+    // Formulário de contato local interativo
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const feedback = document.getElementById('formFeedback');
+
+      if (!name || !email) return;
+
+      feedback.style.display = 'block';
+      feedback.style.background = 'rgba(245, 197, 66, 0.15)';
+      feedback.style.border = '1px solid #f5c542';
+      feedback.style.color = '#fde68a';
+      feedback.innerHTML = `🎨 Que ótima ideia, <strong>${name}</strong>! Mensagem registrada na tela. Você também pode enviar um e-mail direto para <a href="mailto:amanda.duaibs@gmail.com" style="color:#ffffff; text-decoration:underline;">amanda.duaibs@gmail.com</a>.`;
+
+      document.getElementById('contactForm').reset();
+    }
+  </script>
 <script>
-  function mostrarPagina(id){
-    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-    if(id){document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-  }
-</script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
 
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+})();
+
+</script>
 </body>
 </html>
