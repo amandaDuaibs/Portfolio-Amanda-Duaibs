@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio — Amanda Duaibs</title>
+<style>
+  :root{
+    --azul-profundo:#0a1a3f; --azul-medio:#1b3a6b; --azul-claro:#2c5f8a;
+    --dourado:#f5c542; --ambar:#e8a33d; --creme:#f7f4ee; --texto:#2b2b2b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--creme);color:var(--texto);line-height:1.6}
+  h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;color:var(--azul-profundo)}
+  a{color:var(--ambar);text-decoration:none;transition:color .2s}
+  a:hover{color:var(--dourado)}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+  /* ===== Navegação ===== */
+  header{background:linear-gradient(135deg,var(--azul-profundo),var(--azul-medio));padding:18px 0;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(10,26,63,.35)}
+  nav{display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .logo{color:var(--dourado);font-family:Georgia,serif;font-size:1.3rem;font-weight:bold}
+  .menu{display:flex;gap:22px;flex-wrap:wrap}
+  .menu a{color:#e8e4da;font-weight:500;font-size:.95rem}
+  .menu a:hover{color:var(--dourado)}
+  /* ===== Hero ===== */
+  .hero{background:radial-gradient(circle at 80% 20%,var(--azul-claro),var(--azul-profundo) 70%);color:#f0ece2;text-align:center;padding:90px 24px 80px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.35),transparent 70%)}
+  .hero h1{font-size:3rem;color:#fff;margin-bottom:10px}
+  .hero p{font-size:1.25rem;color:var(--dourado);max-width:640px;margin:0 auto 28px}
+  .btn{display:inline-block;background:var(--dourado);color:var(--azul-profundo);font-weight:600;padding:12px 28px;border-radius:26px 10px 26px 10px;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(245,197,66,.4);color:var(--azul-profundo)}
+  /* ===== Seções ===== */
+  section{padding:70px 0}
+  .section-title{font-size:2rem;text-align:center;margin-bottom:8px}
+  .section-sub{text-align:center;color:#5a5a5a;margin-bottom:44px}
+  .card{background:#fff;border-radius:18px 6px 18px 6px;padding:28px;box-shadow:0 4px 16px rgba(10,26,63,.08);transition:transform .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(10,26,63,.14)}
+  /* ===== Sobre ===== */
+  .sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+  .sobre-grid p{color:#444}
+  .sobre-destaque{font-size:1.15rem;color:var(--azul-medio);font-weight:600;margin-bottom:14px}
+  /* ===== Habilidades ===== */
+  .skills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .skill-tag{background:var(--azul-profundo);color:var(--dourado);padding:8px 18px;border-radius:20px 6px 20px 6px;font-size:.9rem;font-weight:500}
+  /* ===== Projetos ===== */
+  .projetos-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .projeto-card h3{margin-bottom:8px}
+  .projeto-card p{color:#555;font-size:.95rem;margin-bottom:14px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .tag{background:#eef1f7;color:var(--azul-medio);font-size:.78rem;padding:4px 12px;border-radius:12px 4px 12px 4px}
+  .link-projeto{font-weight:600;color:var(--ambar)}
+  .link-projeto:hover{color:var(--dourado)}
+  /* ===== Artigos ===== */
+  .artigos-lista{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .artigo-item{background:#fff;border-radius:14px 5px 14px 5px;padding:18px 22px;box-shadow:0 3px 12px rgba(10,26,63,.07)}
+  .artigo-item a{font-weight:600;color:var(--azul-medio);font-size:1.02rem}
+  .artigo-item a:hover{color:var(--ambar)}
+  /* ===== Contato ===== */
+  .contato-box{text-align:center;max-width:640px;margin:0 auto;background:#fff;border-radius:22px 8px 22px 8px;padding:44px 32px;box-shadow:0 6px 22px rgba(10,26,63,.1)}
+  .contato-box h2{font-size:1.9rem;margin-bottom:10px}
+  .contato-box p{color:#555;margin-bottom:24px}
+  .contato-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn-contato{display:inline-block;border:2px solid var(--ambar);color:var(--ambar);font-weight:600;padding:10px 24px;border-radius:22px 8px 22px 8px;transition:all .2s}
+  .btn-contato:hover{background:var(--ambar);color:var(--azul-profundo)}
+  /* ===== Rodapé ===== */
+  footer{background:var(--azul-profundo);color:#c9c4b8;text-align:center;padding:26px 0;font-size:.9rem}
+  footer a{color:var(--dourado)}
+  /* ===== Páginas internas ===== */
+  .page{display:none}
+  .page.active{display:block}
+  .page-hero{background:linear-gradient(135deg,var(--azul-profundo),var(--azul-claro));color:#f0ece2;padding:56px 0 44px;text-align:center}
+  .page-hero h1{color:#fff;font-size:2.2rem;margin-bottom:8px}
+  .page-hero p{color:var(--dourado)}
+  .page-body{padding:56px 0}
+  .voltar{display:inline-block;margin-bottom:26px;font-weight:600}
+  .page-body h2{font-size:1.5rem;margin:34px 0 12px;color:var(--azul-medio)}
+  .page-body p{color:#444;margin-bottom:12px}
+  .page-body ol,.page-body ul{margin:0 0 14px 22px;color:#444}
+  .page-body li{margin-bottom:8px}
+  .destaque{background:linear-gradient(135deg,var(--dourado),var(--ambar));color:var(--azul-profundo);border-radius:16px 6px 16px 6px;padding:20px 24px;font-weight:600;margin-top:26px}
+  .demo-box{background:#fff;border:2px solid rgba(232,163,61,.5);border-radius:18px 6px 18px 6px;padding:18px;box-shadow:0 6px 20px rgba(10,26,63,.1);max-width:1000px;margin:18px auto}
+  .demo-box iframe{width:100%;height:520px;border:0;border-radius:12px 4px 12px 4px}
+  .demo-texto{text-align:center;color:#555;margin-bottom:14px}
+  .video-box{position:relative;width:100%;max-width:900px;margin:18px auto;aspect-ratio:16/9;border-radius:18px 6px 18px 6px;overflow:hidden;box-shadow:0 6px 20px rgba(10,26,63,.12)}
+  .video-box iframe{width:100%;height:100%;border:0}
+  .galeria{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:18px 0}
+  .galeria img{width:100%;border-radius:14px 5px 14px 5px;box-shadow:0 4px 14px rgba(10,26,63,.1)}
+  .btn-abrir{display:inline-block;border:2px solid var(--ambar);color:var(--ambar);font-weight:600;padding:10px 22px;border-radius:22px 8px 22px 8px;transition:all .2s;margin-top:14px}
+  .btn-abrir:hover{background:var(--ambar);color:var(--azul-profundo)}
+  .centro{text-align:center}
+  /* ===== Responsivo ===== */
+  @media(max-width:768px){
+    .hero h1{font-size:2.2rem}
+    .sobre-grid,.projetos-grid{grid-template-columns:1fr}
+    .galeria{grid-template-columns:1fr}
+    .demo-box iframe{height:420px}
+    .menu{gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== CABEÇALHO ===== -->
+<header>
+  <div class="container">
+    <nav>
+      <span class="logo">Amanda Duaibs</span>
+      <div class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#artigos">Artigos</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero" id="inicio">
+  <div class="container">
+    <h1>Amanda Duaibs</h1>
+    <p>Transformo dados em decisões — SQL, Python, Power BI e ETL.</p>
+    <a href="#projetos" class="btn">Ver projetos</a>
+  </div>
+</div>
+
+<!-- ===== SOBRE ===== -->
+<section id="sobre">
+  <div class="container">
+    <h2 class="section-title">Sobre mim</h2>
+    <p class="section-sub">Engenheira da Computação e estudante de Ciência de Dados</p>
+    <div class="sobre-grid">
+      <div>
+        <p class="sobre-destaque">Motivada pela paixão por aprendizado contínuo e pela busca por inovação digital.</p>
+        <p>Atuo com análise de dados e BI, transformando dados brutos em informações que apoiam decisões. Tenho experiência prática com SQL, Python, Power BI e Looker Studio, construindo dashboards, pipelines e análises orientadas a resultado.</p>
+      </div>
+      <div>
+        <p>Meu foco é gerar valor a partir dos dados: entender o problema, modelar a informação e entregar visualizações que contam uma história clara — do dado à decisão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HABILIDADES ===== -->
+<section id="habilidades" style="background:#eef1f7">
+  <div class="container">
+    <h2 class="section-title">Habilidades</h2>
+    <p class="section-sub">Tecnologias e ferramentas do meu dia a dia</p>
+    <div class="skills">
+      <span class="skill-tag">SQL</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Power BI</span>
+      <span class="skill-tag">Looker Studio</span>
+      <span class="skill-tag">DAX</span>
+      <span class="skill-tag">ETL</span>
+      <span class="skill-tag">Modelagem de dados</span>
+      <span class="skill-tag">Análise de dados</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJETOS ===== -->
+<section id="projetos">
+  <div class="container">
+    <h2 class="section-title">Projetos</h2>
+    <p class="section-sub">Análise de dados e BI — cada um com página própria de detalhes</p>
+    <div class="projetos-grid">
+
+      <div class="card projeto-card">
+        <h3>Análise de Vendas entre Filiais</h3>
+        <p>Dashboard em Power BI comparando o desempenho de vendas entre filiais, com indicadores e análises autorais.</p>
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">KPIs de vendas</span></div>
+        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto1');return false;">Ver projeto →</a>
+      </div>
+
+      <div class="card projeto-card">
+        <h3>Análise de Vendas Internas — Gatito PetShop</h3>
+        <p>Dashboard em Power BI de uma empresa fictícia de pet shop, com vídeo de demonstração e análises de vendas internas.</p>
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Vendas</span></div>
+        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto2');return false;">Ver projeto →</a>
+      </div>
+
+      <div class="card projeto-card">
+        <h3>Análise de Performance de Campanha — Tráfego e Aquisição</h3>
+        <p>Dashboard em Looker Studio de uma empresa fictícia: composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição, com recomendações estratégicas.</p>
+        <div class="tags"><span class="tag">Looker Studio</span><span class="tag">KPIs de tráfego</span></div>
+        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto3');return false;">Ver projeto →</a>
+      </div>
+
+      <div class="card projeto-card">
+        <h3>Análise de Logística — Hermex Logística</h3>
+        <p>Dashboard em Looker Studio de uma empresa fictícia de logística: entregas no prazo e em atraso, disponibilidade de frota e evolução da média de dias S2D entre 2019 e 2021.</p>
+        <div class="tags"><span class="tag">Looker Studio</span><span class="tag">KPIs logísticos</span><span class="tag">Análise temporal</span></div>
+        <a href="#" class="link-projeto" onclick="mostrarPagina('projeto4');return false;">Ver projeto →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== ARTIGOS ===== -->
+<section id="artigos" style="background:#eef1f7">
+  <div class="container">
+    <h2 class="section-title">Artigos</h2>
+    <p class="section-sub">Escritos no Medium sobre dados, BI e tecnologia</p>
+    <div class="artigos-lista">
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener">Média mente: quando seu dashboard esconde a verdade dos dados</a></div>
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener">O número estava certo. A história estava errada.</a></div>
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener">Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra</a></div>
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener">Como usar IA para otimizar suas análises de dados (sem virar refém do hype)</a></div>
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener">Detectar Fake News Automaticamente é Possível?</a></div>
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener">Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede</a></div>
+      <div class="artigo-item"><a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener">O Poder da Análise de Dados para Tomada de Decisões</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTATO ===== -->
+<section id="contato">
+  <div class="container">
+    <div class="contato-box">
+      <h2>Vamos criar algo extraordinário juntos?</h2>
+      <p>Fale comigo pelo e-mail ou pelas redes abaixo — respondo rápido.</p>
+      <div class="contato-links">
+        <a class="btn-contato" href="mailto:amanda.duaibs@gmail.com">amanda.duaibs@gmail.com</a>
+        <a class="btn-contato" href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn-contato" href="https://github.com/amandaDuaibs" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RODAPÉ ===== -->
+<footer>
+  <div class="container">
+    <p>© 2026 Amanda Duaibs · <a href="https://www.linkedin.com/in/amanda-duaibs" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener">GitHub</a> · <a href="https://medium.com/@amanda.duaibs" target="_blank" rel="noopener">Medium</a></p>
+  </div>
+</footer>
+
+<!-- ===== PÁGINA INTERNA 1: VENDAS ENTRE FILIAIS ===== -->
+<div class="page" id="projeto1">
+  <div class="page-hero">
+    <div class="container">
+      <h1>Análise de Vendas entre Filiais</h1>
+      <p>Dashboard de vendas — Power BI</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container">
+      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
+      <h2>Objetivo</h2>
+      <p>Analisar o desempenho de vendas entre filiais, identificando padrões de resultado e oportunidades de melhoria para cada unidade.</p>
+      <h2>Contexto</h2>
+      <p>Dashboard desenvolvido no Power BI com análises autorais sobre o desempenho comparativo das filiais.</p>
+      <h2>Processo</h2>
+      <ol>
+        <li>Levantamento e modelagem dos dados de vendas por filial.</li>
+        <li>Construção de indicadores de desempenho e comparativos.</li>
+        <li>Análise dos resultados e identificação de oportunidades.</li>
+      </ol>
+      <h2>Tecnologias</h2>
+      <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Modelagem de dados</span><span class="tag">KPIs de vendas</span></div>
+      <h2>Resultados</h2>
+      <p>O dashboard permite comparar o desempenho entre filiais, evidenciando quais unidades apresentam melhor resultado e onde estão as oportunidades de melhoria.</p>
+      <div class="destaque">Dado → Indicador → Decisão: comparar filiais lado a lado revela onde replicar o que funciona e onde corrigir o que não funciona.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PÁGINA INTERNA 2: GATITO PETSHOP ===== -->
+<div class="page" id="projeto2">
+  <div class="page-hero">
+    <div class="container">
+      <h1>Análise de Vendas Internas — Gatito PetShop</h1>
+      <p>Dashboard de vendas — Power BI</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container">
+      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
+      <h2>Objetivo</h2>
+      <p>Analisar as vendas internas de uma empresa fictícia de pet shop, mapeando o desempenho por produto, categoria e período.</p>
+      <h2>Contexto</h2>
+      <p>Dashboard desenvolvido no Power BI a partir dos dados de vendas de uma empresa fictícia, com análises autorais e vídeo de demonstração.</p>
+      <h2>Processo</h2>
+      <ol>
+        <li>Modelagem dos dados de vendas internas.</li>
+        <li>Construção de indicadores e visualizações por categoria e período.</li>
+        <li>Análise dos resultados e recomendações.</li>
+      </ol>
+      <h2>Demonstração</h2>
+      <p class="demo-texto">Vídeo de demonstração do dashboard.</p>
+      <div class="video-box">
+        <iframe src="https://www.youtube.com/embed/RolK604lfxA" title="Demonstração — Gatito PetShop" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <h2>Tecnologias</h2>
+      <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Modelagem de dados</span><span class="tag">Vendas</span></div>
+      <h2>Resultados</h2>
+      <p>O dashboard entrega uma visão completa das vendas internas, apoiando decisões de mix de produtos e priorização de categorias.</p>
+      <div class="destaque">Dado → Indicador → Decisão: entender o que vende, quando vende e para quem vende orienta o estoque e as promoções.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PÁGINA INTERNA 3: PERFORMANCE DE CAMPANHA ===== -->
+<div class="page" id="projeto3">
+  <div class="page-hero">
+    <div class="container">
+      <h1>Análise de Performance de Campanha — Tráfego e Aquisição</h1>
+      <p>Dashboard de tráfego e aquisição de uma empresa fictícia — Looker Studio</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container">
+      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
+      <h2>Objetivo</h2>
+      <p>Analisar o desempenho de uma campanha de aquisição de tráfego de uma empresa fictícia, identificando quais canais realmente trazem visitantes, como o público se comporta ao longo do tempo e quais ações são prioritárias para sustentar o crescimento.</p>
+      <h2>Contexto</h2>
+      <p>Dashboard desenvolvido no Looker Studio a partir dos dados de campanha de uma marca fictícia, com análises autorais sobre composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição.</p>
+      <h2>Processo</h2>
+      <ol>
+        <li>Análise da composição de tráfego — as redes sociais respondem por 51,03% do tráfego, seguidas por visitas diretas (19,63%) e pesquisas (8,83%). O tráfego pago é praticamente inexpressivo: cliques pagos em 0,01 e CTR de 0,52, indicando baixa eficiência do investimento pago frente ao volume gerado.</li>
+        <li>Análise temporal dos novos usuários — o gráfico de novos usuários únicos mostra picos de aquisição entre julho e setembro, seguidos de queda constante e estabilização em um patamar baixo a partir de outubro. A campanha atrai atenção em momentos pontuais, mas não sustenta o volume.</li>
+        <li>Diagnóstico — o canal orgânico (redes sociais) é o motor real de aquisição, mas o tráfego conquistado não é retido: os picos não se transformam em base recorrente.</li>
+      </ol>
+      <h2>Demonstração</h2>
+      <p class="demo-texto">Dashboard interativo publicado no Looker Studio — explore os filtros e a composição de tráfego em tempo real.</p>
+      <div class="demo-box">
+        <iframe src="https://datastudio.google.com/embed/reporting/eaa9732e-2099-4456-9e2f-971146099498/page/cC15F" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" loading="lazy" title="Dashboard interativo — Análise de Performance de Campanha (Looker Studio)"></iframe>
+      </div>
+      <div class="centro">
+        <a class="btn-abrir" href="https://datastudio.google.com/reporting/eaa9732e-2099-4456-9e2f-971146099498" target="_blank" rel="noopener">Abrir dashboard interativo ↗</a>
+      </div>
+      <h2>Tecnologias</h2>
+      <div class="tags"><span class="tag">Looker Studio</span><span class="tag">Modelagem de dados</span><span class="tag">KPIs de tráfego</span></div>
+      <h2>Resultados — Recomendações a partir da análise</h2>
+      <ol>
+        <li>Realocar o orçamento pago — com cliques pagos em 0,01 e CTR de 0,52, o investimento em anúncios não traz retorno proporcional. A recomendação é reduzir o gasto pago e direcionar o esforço para redes sociais, o canal de aquisição comprovadamente eficaz.</li>
+        <li>Sustentar o tráfego com remarketing e CRM — os picos de novos usuários mostram que a campanha sabe atrair, mas não reter. Estratégias de remarketing e CRM são a prioridade para transformar visitantes ocasionais em usuários recorrentes e combater a queda observada a partir de outubro.</li>
+        <li>Investigar a conversão — o tráfego chega, mas o CTR baixo sugere desalinhamento entre anúncio, CTA e página de destino. Revisar call-to-action e landing page antes de ampliar investimento.</li>
+      </ol>
+      <div class="destaque">Diagnóstico → Recomendação → Ação: o tráfego vem das redes sociais, os picos não se sustentam e o pago não converte — o caminho é reforçar o canal que funciona, reter quem já veio e corrigir a conversão.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PÁGINA INTERNA 4: LOGÍSTICA HERMEX ===== -->
+<div class="page" id="projeto4">
+  <div class="page-hero">
+    <div class="container">
+      <h1>Análise de Logística — Hermex Logística</h1>
+      <p>Dashboard de logística de uma empresa fictícia — Looker Studio</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container">
+      <a href="#projetos" class="voltar" onclick="mostrarPagina(null);return false;">← Voltar ao portfólio</a>
+      <h2>Objetivo</h2>
+      <p>Analisar a operação logística de uma empresa fictícia, com foco no problema central: entender por que as entregas atrasam e como evolui a média de dias S2D (do envio à entrega ao cliente), para embasar decisões de melhoria operacional.</p>
+      <h2>Contexto</h2>
+      <p>Dashboard desenvolvido no Looker Studio a partir dos dados operacionais de uma empresa fictícia de logística, com análises autorais sobre entregas, disponibilidade de frota e tempo médio de entrega ao longo de 2019–2021.</p>
+      <h2>Processo</h2>
+      <ol>
+        <li>Análise de entregas e atrasos — o painel compara entregas no prazo e em atraso e traz um comparativo anual de 2019 a 2021, permitindo identificar se a operação está absorvendo o crescimento da demanda ou acumulando atraso.</li>
+        <li>Análise da frota e cobertura — os indicadores de disponibilidade de veículos, cruzados com o mapa da América Latina, mostram se a capacidade da frota acompanha a distribuição geográfica das entregas ou se há gargalo onde a operação mais precisa.</li>
+        <li>Evolução da média de dias S2D — o gráfico de linha (jan/2019 a jan/2021) é o coração da análise: mostra a tendência do tempo médio entre envio e entrega. É aqui que o problema fica visível — a leitura do comportamento da curva revela se o tempo de entrega está crescendo, estagnado ou melhorando ao longo do período.</li>
+      </ol>
+      <h2>Demonstração</h2>
+      <p class="demo-texto">Dashboard interativo publicado no Looker Studio — explore as entregas, a frota e a evolução da média de dias S2D.</p>
+      <div class="demo-box">
+        <iframe src="https://datastudio.google.com/embed/reporting/d8ee60e5-c4e5-4868-8abb-2e37d360cb0b/page/Um15F" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" loading="lazy" title="Dashboard interativo — Análise de Logística Hermex (Looker Studio)"></iframe>
+      </div>
+      <div class="centro">
+        <a class="btn-abrir" href="https://datastudio.google.com/reporting/d8ee60e5-c4e5-4868-8abb-2e37d360cb0b" target="_blank" rel="noopener">Abrir dashboard interativo ↗</a>
+      </div>
+      <h2>Tecnologias</h2>
+      <div class="tags"><span class="tag">Looker Studio</span><span class="tag">Modelagem de dados</span><span class="tag">KPIs logísticos</span><span class="tag">Análise temporal</span></div>
+      <h2>Resultados — leitura do problema e recomendação</h2>
+      <p>A análise aponta que o ponto crítico da operação está no tempo de entrega (S2D) e no volume de atrasos, não na capacidade de demanda. A recomendação é atacar o gargalo em três frentes:</p>
+      <ol>
+        <li>Investigar as causas do S2D — cruzar a curva da média de dias S2D com os períodos de maior atraso e menor disponibilidade de frota, para isolar se o problema é de rota, de capacidade ou de processo.</li>
+        <li>Priorizar por região — usar o mapa para concentrar o esforço de melhoria nas áreas com maior volume e pior desempenho, em vez de tratar a operação como um todo homogêneo.</li>
+        <li>Monitorar continuamente — manter os indicadores de prazo, atraso e S2D no painel como acompanhamento recorrente, para validar se as ações realmente movem a curva.</li>
+      </ol>
+      <div class="destaque">Problema → Causa → Ação: o dashboard não só mostra os atrasos — ele localiza onde o tempo de entrega piora e direciona o esforço para as frentes que podem mudar a média de dias S2D.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function mostrarPagina(id){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    if(id){document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+  }
+</script>
+
+</body>
+</html>
