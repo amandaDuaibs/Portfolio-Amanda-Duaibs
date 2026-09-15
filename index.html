@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfólio — Amanda Duaibs</title>
+  <title>Portfólio — Amanda Duaibs | Analista de BI e Dados</title>
+  <meta name="description" content="Portfólio de Amanda Duaibs — Analista de BI. SQL, Python, Power BI e Looker Studio. Projetos de análise de dados, dashboards e artigos sobre BI e IA. São Paulo / Remoto.">
+  <meta name="author" content="Amanda Duaibs">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfólio — Amanda Duaibs | Analista de BI e Dados">
+  <meta property="og:description" content="Projetos de análise de dados e BI: Power BI, Looker Studio, SQL e Python. Do dado à decisão.">
+  <meta property="og:url" content="https://amandaduaibs.github.io/Portfolio-Amanda-Duaibs/">
+  <meta property="og:image" content="https://amandaduaibs.github.io/Portfolio-Amanda-Duaibs/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfólio — Amanda Duaibs | Analista de BI e Dados">
+  <meta name="twitter:description" content="Projetos de análise de dados e BI: Power BI, Looker Studio, SQL e Python. Do dado à decisão.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Google Fonts: Caveat & Space Grotesk -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
@@ -3108,7 +3120,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             </div>
 
             <div style="margin-top: 1.8rem; display: flex; align-items: center;">
-              <a href="https://sites.google.com/view/amandaduaibs/projetos/vendas-internas" target="_blank" rel="noopener" class="project-link" style="margin-top:0; padding: 0.55rem 1.15rem;" aria-label="Ver projeto publicado no Google Sites (abre em nova aba)">
+              <a href="https://www.youtube.com/watch?v=RolK604lfxA" target="_blank" rel="noopener" class="project-link" style="margin-top:0; padding: 0.55rem 1.15rem;" aria-label="Ver vídeo do projeto no YouTube (abre em nova aba)">
                 <span>Ver projeto publicado no Google Sites</span>
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
@@ -3712,7 +3724,12 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       feedback.style.background = 'rgba(245, 197, 66, 0.15)';
       feedback.style.border = '1px solid #f5c542';
       feedback.style.color = '#fde68a';
-      feedback.innerHTML = `🎨 Que ótima ideia, <strong>${name}</strong>! Mensagem registrada na tela. Você também pode enviar um e-mail direto para <a href="mailto:amanda.duaibs@gmail.com" style="color:#ffffff; text-decoration:underline;">amanda.duaibs@gmail.com</a>.`;
+      // Monta um mailto com os dados do formulário (funciona sem backend)
+      const msg = document.getElementById('userMessage').value.trim();
+      const subject = encodeURIComponent(`Contato via portfólio — ${name}`);
+      const body = encodeURIComponent(`Nome: ${name}\nE-mail: ${email}\n\n${msg}`);
+      window.location.href = `mailto:amanda.duaibs@gmail.com?subject=${subject}&body=${body}`;
+      feedback.innerHTML = `🎨 Abrindo seu e-mail, <strong>${name}</strong>! Se não abrir automaticamente, escreva para <a href="mailto:amanda.duaibs@gmail.com" style="color:#ffffff; text-decoration:underline;">amanda.duaibs@gmail.com</a>.`;
 
       document.getElementById('contactForm').reset();
     }
