@@ -1606,7 +1606,236 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       }
     }
 
+    /* Curriculo Section Styles */
+    .curriculo-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .curriculo-card {
+      padding: 2.2rem 2.4rem;
+    }
+
+    .curriculo-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.6rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid rgba(245, 197, 66, 0.2);
+    }
+
+    .curriculo-card-header h3 {
+      font-size: 1.65rem;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .curriculo-card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px 6px 14px 6px;
+      background: rgba(245, 197, 66, 0.15);
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      color: var(--vg-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .curriculo-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.9rem;
+    }
+
+    .curriculo-item {
+      position: relative;
+      padding-left: 1.6rem;
+      border-left: 2px solid rgba(245, 197, 66, 0.3);
+      transition: border-color 0.25s ease;
+    }
+
+    .curriculo-item:hover {
+      border-left-color: var(--vg-gold);
+    }
+
+    .curriculo-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--vg-gold);
+      box-shadow: 0 0 8px rgba(245, 197, 66, 0.8);
+    }
+
+    .curriculo-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .curriculo-role-title {
+      font-size: 1.2rem;
+      color: #ffffff;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .curriculo-period-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.22rem 0.75rem;
+      background: rgba(44, 95, 138, 0.35);
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      border-radius: 14px 4px 12px 4px;
+      font-size: 0.82rem;
+      color: #bae6fd;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .curriculo-company-name {
+      color: var(--vg-gold);
+      font-size: 0.96rem;
+      font-weight: 500;
+      margin-bottom: 0.65rem;
+      display: block;
+    }
+
+    .curriculo-bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .curriculo-bullet-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .curriculo-bullet-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--vg-gold);
+      font-size: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .curriculo-columns-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    .curriculo-columns-3 {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr 0.9fr;
+      gap: 1.8rem;
+    }
+
+    .curriculo-lang-list, .curriculo-course-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .curriculo-lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(6, 13, 29, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 14px 6px 14px 6px;
+    }
+
+    .curriculo-lang-name {
+      color: #f8fafc;
+      font-weight: 600;
+      font-size: 0.94rem;
+    }
+
+    .curriculo-lang-level {
+      color: var(--vg-gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.18rem 0.65rem;
+      background: rgba(245, 197, 66, 0.12);
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      border-radius: 999px;
+    }
+
+    .curriculo-course-item {
+      padding: 0.8rem 1rem;
+      background: rgba(6, 13, 29, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 14px 6px 14px 6px;
+      display: flex;
+      align-items: center;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .curriculo-course-item:hover {
+      border-color: rgba(245, 197, 66, 0.45);
+      transform: translateX(3px);
+    }
+
+    .curriculo-course-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.93rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .curriculo-course-link:hover {
+      color: var(--vg-gold);
+    }
+
+    .curriculo-course-static {
+      color: #cbd5e1;
+      font-size: 0.93rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 992px) {
+      .curriculo-columns-2, .curriculo-columns-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
+      .curriculo-card {
+        padding: 1.6rem 1.3rem;
+      }
       .nav-links {
         display: none;
         position: absolute;
@@ -1701,6 +1930,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <ul class="nav-links" id="navLinks">
             <li><a href="#sobre" class="nav-link">Sobre</a></li>
             <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+            <li><a href="#curriculo" class="nav-link">Currículo</a></li>
             <li><a href="#projetos" class="nav-link">Projetos</a></li>
             <li><a href="#artigos" class="nav-link">Artigos</a></li>
             <li><a href="#contato" class="nav-link">Contato</a></li>
@@ -1919,6 +2149,264 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
         </svg>
       </div>
 
+      <!-- Currículo Section -->
+      <section id="curriculo" class="section-wrap reveal">
+        <div class="section-header">
+          <span class="section-tag font-artistic">Trajetória &amp; Qualificações</span>
+          <h2 class="section-title font-artistic">Currículo</h2>
+          <p class="section-subtext">Experiência, formação e competências</p>
+          <div class="swirl-divider"></div>
+        </div>
+
+        <div class="curriculo-grid">
+          <!-- Bloco A: Experiência Profissional -->
+          <div class="vg-card curriculo-card">
+            <div class="curriculo-card-header">
+              <div class="curriculo-card-icon" aria-hidden="true">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <h3 class="font-artistic">Experiência Profissional</h3>
+            </div>
+
+            <div class="curriculo-timeline">
+              <!-- Item 1: Hands -->
+              <div class="curriculo-item">
+                <div class="curriculo-item-top">
+                  <h4 class="curriculo-role-title font-artistic">Analista de BI Júnior</h4>
+                  <span class="curriculo-period-badge">2026 – atual</span>
+                </div>
+                <span class="curriculo-company-name">Hands (Hands Mobile)</span>
+                <ul class="curriculo-bullet-list">
+                  <li>Desenvolvimento de análises e dashboards de Business Intelligence para apoiar decisões em mídia mobile e dados.</li>
+                  <li>Atuação com dados de audiência e comportamento mobile (GeoBehavior, AppBehavior) para segmentação e ativação de campanhas.</li>
+                  <li>Construção de pipelines e análises com foco em dados de mídia, big data e performance de campanhas.</li>
+                  <li>Uso de Power BI, AWS e GCP no desenvolvimento de soluções de dados e BI.</li>
+                </ul>
+              </div>
+
+              <!-- Item 2: Bayer -->
+              <div class="curriculo-item">
+                <div class="curriculo-item-top">
+                  <h4 class="curriculo-role-title font-artistic">Estágio em Inteligência de Mercado</h4>
+                  <span class="curriculo-period-badge">2024 – 2024</span>
+                </div>
+                <span class="curriculo-company-name">Bayer Crop Science</span>
+                <ul class="curriculo-bullet-list">
+                  <li>Desenvolvimento de processos ETL utilizando Python, SQL e AWS.</li>
+                  <li>Tratamento, integração e validação de grandes volumes de dados.</li>
+                  <li>Identificação de oportunidades de melhoria de processos através da análise de dados.</li>
+                  <li>Desenvolvimento de soluções para apoiar a tomada de decisão.</li>
+                  <li>Colaboração com equipes de diferentes áreas na implementação de projetos Data Driven.</li>
+                </ul>
+              </div>
+
+              <!-- Item 2: Braskem -->
+              <div class="curriculo-item">
+                <div class="curriculo-item-top">
+                  <h4 class="curriculo-role-title font-artistic">Estagiária Front-end no Digital Factory</h4>
+                  <span class="curriculo-period-badge">2022 – 2023</span>
+                </div>
+                <span class="curriculo-company-name">Braskem</span>
+                <ul class="curriculo-bullet-list">
+                  <li>Desenvolvimento de aplicações para as áreas de logística, inovação e desenvolvimento.</li>
+                  <li>Participação em projetos de transformação digital.</li>
+                  <li>Desenvolvimento de soluções utilizando React, JavaScript, TypeScript e Power Platform.</li>
+                  <li>Integração de bases de dados e automatização de processos.</li>
+                  <li>Participação em equipes ágeis utilizando Scrum e Kanban.</li>
+                </ul>
+              </div>
+
+              <!-- Item 3: Scania -->
+              <div class="curriculo-item">
+                <div class="curriculo-item-top">
+                  <h4 class="curriculo-role-title font-artistic">Estagiária de Infraestrutura Delivery</h4>
+                  <span class="curriculo-period-badge">2021</span>
+                </div>
+                <span class="curriculo-company-name">Scania</span>
+                <ul class="curriculo-bullet-list">
+                  <li>Suporte às operações de infraestrutura de TI.</li>
+                  <li>Análise e resolução de incidentes.</li>
+                  <li>Apoio em ambientes virtualizados com VMware.</li>
+                  <li>Automatização de processos internos.</li>
+                  <li>Apoio à continuidade operacional dos serviços de TI.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colunas Duplas: Formação Acadêmica & Projetos / Atuações -->
+          <div class="curriculo-columns-2">
+            <!-- Bloco B: Formação Acadêmica -->
+            <div class="vg-card curriculo-card">
+              <div class="curriculo-card-header">
+                <div class="curriculo-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                </div>
+                <h3 class="font-artistic">Formação Acadêmica</h3>
+              </div>
+
+              <div class="curriculo-timeline">
+                <div class="curriculo-item">
+                  <div class="curriculo-item-top">
+                    <h4 class="curriculo-role-title font-artistic" style="font-size:1.1rem;">Bacharelado em Ciência de Dados</h4>
+                    <span class="curriculo-period-badge">2024–2028</span>
+                  </div>
+                  <span class="curriculo-company-name">Universidade Virtual do Estado de São Paulo (UNIVESP)</span>
+                  <p style="color:#cbd5e1; font-size:0.92rem; margin:0.3rem 0 0; line-height:1.6;">
+                    Graduação focada em modelagem estatística, machine learning, engenharia de dados e análise preditiva.
+                  </p>
+                </div>
+
+                <div class="curriculo-item">
+                  <div class="curriculo-item-top">
+                    <h4 class="curriculo-role-title font-artistic" style="font-size:1.1rem;">Engenharia da Computação</h4>
+                    <span class="curriculo-period-badge">2020–2025</span>
+                  </div>
+                  <span class="curriculo-company-name">Centro Universitário ENIAC</span>
+                  <div style="background:rgba(6, 13, 29, 0.7); border:1px solid rgba(245, 197, 66, 0.25); border-radius:12px 4px 12px 4px; padding:0.75rem 0.9rem; margin-top:0.5rem;">
+                    <strong style="color:var(--vg-gold); font-size:0.85rem; display:block; margin-bottom:0.2rem;">TCC:</strong>
+                    <span style="color:#e2e8f0; font-size:0.88rem; line-height:1.5; display:block;">
+                      Uma Abordagem Híbrida para Detecção de Fake News Combinando Análise Textual (RoBERTa) e Relações entre Usuários (Graph Neural Networks).
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bloco C: Projetos & Iniciativas -->
+            <div class="vg-card curriculo-card">
+              <div class="curriculo-card-header">
+                <div class="curriculo-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <h3 class="font-artistic">Iniciativas &amp; Projetos</h3>
+              </div>
+
+              <div class="curriculo-timeline">
+                <div class="curriculo-item">
+                  <div class="curriculo-item-top">
+                    <h4 class="curriculo-role-title font-artistic" style="font-size:1.08rem;">Palestra PrograMaria</h4>
+                    <span class="curriculo-period-badge">2023</span>
+                  </div>
+                  <span class="curriculo-company-name">Incentivo às mulheres na TI</span>
+                  <p style="color:#cbd5e1; font-size:0.92rem; margin:0.25rem 0 0; line-height:1.6;">
+                    Palestrou com o tema "Transição de carreira — da educação à T.I." — como é mudar de carreira depois de ser mãe — em um programa voltado para a inserção e apoio de mulheres na T.I.
+                  </p>
+                </div>
+
+                <div class="curriculo-item">
+                  <div class="curriculo-item-top">
+                    <h4 class="curriculo-role-title font-artistic" style="font-size:1.08rem;">Kemleague — liga dos estagiários</h4>
+                    <span class="curriculo-period-badge">2022–2023</span>
+                  </div>
+                  <span class="curriculo-company-name">Braskem</span>
+                  <p style="color:#cbd5e1; font-size:0.92rem; margin:0.25rem 0 0; line-height:1.6;">
+                    Atuou como responsável pela Liga de estagiários, trabalhando nas trilhas de desenvolvimento e acolhimento deles.
+                  </p>
+                </div>
+
+                <div class="curriculo-item">
+                  <div class="curriculo-item-top">
+                    <h4 class="curriculo-role-title font-artistic" style="font-size:1.08rem;">Projeto Letramento</h4>
+                    <span class="curriculo-period-badge">2018–2020</span>
+                  </div>
+                  <span class="curriculo-company-name">Alfabetização tardia e reforço de português</span>
+                  <p style="color:#cbd5e1; font-size:0.92rem; margin:0.25rem 0 0; line-height:1.6;">
+                    Atuou como professora na rede estadual em São Paulo, ensinando português para pessoas adultas ou fora da idade de alfabetização.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colunas Triplas: Competências, Idiomas e Cursos -->
+          <div class="curriculo-columns-3">
+            <!-- Bloco D: Competências -->
+            <div class="vg-card curriculo-card">
+              <div class="curriculo-card-header">
+                <div class="curriculo-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3 class="font-artistic">Competências</h3>
+              </div>
+              <div class="skill-pill-list">
+                <span class="skill-tag">ETL</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">AWS (S3, Athena e AWS Glue)</span>
+                <span class="skill-tag">Análise de dados</span>
+                <span class="skill-tag">Data Driven</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Power Platform</span>
+                <span class="skill-tag">Scrum</span>
+                <span class="skill-tag">Kanban</span>
+                <span class="skill-tag">VMware</span>
+              </div>
+            </div>
+
+            <!-- Bloco E: Idiomas -->
+            <div class="vg-card curriculo-card">
+              <div class="curriculo-card-header">
+                <div class="curriculo-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3 class="font-artistic">Idiomas</h3>
+              </div>
+              <ul class="curriculo-lang-list">
+                <li class="curriculo-lang-item">
+                  <span class="curriculo-lang-name">Português</span>
+                  <span class="curriculo-lang-level">Nativo</span>
+                </li>
+                <li class="curriculo-lang-item">
+                  <span class="curriculo-lang-name">Inglês</span>
+                  <span class="curriculo-lang-level">B2</span>
+                </li>
+                <li class="curriculo-lang-item">
+                  <span class="curriculo-lang-name">Espanhol</span>
+                  <span class="curriculo-lang-level">B2</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloco F: Cursos -->
+            <div class="vg-card curriculo-card">
+              <div class="curriculo-card-header">
+                <div class="curriculo-card-icon" aria-hidden="true">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
+                <h3 class="font-artistic">Cursos</h3>
+              </div>
+              <ul class="curriculo-course-list">
+                <li class="curriculo-course-item">
+                  <a href="https://cursos.alura.com.br/user/amanda-araujo-duaibs/fullCertificate/6ed9e546b7bb3e4f8d291568482a3a93" target="_blank" rel="noopener" class="curriculo-course-link" aria-label="Ver certificado dos Cursos Alura (abre em nova aba)">
+                    <span>
+                      <svg width="15" height="15" fill="none" stroke="var(--vg-gold)" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      Cursos Alura
+                    </span>
+                    <span style="color:var(--vg-gold); font-size:0.85rem;">↗</span>
+                  </a>
+                </li>
+                <li class="curriculo-course-item">
+                  <div class="curriculo-course-static">
+                    <svg width="15" height="15" fill="none" stroke="var(--vg-gold)" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Santander Bootcamp | Fullstack Developer (DIO)
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wavy Brushstroke Divider Projetos -->
+      <div class="vg-wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(10, 26, 63, 0.45)"></path>
+        </svg>
+      </div>
+
       <!-- Projetos Section -->
       <section id="projetos" class="section-wrap reveal">
         <div class="section-header">
@@ -2057,17 +2545,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#01 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener">Média mente: quando seu dashboard esconde a verdade dos dados</a>
+                <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener">Média mente: quando seu dashboard esconde a verdade dos dados ↗</a>
               </h3>
               <p class="article-theme">Como médias podem mascarar a realidade nos dashboards.</p>
-              <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/m%C3%A9dia-mente-quando-seu-dashboard-esconde-a-verdade-dos-dados-1052a99363f9" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Média mente: quando seu dashboard esconde a verdade dos dados (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
           <!-- Artigo 2 -->
@@ -2075,17 +2556,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#02 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener">O número estava certo. A história estava errada.</a>
+                <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener">O número estava certo. A história estava errada. ↗</a>
               </h3>
               <p class="article-theme">A importância da narrativa correta por trás dos dados.</p>
-              <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/o-n%C3%BAmero-estava-certo-a-hist%C3%B3ria-estava-errada-a6dd62fde0b9" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: O número estava certo. A história estava errada. (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
           <!-- Artigo 3 -->
@@ -2093,17 +2567,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#03 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener">Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra</a>
+                <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener">Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra ↗</a>
               </h3>
               <p class="article-theme">Estrutura de pipelines de campanhas orientados a dados.</p>
-              <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/do-dado-ao-dashboard-como-eu-estruturo-um-pipeline-de-campanhas-que-n%C3%A3o-quebra-48d1df0435b0" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Do dado ao dashboard: como eu estruturo um pipeline de campanhas que não quebra (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
           <!-- Artigo 4 -->
@@ -2111,17 +2578,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#04 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener">Como usar IA para otimizar suas análises de dados (sem virar refém do hype)</a>
+                <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener">Como usar IA para otimizar suas análises de dados (sem virar refém do hype) ↗</a>
               </h3>
               <p class="article-theme">Uso pragmático de IA em análises de dados.</p>
-              <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/como-usar-ia-para-otimizar-suas-an%C3%A1lises-de-dados-sem-virar-ref%C3%A9m-do-hype-c810aa4745f5" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Como usar IA para otimizar suas análises de dados (sem virar refém do hype) (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
           <!-- Artigo 5 -->
@@ -2129,17 +2589,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#05 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener">Detectar Fake News Automaticamente é Possível?</a>
+                <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener">Detectar Fake News Automaticamente é Possível? ↗</a>
               </h3>
               <p class="article-theme">Detecção automática de fake news.</p>
-              <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/detectar-fake-news-automaticamente-%C3%A9-poss%C3%ADvel-5a2f9a2bf1cb" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Detectar Fake News Automaticamente é Possível? (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
           <!-- Artigo 6 -->
@@ -2147,17 +2600,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#06 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener">Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede</a>
+                <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener">Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede ↗</a>
               </h3>
               <p class="article-theme">TCC com RoBERTa e Graph Neural Networks.</p>
-              <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/uma-abordagem-h%C3%ADbrida-para-detec%C3%A7%C3%A3o-de-fake-news-combinando-an%C3%A1lise-textual-e-estruturas-de-rede-54a8a61ef5f4" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: Uma Abordagem Híbrida para Detecção de Fake News: Combinando Análise Textual e Estruturas de Rede (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
           <!-- Artigo 7 -->
@@ -2165,17 +2611,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="article-content">
               <span class="article-index font-artistic">#07 &bull; Medium</span>
               <h3 class="article-card-title">
-                <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener">O Poder da Análise de Dados para Tomada de Decisões</a>
+                <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener">O Poder da Análise de Dados para Tomada de Decisões ↗</a>
               </h3>
               <p class="article-theme">Dados como base para decisões estratégicas.</p>
-              <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener" class="article-sublink">
-                Ler no Medium ↗
-              </a>
             </div>
-            <a href="https://medium.com/@amanda.duaibs/o-poder-da-an%C3%A1lise-de-dados-para-tomada-de-decis%C3%B5es-305a45ff469b" target="_blank" rel="noopener" class="article-cta" aria-label="Ler no Medium: O Poder da Análise de Dados para Tomada de Decisões (abre em nova aba)">
-              <span>Ler no Medium ↗</span>
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
         </div>
 
