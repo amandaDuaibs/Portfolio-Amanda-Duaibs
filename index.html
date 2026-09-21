@@ -57,7 +57,7 @@
     --text: #eef1f6;
     --text-muted: #9aa4b2;
     --border: rgba(238, 241, 246, 0.12);
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow: 0 1px 3px rgba(var(--shadow-rgb), 0.4);
   }
 }
 :root:where([data-theme="dark"]) {
@@ -68,7 +68,7 @@
   --text: #eef1f6;
   --text-muted: #9aa4b2;
   --border: rgba(238, 241, 246, 0.12);
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 3px rgba(var(--shadow-rgb), 0.4);
 }
 :root:where([data-theme="light"]) { color-scheme: light; }
 * { box-sizing: border-box; }
@@ -137,6 +137,119 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
   <!-- Shell script (chart helpers & formatters) -->
   
 
+  <meta name="theme-color" content="#060d1d">
+  <style id="theme-tokens">
+    /* ===== Tema duplo: 🌙 Noite Estrelada (dark, padrão) · 🌻 Girassóis (light) ===== */
+    :root,
+    :root[data-theme="dark"] {
+      --bg-page: #060d1d;
+      --sky-bg: radial-gradient(circle at 82% 14%, rgba(245, 197, 66, 0.08) 0%, transparent 35%), radial-gradient(circle at 20% 40%, rgba(44, 95, 138, 0.18) 0%, transparent 45%), radial-gradient(circle at 50% 0%, #132448 0%, #081329 55%, #050b18 100%);
+      --texture-bg: repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 6px), radial-gradient(ellipse at 60% 85%, rgba(27, 58, 107, 0.22) 0%, transparent 50%);
+      --tx-body: #e2e8f0;
+      --tx-soft: #cbd5e1;
+      --tx-muted: #94a3b8;
+      --tx-strong: #ffffff;
+      --tx-sky: #bae6fd;
+      --tx-gold: #fde68a;
+      --tx-gold-soft: #fef08a;
+      --gold-rgb: 245,197,66;
+      --gold-solid: #f5c542;
+      --amber-solid: #e8a33d;
+      --star-color: #fde68a;
+      --divider-blue: #38bdf8;
+      --navy-rgb: 27,58,107;
+      --steel-rgb: 44,95,138;
+      --lineblue-rgb: 96,165,250;
+      --sky-rgb: 147,197,253;
+      --slate-rgb: 148,163,184;
+      --shadow-rgb: 0,0,0;
+      --night-rgb: 6,13,29;
+      --bg-header: rgba(6,13,29,0.85);
+      --bg-chip: rgba(6,13,29,0.8);
+      --bg-panel-soft: rgba(6,13,29,0.65);
+      --bg-figure: rgba(6,13,29,0.75);
+      --bg-figure-deep: #030712;
+      --bg-icon-circle: rgba(6,13,31,0.75);
+      --bg-form: rgba(6,13,31,0.85);
+      --bg-footer: rgba(6,13,31,0.95);
+      --bg-mobile-menu: #081126;
+      --bg-input: rgba(14,25,54,0.8);
+      --bg-btn-2: rgba(27,58,107,0.4);
+      --bg-btn-2-hover: rgba(27,58,107,0.5);
+      --bg-panel: rgba(27,58,107,0.35);
+      --bg-badge: rgba(44,95,138,0.35);
+      --grad-card: linear-gradient(135deg, rgba(14, 30, 70, 0.75) 0%, rgba(8, 19, 48, 0.85) 100%);
+      --grad-card-2: linear-gradient(135deg, rgba(16, 34, 78, 0.82) 0%, rgba(8, 20, 52, 0.92) 100%);
+      --grad-media: linear-gradient(135deg, rgba(16, 34, 78, 0.88) 0%, rgba(10, 24, 58, 0.95) 100%);
+      --grad-callout: linear-gradient(135deg, rgba(245, 197, 66, 0.1) 0%, rgba(27, 58, 107, 0.35) 60%, rgba(10, 26, 63, 0.55) 100%);
+      --grad-matte: linear-gradient(145deg, rgba(14, 28, 64, 0.95), rgba(7, 16, 40, 0.95));
+      --grad-frame: linear-gradient(135deg, #1c1308 0%, #30200e 50%, #170f07 100%);
+      --grad-figure-footer: linear-gradient(180deg, rgba(10, 26, 63, 0.6) 0%, rgba(6, 13, 29, 0.9) 100%);
+      --grad-hero-name: linear-gradient(135deg, #ffffff 0%, #fef08a 25%, #f5c542 60%, #e8a33d 90%);
+      color-scheme: dark;
+    }
+
+    :root[data-theme="light"] {
+      --bg-page: #f6eeda;
+      --sky-bg: radial-gradient(circle at 82% 14%, rgba(232, 163, 61, 0.16) 0%, transparent 35%), radial-gradient(circle at 20% 40%, rgba(126, 166, 204, 0.30) 0%, transparent 45%), radial-gradient(circle at 50% 0%, #fdf7e6 0%, #f5ebd2 55%, #eddfc0 100%);
+      --texture-bg: repeating-linear-gradient(135deg, rgba(122, 59, 46, 0.016) 0px, rgba(122, 59, 46, 0.016) 2px, transparent 2px, transparent 6px), radial-gradient(ellipse at 60% 85%, rgba(184, 204, 224, 0.30) 0%, transparent 50%);
+      --tx-body: #3a3226;
+      --tx-soft: #57503f;
+      --tx-muted: #7d7362;
+      --tx-strong: #1b2a4a;
+      --tx-sky: #1b4a6b;
+      --tx-gold: #8a5f00;
+      --tx-gold-soft: #a16207;
+      --gold-rgb: 176,128,16;
+      --gold-solid: #b8860b;
+      --amber-solid: #a16207;
+      --star-color: rgba(176,128,16,0.4);
+      --divider-blue: #5a8cbe;
+      --navy-rgb: 122,156,196;
+      --steel-rgb: 110,145,180;
+      --lineblue-rgb: 120,160,205;
+      --sky-rgb: 90,140,190;
+      --slate-rgb: 130,120,100;
+      --shadow-rgb: 122,90,40;
+      --night-rgb: 255,252,244;
+      --bg-header: rgba(252,246,232,0.9);
+      --bg-chip: rgba(255,252,244,0.92);
+      --bg-panel-soft: rgba(255,252,244,0.75);
+      --bg-figure: rgba(247,238,218,0.92);
+      --bg-figure-deep: #efe3c8;
+      --bg-icon-circle: rgba(255,252,244,0.85);
+      --bg-form: rgba(255,252,244,0.92);
+      --bg-footer: rgba(243,232,208,0.97);
+      --bg-mobile-menu: #fdf6e4;
+      --bg-input: rgba(255,255,255,0.88);
+      --bg-btn-2: rgba(122,156,196,0.18);
+      --bg-btn-2-hover: rgba(122,156,196,0.32);
+      --bg-panel: rgba(122,156,196,0.14);
+      --bg-badge: rgba(110,145,180,0.22);
+      --grad-card: linear-gradient(135deg, rgba(255,253,246,0.92) 0%, rgba(247,238,216,0.95) 100%);
+      --grad-card-2: linear-gradient(135deg, rgba(255,251,240,0.95) 0%, rgba(244,233,208,0.97) 100%);
+      --grad-media: linear-gradient(135deg, rgba(250,244,228,0.95) 0%, rgba(240,228,202,0.97) 100%);
+      --grad-callout: linear-gradient(135deg, rgba(242, 201, 76, 0.20) 0%, rgba(255,252,244,0.7) 60%, rgba(250,242,224,0.9) 100%);
+      --grad-matte: linear-gradient(145deg, rgba(255,252,244,0.97), rgba(246,236,214,0.97));
+      --grad-frame: linear-gradient(135deg, #a9714b 0%, #8a5a33 50%, #6b4428 100%);
+      --grad-figure-footer: linear-gradient(180deg, rgba(255,252,244,0.7) 0%, rgba(240,228,200,0.95) 100%);
+      --grad-hero-name: linear-gradient(135deg, #8a5f00 0%, #b8860b 30%, #d97706 65%, #92400e 100%);
+      color-scheme: light;
+    }
+
+    /* Alternador de tema */
+    #themeToggle { cursor: pointer; }
+    html[data-theme="dark"] .theme-icon-moon { display: none; }
+    html[data-theme="light"] .theme-icon-sun { display: none; }
+  </style>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('portfolio-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
   <style>
     :root {
       --accent: #f5c542;
@@ -146,10 +259,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       --vg-deep-blue: #0a1a3f;
       --vg-cobalt: #1b3a6b;
       --vg-sky: #2c5f8a;
-      --vg-gold: #f5c542;
-      --vg-amber: #e8a33d;
+      --vg-gold: var(--gold-solid);
+      --vg-amber: var(--amber-solid);
       --vg-terracotta: #e06c43;
-      --vg-card-bg: rgba(10, 26, 63, 0.72);
+      --vg-card-bg: rgba(var(--navy-rgb), 0.72);
       --font-display: 'Caveat', cursive, serif;
       --font-body: 'Space Grotesk', system-ui, -apple-system, sans-serif;
     }
@@ -160,8 +273,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     body {
       font-family: var(--font-body);
-      background-color: var(--vg-night);
-      color: #e2e8f0;
+      background-color: var(--bg-page);
+      color: var(--tx-body);
       scroll-behavior: smooth;
       overflow-x: hidden;
       margin: 0;
@@ -178,18 +291,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
-      background: 
-        radial-gradient(circle at 82% 14%, rgba(245, 197, 66, 0.08) 0%, transparent 35%),
-        radial-gradient(circle at 20% 40%, rgba(44, 95, 138, 0.18) 0%, transparent 45%),
-        radial-gradient(circle at 50% 0%, #132448 0%, #081329 55%, #050b18 100%);
+      background: var(--sky-bg);
     }
 
     .vg-texture-layer {
       position: absolute;
       inset: 0;
-      background: 
-        repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 2px, transparent 2px, transparent 6px),
-        radial-gradient(ellipse at 60% 85%, rgba(27, 58, 107, 0.22) 0%, transparent 50%);
+      background: var(--texture-bg);
       opacity: 0.7;
     }
 
@@ -204,8 +312,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .static-star {
       position: absolute;
       border-radius: 50%;
-      background: #fde68a;
-      box-shadow: 0 0 6px rgba(245, 197, 66, 0.6);
+      background: var(--star-color);
+      box-shadow: 0 0 6px rgba(var(--gold-rgb), 0.6);
       opacity: 0.65;
     }
 
@@ -244,9 +352,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       z-index: 100;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      background: rgba(6, 13, 29, 0.85);
-      border-bottom: 2px solid rgba(245, 197, 66, 0.22);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      background: var(--bg-header);
+      border-bottom: 2px solid rgba(var(--gold-rgb), 0.22);
+      box-shadow: 0 4px 24px rgba(var(--shadow-rgb), 0.4);
       transition: all 0.3s ease;
     }
 
@@ -264,7 +372,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: #ffffff;
+      color: var(--tx-strong);
       font-size: 1.85rem;
       font-weight: 700;
       line-height: 1;
@@ -274,7 +382,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      box-shadow: 0 0 10px rgba(245, 197, 66, 0.5), 0 0 5px rgba(10, 26, 63, 0.8);
+      box-shadow: 0 0 10px rgba(var(--gold-rgb), 0.5), 0 0 5px rgba(var(--navy-rgb), 0.8);
       display: inline-block;
       flex-shrink: 0;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -282,7 +390,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .nav-brand:hover .nav-brand-vortex {
       transform: rotate(40deg) scale(1.08);
-      box-shadow: 0 0 14px rgba(245, 197, 66, 0.75);
+      box-shadow: 0 0 14px rgba(var(--gold-rgb), 0.75);
     }
 
     .nav-links {
@@ -295,7 +403,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .nav-link {
-      color: #cbd5e1;
+      color: var(--tx-soft);
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
@@ -326,9 +434,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .mobile-toggle {
       display: none;
-      background: rgba(245, 197, 66, 0.1);
-      border: 1px solid rgba(245, 197, 66, 0.35);
-      color: #f8fafc;
+      background: rgba(var(--gold-rgb), 0.1);
+      border: 1px solid rgba(var(--gold-rgb), 0.35);
+      color: var(--tx-strong);
       padding: 0.45rem 0.65rem;
       border-radius: 8px;
       cursor: pointer;
@@ -336,10 +444,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     /* Cantos orgânicos suaves nos cartões */
     .vg-card {
-      background: linear-gradient(135deg, rgba(14, 30, 70, 0.75) 0%, rgba(8, 19, 48, 0.85) 100%);
-      border: 1px solid rgba(96, 165, 250, 0.2);
+      background: var(--grad-card);
+      border: 1px solid rgba(var(--lineblue-rgb), 0.2);
       border-radius: 22px 10px 20px 10px;
-      box-shadow: 0 10px 30px -8px rgba(2, 6, 23, 0.6);
+      box-shadow: 0 10px 30px -8px rgba(var(--shadow-rgb), 0.6);
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(10px);
@@ -349,8 +457,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .vg-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(245, 197, 66, 0.4);
-      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75);
+      border-color: rgba(var(--gold-rgb), 0.4);
+      box-shadow: 0 16px 36px -10px rgba(var(--shadow-rgb), 0.75);
     }
 
     /* Painterly brush stroke top ribbon */
@@ -393,29 +501,29 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       background: linear-gradient(135deg, #f5c542 0%, #e8a33d 70%, #d97706 100%);
       color: #081126;
       border: 1px solid #fde68a;
-      box-shadow: 0 4px 18px rgba(245, 197, 66, 0.4), inset 0 1px 1px rgba(255,255,255,0.6);
+      box-shadow: 0 4px 18px rgba(var(--gold-rgb), 0.4), inset 0 1px 1px rgba(255,255,255,0.6);
     }
 
     .btn-artistic-primary:hover {
       background: linear-gradient(135deg, #fde68a 0%, #f5c542 60%, #e8a33d 100%);
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 24px rgba(245, 197, 66, 0.55);
+      box-shadow: 0 8px 24px rgba(var(--gold-rgb), 0.55);
       color: #040914;
     }
 
     .btn-artistic-secondary {
-      background: rgba(27, 58, 107, 0.4);
-      color: #f1f5f9;
-      border: 1px solid rgba(147, 197, 253, 0.35);
+      background: var(--bg-btn-2);
+      color: var(--tx-strong);
+      border: 1px solid rgba(var(--sky-rgb), 0.35);
       backdrop-filter: blur(6px);
     }
 
     .btn-artistic-secondary:hover {
-      background: rgba(44, 95, 138, 0.55);
+      background: rgba(var(--steel-rgb), 0.55);
       border-color: var(--vg-gold);
-      color: #ffffff;
+      color: var(--tx-strong);
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(44, 95, 138, 0.4);
+      box-shadow: 0 6px 20px rgba(var(--steel-rgb), 0.4);
     }
 
     /* Hero section with spinning vortex and Starry Night atmosphere */
@@ -437,7 +545,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       height: 400px;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245, 197, 66, 0.12) 0%, rgba(44, 95, 138, 0.15) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--gold-rgb), 0.12) 0%, rgba(var(--steel-rgb), 0.15) 45%, transparent 70%);
       filter: blur(40px);
       pointer-events: none;
       z-index: -1;
@@ -448,9 +556,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       align-items: center;
       gap: 0.6rem;
       padding: 0.45rem 1.15rem;
-      background: rgba(245, 197, 66, 0.1);
-      border: 1px solid rgba(245, 197, 66, 0.28);
-      color: #fde68a;
+      background: rgba(var(--gold-rgb), 0.1);
+      border: 1px solid rgba(var(--gold-rgb), 0.28);
+      color: var(--tx-gold);
       border-radius: 9999px;
       font-size: 0.88rem;
       font-weight: 600;
@@ -468,7 +576,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .hero-greeting {
       font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-      color: #93c5fd;
+      color: var(--tx-sky);
       margin-bottom: 0.2rem;
       letter-spacing: 0.05em;
     }
@@ -478,16 +586,16 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       font-weight: 700;
       line-height: 1.08;
       margin: 0.4rem 0 1.35rem;
-      color: #fde68a;
-      background: linear-gradient(135deg, #ffffff 0%, #fef08a 25%, #f5c542 60%, #e8a33d 90%);
+      color: var(--tx-gold);
+      background: var(--grad-hero-name);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 6px 24px rgba(245, 197, 66, 0.35));
+      filter: drop-shadow(0 6px 24px rgba(var(--gold-rgb), 0.35));
     }
 
     .hero-subtitle {
       font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-      color: #bae6fd;
+      color: var(--tx-sky);
       font-weight: 600;
       margin-bottom: 1.25rem;
       letter-spacing: 0.02em;
@@ -499,17 +607,17 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .hero-subtitle .pill-art {
-      background: rgba(44, 95, 138, 0.35);
-      border: 1px solid rgba(147, 197, 253, 0.3);
+      background: var(--bg-badge);
+      border: 1px solid rgba(var(--sky-rgb), 0.3);
       padding: 0.2rem 0.85rem;
       border-radius: 20px 6px 18px 8px;
       font-size: 0.95rem;
-      color: #e0f2fe;
+      color: var(--tx-sky);
     }
 
     .hero-desc {
       font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-      color: #cbd5e1;
+      color: var(--tx-soft);
       max-width: 680px;
       margin: 0 auto 2.5rem;
       line-height: 1.6;
@@ -570,13 +678,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .section-title {
       font-size: clamp(2.3rem, 4.5vw, 3.2rem);
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0 0 0.6rem;
       line-height: 1.15;
     }
 
     .section-subtext {
-      color: #94a3b8;
+      color: var(--tx-muted);
       max-width: 620px;
       margin: 0 auto;
       font-size: 1.05rem;
@@ -586,7 +694,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .swirl-divider {
       width: 120px;
       height: 5px;
-      background: linear-gradient(90deg, transparent, #e06c43, #f5c542, #38bdf8, transparent);
+      background: linear-gradient(90deg, transparent, #e06c43, var(--gold-solid), var(--divider-blue), transparent);
       margin: 1.3rem auto 0;
       border-radius: 9999px;
     }
@@ -601,7 +709,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .about-text p {
       margin-bottom: 1.25rem;
       font-size: 1.05rem;
-      color: #cbd5e1;
+      color: var(--tx-soft);
       line-height: 1.75;
     }
 
@@ -613,8 +721,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .highlight-pill {
-      background: rgba(27, 58, 107, 0.35);
-      border: 1px solid rgba(96, 165, 250, 0.25);
+      background: var(--bg-panel);
+      border: 1px solid rgba(var(--lineblue-rgb), 0.25);
       border-radius: 16px 6px 16px 6px;
       padding: 0.9rem 1.1rem;
       display: flex;
@@ -624,7 +732,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .highlight-pill:hover {
-      border-color: rgba(245, 197, 66, 0.4);
+      border-color: rgba(var(--gold-rgb), 0.4);
     }
 
     .highlight-icon {
@@ -634,13 +742,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .highlight-text strong {
       display: block;
-      color: #f8fafc;
+      color: var(--tx-strong);
       font-size: 0.9rem;
     }
 
     .highlight-text span {
       font-size: 0.8rem;
-      color: #94a3b8;
+      color: var(--tx-muted);
     }
 
     /* Skills as Painterly Swatches with vibrant color strokes */
@@ -689,8 +797,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       width: 44px;
       height: 44px;
       border-radius: 12px 6px 14px 6px;
-      background: rgba(245, 197, 66, 0.14);
-      border: 1px solid rgba(245, 197, 66, 0.3);
+      background: rgba(var(--gold-rgb), 0.14);
+      border: 1px solid rgba(var(--gold-rgb), 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -700,7 +808,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .skill-card h3 {
       font-size: 1.35rem;
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0;
     }
 
@@ -711,9 +819,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .skill-tag {
-      background: rgba(6, 13, 29, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      color: #e2e8f0;
+      background: var(--bg-chip);
+      border: 1px solid rgba(var(--slate-rgb), 0.22);
+      color: var(--tx-body);
       font-size: 0.85rem;
       font-weight: 500;
       padding: 0.4rem 0.85rem;
@@ -723,8 +831,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .skill-tag:hover {
       border-color: var(--vg-gold);
-      color: #fff;
-      background: rgba(27, 58, 107, 0.5);
+      color: var(--tx-strong);
+      background: var(--bg-btn-2-hover);
       transform: translateY(-2px);
     }
 
@@ -745,9 +853,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       justify-content: space-between;
       width: 100%;
       border-radius: 26px 12px 24px 12px;
-      background: linear-gradient(135deg, rgba(16, 34, 78, 0.82) 0%, rgba(8, 20, 52, 0.92) 100%);
-      border: 1px solid rgba(96, 165, 250, 0.25);
-      box-shadow: 0 16px 38px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 197, 66, 0.08);
+      background: var(--grad-card-2);
+      border: 1px solid rgba(var(--lineblue-rgb), 0.25);
+      box-shadow: 0 16px 38px -10px rgba(var(--shadow-rgb), 0.7), 0 0 20px rgba(var(--gold-rgb), 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       text-decoration: none;
       color: inherit;
@@ -755,8 +863,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .project-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(245, 197, 66, 0.55);
-      box-shadow: 0 22px 46px -10px rgba(0, 0, 0, 0.8), 0 0 28px rgba(245, 197, 66, 0.2);
+      border-color: rgba(var(--gold-rgb), 0.55);
+      box-shadow: 0 22px 46px -10px rgba(var(--shadow-rgb), 0.8), 0 0 28px rgba(var(--gold-rgb), 0.2);
     }
 
     .project-header {
@@ -775,13 +883,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .project-title {
       font-size: 1.55rem;
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0 0 0.85rem;
       line-height: 1.25;
     }
 
     .project-summary {
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 0.96rem;
       line-height: 1.7;
       margin-bottom: 1.6rem;
@@ -801,9 +909,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       font-weight: 600;
       padding: 0.3rem 0.75rem;
       border-radius: 12px 4px 12px 4px;
-      background: rgba(27, 58, 107, 0.4);
-      color: #bae6fd;
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: var(--bg-btn-2);
+      color: var(--tx-sky);
+      border: 1px solid rgba(var(--sky-rgb), 0.25);
     }
 
     .project-link {
@@ -816,17 +924,17 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       text-decoration: none;
       margin-top: 1.1rem;
       padding: 0.42rem 0.95rem;
-      background: rgba(245, 197, 66, 0.1);
-      border: 1px solid rgba(245, 197, 66, 0.32);
+      background: rgba(var(--gold-rgb), 0.1);
+      border: 1px solid rgba(var(--gold-rgb), 0.32);
       border-radius: 14px 4px 12px 4px;
       transition: all 0.25s ease;
       width: fit-content;
     }
 
     .project-link:hover {
-      background: rgba(245, 197, 66, 0.2);
+      background: rgba(var(--gold-rgb), 0.2);
       border-color: var(--vg-gold);
-      color: #fef08a;
+      color: var(--tx-gold-soft);
       transform: translateX(3px);
     }
 
@@ -842,16 +950,16 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       cursor: pointer;
       display: flex;
       text-align: left;
-      border: 1px solid rgba(96, 165, 250, 0.2);
+      border: 1px solid rgba(var(--lineblue-rgb), 0.2);
       font-family: inherit;
       text-decoration: none;
       color: inherit;
     }
 
     .project-card-interactive:hover .project-link {
-      background: rgba(245, 197, 66, 0.22);
+      background: rgba(var(--gold-rgb), 0.22);
       border-color: var(--vg-gold);
-      color: #fef08a;
+      color: var(--tx-gold-soft);
       transform: translateX(3px);
     }
 
@@ -889,8 +997,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .article-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(245, 197, 66, 0.45);
-      box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.65), 0 0 16px rgba(245, 197, 66, 0.12);
+      border-color: rgba(var(--gold-rgb), 0.45);
+      box-shadow: 0 14px 32px -8px rgba(var(--shadow-rgb), 0.65), 0 0 16px rgba(var(--gold-rgb), 0.12);
     }
 
     .article-content {
@@ -917,23 +1025,23 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .article-card-title a {
-      color: #ffffff;
+      color: var(--tx-strong);
       text-decoration: none;
       transition: color 0.2s ease, text-shadow 0.2s ease;
       display: inline-block;
     }
 
     .article-card-title a:hover {
-      color: #fde68a;
-      text-shadow: 0 0 10px rgba(245, 197, 66, 0.45);
+      color: var(--tx-gold);
+      text-shadow: 0 0 10px rgba(var(--gold-rgb), 0.45);
     }
 
     .article-card:hover .article-card-title a {
-      color: #fde68a;
+      color: var(--tx-gold);
     }
 
     .article-theme {
-      color: #94a3b8;
+      color: var(--tx-muted);
       font-size: 0.93rem;
       line-height: 1.55;
       margin: 0 0 0.45rem;
@@ -953,8 +1061,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .article-sublink:hover {
-      color: #fef08a;
-      text-shadow: 0 0 8px rgba(245, 197, 66, 0.65);
+      color: var(--tx-gold-soft);
+      text-shadow: 0 0 8px rgba(var(--gold-rgb), 0.65);
       transform: translateX(3px);
     }
 
@@ -975,8 +1083,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       font-size: 0.9rem;
       white-space: nowrap;
       padding: 0.55rem 1.15rem;
-      background: rgba(245, 197, 66, 0.1);
-      border: 1px solid rgba(245, 197, 66, 0.32);
+      background: rgba(var(--gold-rgb), 0.1);
+      border: 1px solid rgba(var(--gold-rgb), 0.32);
       border-radius: 14px 4px 12px 4px;
       transition: all 0.25s ease;
       flex-shrink: 0;
@@ -984,11 +1092,11 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .article-cta:hover {
-      background: rgba(245, 197, 66, 0.22);
+      background: rgba(var(--gold-rgb), 0.22);
       border-color: var(--vg-gold);
-      color: #ffffff;
+      color: var(--tx-strong);
       transform: translateX(4px);
-      box-shadow: 0 0 12px rgba(245, 197, 66, 0.3);
+      box-shadow: 0 0 12px rgba(var(--gold-rgb), 0.3);
     }
 
     .articles-footer-cta {
@@ -1028,9 +1136,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .btn-back-portfolio {
-      background: rgba(27, 58, 107, 0.45);
-      border: 1px solid rgba(245, 197, 66, 0.35);
-      color: #fde68a;
+      background: var(--bg-btn-2);
+      border: 1px solid rgba(var(--gold-rgb), 0.35);
+      color: var(--tx-gold);
       font-size: 0.92rem;
       font-weight: 600;
       padding: 0.55rem 1.25rem;
@@ -1045,9 +1153,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .btn-back-portfolio:hover {
-      background: rgba(245, 197, 66, 0.2);
+      background: rgba(var(--gold-rgb), 0.2);
       border-color: var(--vg-gold);
-      color: #ffffff;
+      color: var(--tx-strong);
       transform: translateX(-3px);
     }
 
@@ -1069,14 +1177,14 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .project-detail-title {
       font-size: clamp(2.3rem, 5vw, 3.4rem);
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0.1rem 0 0.6rem;
       line-height: 1.15;
     }
 
     .project-detail-subtitle {
       font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-      color: #bae6fd;
+      color: var(--tx-sky);
       font-weight: 500;
       max-width: 680px;
       margin: 0 auto;
@@ -1100,7 +1208,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .detail-section-heading h3 {
       font-size: 1.55rem;
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0;
     }
 
@@ -1109,12 +1217,12 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       height: 10px;
       border-radius: 50%;
       background: var(--vg-gold);
-      box-shadow: 0 0 8px rgba(245, 197, 66, 0.6);
+      box-shadow: 0 0 8px rgba(var(--gold-rgb), 0.6);
       display: inline-block;
     }
 
     .detail-body-text {
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 1.05rem;
       line-height: 1.8;
       margin: 0;
@@ -1132,14 +1240,14 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       gap: 1.4rem;
       align-items: flex-start;
       padding: 1.4rem 1.6rem;
-      background: rgba(6, 13, 29, 0.65);
-      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: var(--bg-panel-soft);
+      border: 1px solid rgba(var(--slate-rgb), 0.16);
       border-radius: 18px 8px 16px 8px;
       transition: border-color 0.25s ease, transform 0.25s ease;
     }
 
     .process-step-item:hover {
-      border-color: rgba(245, 197, 66, 0.4);
+      border-color: rgba(var(--gold-rgb), 0.4);
       transform: translateY(-2px);
     }
 
@@ -1156,18 +1264,18 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(245, 197, 66, 0.4);
+      box-shadow: 0 4px 14px rgba(var(--gold-rgb), 0.4);
     }
 
     .step-content strong {
       display: block;
-      color: #ffffff;
+      color: var(--tx-strong);
       font-size: 1.12rem;
       margin-bottom: 0.45rem;
     }
 
     .step-content p {
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 0.98rem;
       line-height: 1.65;
       margin: 0;
@@ -1178,17 +1286,17 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       justify-content: center;
       margin-top: 3rem;
       padding-top: 2rem;
-      border-top: 1px solid rgba(245, 197, 66, 0.2);
+      border-top: 1px solid rgba(var(--gold-rgb), 0.2);
     }
 
     /* Imagens Integradas do Projeto com Estética Van Gogh */
     .project-figure {
       margin: 1.5rem 0 0;
-      background: rgba(6, 13, 29, 0.75);
-      border: 1px solid rgba(96, 165, 250, 0.22);
+      background: var(--bg-figure);
+      border: 1px solid rgba(var(--lineblue-rgb), 0.22);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 10px 26px rgba(2, 6, 23, 0.6);
+      box-shadow: 0 10px 26px rgba(var(--shadow-rgb), 0.6);
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
@@ -1196,13 +1304,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .project-figure:hover {
       transform: translateY(-3px);
-      border-color: rgba(245, 197, 66, 0.45);
-      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.8), 0 0 14px rgba(245, 197, 66, 0.12);
+      border-color: rgba(var(--gold-rgb), 0.45);
+      box-shadow: 0 16px 36px -6px rgba(var(--shadow-rgb), 0.8), 0 0 14px rgba(var(--gold-rgb), 0.12);
     }
 
     .project-figure-media {
       width: 100%;
-      background: #030712;
+      background: var(--bg-figure-deep);
       position: relative;
       overflow: hidden;
       aspect-ratio: 16 / 9;
@@ -1226,10 +1334,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .project-figure-caption {
       padding: 0.8rem 1.2rem;
       font-size: 0.88rem;
-      color: #94a3b8;
+      color: var(--tx-muted);
       font-style: italic;
-      border-top: 1px solid rgba(245, 197, 66, 0.15);
-      background: linear-gradient(180deg, rgba(10, 26, 63, 0.6) 0%, rgba(6, 13, 29, 0.9) 100%);
+      border-top: 1px solid rgba(var(--gold-rgb), 0.15);
+      background: var(--grad-figure-footer);
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -1242,7 +1350,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       border-radius: 50%;
       background: var(--vg-gold);
       flex-shrink: 0;
-      box-shadow: 0 0 6px rgba(245, 197, 66, 0.7);
+      box-shadow: 0 0 6px rgba(var(--gold-rgb), 0.7);
     }
 
     /* Galeria de Imagens do Dashboard em Grid Responsivo (2 colunas desktop, 1 coluna mobile) */
@@ -1263,9 +1371,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       margin: 1.5rem auto 0;
       border-radius: 18px;
       overflow: hidden;
-      border: 1px solid rgba(96, 165, 250, 0.25);
-      box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.75), 0 0 16px rgba(245, 197, 66, 0.1);
-      background: #030712;
+      border: 1px solid rgba(var(--lineblue-rgb), 0.25);
+      box-shadow: 0 14px 34px -6px rgba(var(--shadow-rgb), 0.75), 0 0 16px rgba(var(--gold-rgb), 0.1);
+      background: var(--bg-figure-deep);
       position: relative;
       aspect-ratio: 16 / 9;
     }
@@ -1286,9 +1394,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       margin: 1rem auto 0;
       border-radius: 18px;
       overflow: hidden;
-      border: 1.5px solid rgba(245, 197, 66, 0.32);
-      background: linear-gradient(135deg, rgba(16, 34, 78, 0.88) 0%, rgba(10, 24, 58, 0.95) 100%);
-      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(245, 197, 66, 0.12);
+      border: 1.5px solid rgba(var(--gold-rgb), 0.32);
+      background: var(--grad-media);
+      box-shadow: 0 16px 36px -6px rgba(var(--shadow-rgb), 0.75), 0 0 18px rgba(var(--gold-rgb), 0.12);
       aspect-ratio: 16 / 10;
       min-height: 520px;
       position: relative;
@@ -1306,9 +1414,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       margin-top: 1.6rem;
       padding: 1.25rem 1.5rem;
       border-radius: 18px 8px 16px 8px;
-      border: 1.5px solid rgba(245, 197, 66, 0.45);
-      background: linear-gradient(135deg, rgba(245, 197, 66, 0.1) 0%, rgba(27, 58, 107, 0.35) 60%, rgba(10, 26, 63, 0.55) 100%);
-      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(245, 197, 66, 0.08);
+      border: 1.5px solid rgba(var(--gold-rgb), 0.45);
+      background: var(--grad-callout);
+      box-shadow: 0 8px 24px -4px rgba(var(--shadow-rgb), 0.5), inset 0 0 16px rgba(var(--gold-rgb), 0.08);
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -1325,11 +1433,11 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       justify-content: center;
       flex-shrink: 0;
       font-size: 1.25rem;
-      box-shadow: 0 4px 12px rgba(245, 197, 66, 0.35);
+      box-shadow: 0 4px 12px rgba(var(--gold-rgb), 0.35);
     }
 
     .recruiter-highlight-text {
-      color: #fef08a;
+      color: var(--tx-gold-soft);
       font-size: 1.02rem;
       font-weight: 600;
       line-height: 1.5;
@@ -1368,19 +1476,19 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     /* Contact Section - Canvas / Painting Frame (Quadro em Tela) */
     .canvas-frame-container {
-      background: linear-gradient(135deg, #1c1308 0%, #30200e 50%, #170f07 100%);
+      background: var(--grad-frame);
       padding: 14px;
       border-radius: 32px 12px 32px 12px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 12px rgba(245, 197, 66, 0.25);
+      box-shadow: 0 25px 60px rgba(var(--shadow-rgb), 0.8), inset 0 0 12px rgba(var(--gold-rgb), 0.25);
       border: 2px solid #b87a28;
       position: relative;
     }
 
     .canvas-matte {
       background: 
-        radial-gradient(ellipse at 80% 20%, rgba(245, 197, 66, 0.08) 0%, transparent 50%),
-        linear-gradient(145deg, rgba(14, 28, 64, 0.95), rgba(7, 16, 40, 0.95));
-      border: 1px dashed rgba(245, 197, 66, 0.35);
+        radial-gradient(ellipse at 80% 20%, rgba(var(--gold-rgb), 0.08) 0%, transparent 50%),
+        var(--grad-matte);
+      border: 1px dashed rgba(var(--gold-rgb), 0.35);
       border-radius: 24px 8px 24px 8px;
       padding: 3rem 2.5rem;
       position: relative;
@@ -1406,13 +1514,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .contact-info-block h3 {
       font-size: 2.6rem;
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0 0 1rem;
       line-height: 1.15;
     }
 
     .contact-info-block p {
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 1.05rem;
       line-height: 1.7;
       margin-bottom: 2rem;
@@ -1430,26 +1538,26 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       gap: 1.1rem;
       padding: 0.9rem 1.35rem;
       border-radius: 18px 6px 16px 6px;
-      background: rgba(6, 13, 31, 0.75);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      color: #e2e8f0;
+      background: var(--bg-icon-circle);
+      border: 1px solid rgba(var(--slate-rgb), 0.18);
+      color: var(--tx-body);
       text-decoration: none;
       transition: all 0.25s ease;
     }
 
     .contact-item-link:hover {
-      background: rgba(27, 58, 107, 0.55);
+      background: rgba(var(--navy-rgb), 0.55);
       border-color: var(--vg-gold);
-      color: #ffffff;
+      color: var(--tx-strong);
       transform: translateX(6px);
-      box-shadow: 0 4px 18px rgba(245, 197, 66, 0.15);
+      box-shadow: 0 4px 18px rgba(var(--gold-rgb), 0.15);
     }
 
     .contact-item-icon {
       width: 40px;
       height: 40px;
       border-radius: 50% 30% 50% 30%;
-      background: rgba(245, 197, 66, 0.18);
+      background: rgba(var(--gold-rgb), 0.18);
       color: var(--vg-gold);
       display: flex;
       align-items: center;
@@ -1459,11 +1567,11 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     /* Interactive message mockup form */
     .quick-message-form {
-      background: rgba(6, 13, 31, 0.85);
+      background: var(--bg-form);
       padding: 2.2rem;
       border-radius: 24px 8px 24px 8px;
-      border: 1px solid rgba(96, 165, 250, 0.25);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(var(--lineblue-rgb), 0.25);
+      box-shadow: 0 10px 30px rgba(var(--shadow-rgb),0.5);
     }
 
     .form-group {
@@ -1474,17 +1582,17 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       display: block;
       font-size: 0.85rem;
       font-weight: 600;
-      color: #cbd5e1;
+      color: var(--tx-soft);
       margin-bottom: 0.4rem;
     }
 
     .form-input {
       width: 100%;
       padding: 0.8rem 1.1rem;
-      background: rgba(14, 25, 54, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: var(--bg-input);
+      border: 1px solid rgba(var(--slate-rgb), 0.28);
       border-radius: 12px 4px 12px 4px;
-      color: #ffffff;
+      color: var(--tx-strong);
       font-family: inherit;
       font-size: 0.95rem;
       box-sizing: border-box;
@@ -1494,7 +1602,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .form-input:focus {
       outline: none;
       border-color: var(--vg-gold);
-      box-shadow: 0 0 0 3px rgba(245, 197, 66, 0.25);
+      box-shadow: 0 0 0 3px rgba(var(--gold-rgb), 0.25);
     }
 
     /* Links rápidos de Contato (LinkedIn & GitHub) */
@@ -1515,17 +1623,17 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       font-size: 0.88rem;
       font-weight: 600;
       color: var(--vg-gold);
-      background: rgba(245, 197, 66, 0.08);
-      border: 1px solid rgba(245, 197, 66, 0.45);
+      background: rgba(var(--gold-rgb), 0.08);
+      border: 1px solid rgba(var(--gold-rgb), 0.45);
       text-decoration: none;
       transition: all 0.25s ease;
     }
 
     .contact-quick-btn:hover {
-      background: rgba(245, 197, 66, 0.22);
+      background: rgba(var(--gold-rgb), 0.22);
       border-color: var(--vg-gold);
-      color: #ffffff;
-      box-shadow: 0 0 14px rgba(245, 197, 66, 0.35);
+      color: var(--tx-strong);
+      box-shadow: 0 0 14px rgba(var(--gold-rgb), 0.35);
       transform: translateY(-2px);
     }
 
@@ -1550,9 +1658,9 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       width: 34px;
       height: 34px;
       border-radius: 10px 4px 10px 4px;
-      color: #cbd5e1;
-      background: rgba(245, 197, 66, 0.08);
-      border: 1px solid rgba(245, 197, 66, 0.28);
+      color: var(--tx-soft);
+      background: rgba(var(--gold-rgb), 0.08);
+      border: 1px solid rgba(var(--gold-rgb), 0.28);
       text-decoration: none;
       transition: all 0.25s ease;
     }
@@ -1560,15 +1668,15 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .nav-social-btn:hover {
       color: var(--vg-gold);
       border-color: var(--vg-gold);
-      background: rgba(245, 197, 66, 0.2);
-      box-shadow: 0 0 10px rgba(245, 197, 66, 0.4);
+      background: rgba(var(--gold-rgb), 0.2);
+      box-shadow: 0 0 10px rgba(var(--gold-rgb), 0.4);
       transform: translateY(-2px);
     }
 
     /* Footer */
     .portfolio-footer {
-      border-top: 1px solid rgba(245, 158, 11, 0.15);
-      background: rgba(6, 13, 31, 0.95);
+      border-top: 1px solid rgba(var(--gold-rgb), 0.15);
+      background: var(--bg-footer);
       padding: 3rem 1.5rem;
       text-align: center;
       margin-top: 5rem;
@@ -1577,7 +1685,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .footer-quote {
       font-family: var(--font-display);
       font-style: italic;
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 1.1rem;
       max-width: 600px;
       margin: 0 auto 1.5rem;
@@ -1593,7 +1701,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .footer-social-link {
-      color: #94a3b8;
+      color: var(--tx-muted);
       font-size: 0.88rem;
       text-decoration: none;
       transition: color 0.25s ease, text-shadow 0.25s ease;
@@ -1601,7 +1709,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .footer-social-link:hover {
       color: var(--vg-gold);
-      text-shadow: 0 0 8px rgba(245, 197, 66, 0.45);
+      text-shadow: 0 0 8px rgba(var(--gold-rgb), 0.45);
     }
 
     .footer-copy {
@@ -1635,12 +1743,12 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       gap: 0.85rem;
       margin-bottom: 1.6rem;
       padding-bottom: 0.9rem;
-      border-bottom: 1px solid rgba(245, 197, 66, 0.2);
+      border-bottom: 1px solid rgba(var(--gold-rgb), 0.2);
     }
 
     .curriculo-card-header h3 {
       font-size: 1.65rem;
-      color: #ffffff;
+      color: var(--tx-strong);
       margin: 0;
     }
 
@@ -1648,8 +1756,8 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       width: 42px;
       height: 42px;
       border-radius: 12px 6px 14px 6px;
-      background: rgba(245, 197, 66, 0.15);
-      border: 1px solid rgba(245, 197, 66, 0.35);
+      background: rgba(var(--gold-rgb), 0.15);
+      border: 1px solid rgba(var(--gold-rgb), 0.35);
       color: var(--vg-gold);
       display: flex;
       align-items: center;
@@ -1666,7 +1774,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .curriculo-item {
       position: relative;
       padding-left: 1.6rem;
-      border-left: 2px solid rgba(245, 197, 66, 0.3);
+      border-left: 2px solid rgba(var(--gold-rgb), 0.3);
       transition: border-color 0.25s ease;
     }
 
@@ -1683,7 +1791,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       height: 10px;
       border-radius: 50%;
       background: var(--vg-gold);
-      box-shadow: 0 0 8px rgba(245, 197, 66, 0.8);
+      box-shadow: 0 0 8px rgba(var(--gold-rgb), 0.8);
     }
 
     .curriculo-item-top {
@@ -1697,7 +1805,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
     .curriculo-role-title {
       font-size: 1.2rem;
-      color: #ffffff;
+      color: var(--tx-strong);
       font-weight: 600;
       margin: 0;
     }
@@ -1706,11 +1814,11 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       display: inline-flex;
       align-items: center;
       padding: 0.22rem 0.75rem;
-      background: rgba(44, 95, 138, 0.35);
-      border: 1px solid rgba(147, 197, 253, 0.3);
+      background: var(--bg-badge);
+      border: 1px solid rgba(var(--sky-rgb), 0.3);
       border-radius: 14px 4px 12px 4px;
       font-size: 0.82rem;
-      color: #bae6fd;
+      color: var(--tx-sky);
       font-weight: 600;
       white-space: nowrap;
     }
@@ -1735,7 +1843,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     .curriculo-bullet-list li {
       position: relative;
       padding-left: 1.25rem;
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 0.94rem;
       line-height: 1.6;
     }
@@ -1776,13 +1884,13 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       justify-content: space-between;
       align-items: center;
       padding: 0.75rem 1rem;
-      background: rgba(6, 13, 29, 0.65);
-      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: var(--bg-panel-soft);
+      border: 1px solid rgba(var(--slate-rgb), 0.18);
       border-radius: 14px 6px 14px 6px;
     }
 
     .curriculo-lang-name {
-      color: #f8fafc;
+      color: var(--tx-strong);
       font-weight: 600;
       font-size: 0.94rem;
     }
@@ -1792,15 +1900,15 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       font-size: 0.82rem;
       font-weight: 600;
       padding: 0.18rem 0.65rem;
-      background: rgba(245, 197, 66, 0.12);
-      border: 1px solid rgba(245, 197, 66, 0.35);
+      background: rgba(var(--gold-rgb), 0.12);
+      border: 1px solid rgba(var(--gold-rgb), 0.35);
       border-radius: 999px;
     }
 
     .curriculo-course-item {
       padding: 0.8rem 1rem;
-      background: rgba(6, 13, 29, 0.65);
-      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: var(--bg-panel-soft);
+      border: 1px solid rgba(var(--slate-rgb), 0.18);
       border-radius: 14px 6px 14px 6px;
       display: flex;
       align-items: center;
@@ -1808,12 +1916,12 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .curriculo-course-item:hover {
-      border-color: rgba(245, 197, 66, 0.45);
+      border-color: rgba(var(--gold-rgb), 0.45);
       transform: translateX(3px);
     }
 
     .curriculo-course-link {
-      color: #ffffff;
+      color: var(--tx-strong);
       text-decoration: none;
       font-size: 0.93rem;
       font-weight: 600;
@@ -1830,7 +1938,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
     }
 
     .curriculo-course-static {
-      color: #cbd5e1;
+      color: var(--tx-soft);
       font-size: 0.93rem;
       font-weight: 500;
       display: flex;
@@ -1854,10 +1962,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
         top: 100%;
         left: 0;
         right: 0;
-        background: #081126;
+        background: var(--bg-mobile-menu);
         flex-direction: column;
         padding: 1.5rem;
-        border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+        border-bottom: 1px solid rgba(var(--gold-rgb), 0.2);
         gap: 1rem;
       }
       .nav-links.open {
@@ -1953,6 +2061,10 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
               <a href="https://github.com/amandaDuaibs" target="_blank" rel="noopener" class="nav-social-btn" aria-label="GitHub de Amanda Duaibs (abre em nova aba)">
                 <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               </a>
+              <button id="themeToggle" class="nav-social-btn" type="button" aria-label="Alternar entre tema claro (Girassóis) e escuro (Noite Estrelada)" title="Alternar tema">
+                <svg class="theme-icon-sun" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path stroke-linecap="round" d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.8 4.8l1.6 1.6M17.6 17.6l1.6 1.6M19.2 4.8l-1.6 1.6M6.4 17.6l-1.6 1.6"/></svg>
+                <svg class="theme-icon-moon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8z"/></svg>
+              </button>
             </li>
             <li>
               <a href="#contato" class="btn-artistic btn-artistic-primary" style="padding: 0.45rem 1.1rem; font-size: 0.85rem;">
@@ -2018,7 +2130,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       <!-- Wavy Brushstroke Divider -->
       <div class="vg-wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(10, 26, 63, 0.45)"></path>
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(var(--navy-rgb), 0.45)"></path>
         </svg>
       </div>
 
@@ -2157,7 +2269,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       <!-- Wavy Brushstroke Divider 2 -->
       <div class="vg-wave-divider flip" aria-hidden="true">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0 C200,90 400,-20 600,60 C800,120 1000,20 1200,80 L1200,120 L0,120 Z" fill="rgba(6, 13, 29, 0.4)"></path>
+          <path d="M0,0 C200,90 400,-20 600,60 C800,120 1000,20 1200,80 L1200,120 L0,120 Z" fill="rgba(var(--night-rgb), 0.4)"></path>
         </svg>
       </div>
 
@@ -2275,7 +2387,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
                     <span class="curriculo-period-badge">2020–2025</span>
                   </div>
                   <span class="curriculo-company-name">Centro Universitário ENIAC</span>
-                  <div style="background:rgba(6, 13, 29, 0.7); border:1px solid rgba(245, 197, 66, 0.25); border-radius:12px 4px 12px 4px; padding:0.75rem 0.9rem; margin-top:0.5rem;">
+                  <div style="background:rgba(var(--night-rgb), 0.7); border:1px solid rgba(var(--gold-rgb), 0.25); border-radius:12px 4px 12px 4px; padding:0.75rem 0.9rem; margin-top:0.5rem;">
                     <strong style="color:var(--vg-gold); font-size:0.85rem; display:block; margin-bottom:0.2rem;">TCC:</strong>
                     <span style="color:#e2e8f0; font-size:0.88rem; line-height:1.5; display:block;">
                       Uma Abordagem Híbrida para Detecção de Fake News Combinando Análise Textual (RoBERTa) e Relações entre Usuários (Graph Neural Networks).
@@ -2415,7 +2527,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       <!-- Wavy Brushstroke Divider Projetos -->
       <div class="vg-wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(10, 26, 63, 0.45)"></path>
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(var(--navy-rgb), 0.45)"></path>
         </svg>
       </div>
 
@@ -2538,7 +2650,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       <!-- Wavy Brushstroke Divider 3 -->
       <div class="vg-wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(10, 26, 63, 0.45)"></path>
+          <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" fill="rgba(var(--navy-rgb), 0.45)"></path>
         </svg>
       </div>
 
@@ -2650,7 +2762,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <div class="contact-grid">
               <div class="contact-info-block">
                 <span class="section-tag font-artistic" style="margin-bottom:0.2rem;">Uma tela em branco para o seu negócio</span>
-                <h2 class="font-artistic" style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 0.2rem 0 1rem; color:#fff;">
+                <h2 class="font-artistic" style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 0.2rem 0 1rem; color:var(--tx-strong);">
                   Vamos criar algo extraordinário juntos?
                 </h2>
                 <p>
@@ -2665,7 +2777,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
                   </div>
                   <div>
                     <span style="font-size:0.75rem; color:#94a3b8; display:block;">E-mail direto</span>
-                    <strong style="color:#ffffff;">amanda.duaibs@gmail.com</strong>
+                    <strong style="color:var(--tx-strong);">amanda.duaibs@gmail.com</strong>
                   </div>
                 </a>
 
@@ -2688,7 +2800,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
                   </div>
                   <div>
                     <span style="font-size:0.75rem; color:#94a3b8; display:block;">Conexões Profissionais</span>
-                    <strong style="color:#ffffff;">linkedin.com/in/amanda-duaibs ↗</strong>
+                    <strong style="color:var(--tx-strong);">linkedin.com/in/amanda-duaibs ↗</strong>
                   </div>
                 </a>
 
@@ -2699,7 +2811,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
                   </div>
                   <div>
                     <span style="font-size:0.75rem; color:#94a3b8; display:block;">Repositórios &amp; Código</span>
-                    <strong style="color:#ffffff;">github.com/amandaDuaibs ↗</strong>
+                    <strong style="color:var(--tx-strong);">github.com/amandaDuaibs ↗</strong>
                   </div>
                 </a>
 
@@ -2710,7 +2822,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
                   </div>
                   <div>
                     <span style="font-size:0.75rem; color:#94a3b8; display:block;">Artigos &amp; Insights de BI</span>
-                    <strong style="color:#ffffff;">@amanda.duaibs ↗</strong>
+                    <strong style="color:var(--tx-strong);">@amanda.duaibs ↗</strong>
                   </div>
                 </a>
               </div>
@@ -2718,7 +2830,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 
             <!-- Formulário interativo rápido -->
             <div class="quick-message-form">
-              <h3 style="font-size:1.75rem; color:#ffffff; margin:0 0 1.25rem;" class="font-artistic">Envie uma mensagem direta</h3>
+              <h3 style="font-size:1.75rem; color:var(--tx-strong); margin:0 0 1.25rem;" class="font-artistic">Envie uma mensagem direta</h3>
               
               <form id="contactForm" onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
@@ -2758,7 +2870,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <span>← Voltar ao portfólio</span>
           </button>
           
-          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(var(--gold-rgb), 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.35);">
             Estilo Van Gogh
           </span>
         </div>
@@ -2776,7 +2888,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Objetivo</h2>
             </div>
             <p class="detail-body-text">
               Transformar dados brutos de um varejista de moda em insights acionáveis por meio do Power BI, apoiando decisões estratégicas de vendas e marketing.
@@ -2787,7 +2899,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Contexto</h2>
             </div>
             <p class="detail-body-text">
               Análise de dados de vendas, demografia, campanhas de marketing e feedbacks de clientes de um varejista de moda, com o desafio de identificar padrões de vendas, diferenças regionais e o impacto real das campanhas anteriores.
@@ -2798,7 +2910,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Dashboard</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Dashboard</h2>
             </div>
             
             <div class="dashboard-gallery-grid">
@@ -2882,7 +2994,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Demonstração</h2>
             </div>
             <p class="detail-body-text">
               Assista à demonstração do dashboard e ao passo a passo da análise.
@@ -2901,7 +3013,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Processo</h2>
             </div>
             
             <div class="process-steps-list">
@@ -2941,7 +3053,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Tecnologias</h2>
             </div>
             <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
               <span>Power BI</span>
@@ -2954,7 +3066,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Resultados</h2>
             </div>
             <p class="detail-body-text">
               A análise transformou os dados brutos em uma visualização clara e orientada a decisões estratégicas, promovendo aumento de vendas e melhoria na satisfação dos clientes.
@@ -2987,7 +3099,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <span>← Voltar ao portfólio</span>
           </button>
           
-          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(var(--gold-rgb), 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.35);">
             Power BI Desktop
           </span>
         </div>
@@ -3005,7 +3117,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Objetivo</h2>
             </div>
             <p class="detail-body-text">
               Consolidar os dados de vendas do Gatito PetShop em um painel interativo no Power BI, permitindo acompanhar indicadores financeiros, compreender o perfil dos clientes e identificar oportunidades para otimizar as estratégias de marketing e vendas.
@@ -3016,7 +3128,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Contexto</h2>
             </div>
             <p class="detail-body-text">
               Dashboard desenvolvido para uma marca fictícia de pet shop, a partir do curso 'Power BI Desktop: construindo meu 1º dashboard'. Os dados já vieram tratados, mas as análises foram feitas de maneira autoral a partir do dashboard pronto.
@@ -3027,7 +3139,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Processo</h2>
             </div>
             
             <div class="process-steps-list">
@@ -3067,7 +3179,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Demonstração</h2>
             </div>
             <p class="detail-body-text">
               Assista à demonstração do dashboard e ao passo a passo da análise.
@@ -3092,7 +3204,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Tecnologias</h2>
             </div>
             <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
               <span>Power BI</span>
@@ -3106,7 +3218,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Resultados</h2>
             </div>
             <p class="detail-body-text">
               O dashboard consolidou os indicadores do Gatito PetShop em uma visualização clara e interativa: R$ 2,03 milhões em faturamento, cerca de 57 mil vendas e média de 2,61 pets por cliente, com crescimento consistente entre 2020 e 2022.
@@ -3146,7 +3258,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <span>← Voltar ao portfólio</span>
           </button>
           
-          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(var(--gold-rgb), 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.35);">
             Looker Studio
           </span>
         </div>
@@ -3164,7 +3276,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Objetivo</h2>
             </div>
             <p class="detail-body-text">
               Analisar o desempenho de uma campanha de aquisição de tráfego de uma empresa fictícia, identificando quais canais realmente trazem visitantes, como o público se comporta ao longo do tempo e quais ações são prioritárias para sustentar o crescimento.
@@ -3175,7 +3287,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Contexto</h2>
             </div>
             <p class="detail-body-text">
               Dashboard desenvolvido no Looker Studio a partir dos dados de campanha de uma marca fictícia, com análises autorais sobre composição de tráfego, comportamento de novos usuários e eficiência dos canais de aquisição.
@@ -3186,7 +3298,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Processo</h2>
             </div>
             
             <div class="process-steps-list">
@@ -3226,7 +3338,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Demonstração</h2>
             </div>
             <p class="detail-body-text">
               Dashboard interativo publicado no Looker Studio — explore os filtros e a composição de tráfego em tempo real.
@@ -3254,7 +3366,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Tecnologias</h2>
             </div>
             <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
               <span>Looker Studio</span>
@@ -3267,7 +3379,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados — Recomendações a partir da análise</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Resultados — Recomendações a partir da análise</h2>
             </div>
 
             <div class="process-steps-list" style="margin-top:0.5rem; margin-bottom: 1.6rem;">
@@ -3329,7 +3441,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
             <span>← Voltar ao portfólio</span>
           </button>
           
-          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(245, 197, 66, 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(245, 197, 66, 0.35);">
+          <span style="font-family: var(--font-display); font-size:1.15rem; color:var(--vg-gold); background:rgba(var(--gold-rgb), 0.12); padding: 0.25rem 0.85rem; border-radius: 9999px; border: 1px solid rgba(var(--gold-rgb), 0.35);">
             Looker Studio
           </span>
         </div>
@@ -3347,7 +3459,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Objetivo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Objetivo</h2>
             </div>
             <p class="detail-body-text">
               Analisar a operação logística de uma empresa fictícia, com foco no problema central: entender por que as entregas atrasam e como evolui a média de dias S2D (do envio à entrega ao cliente), para embasar decisões de melhoria operacional.
@@ -3358,7 +3470,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Contexto</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Contexto</h2>
             </div>
             <p class="detail-body-text">
               Dashboard desenvolvido no Looker Studio a partir dos dados operacionais de uma empresa fictícia de logística, com análises autorais sobre entregas, disponibilidade de frota e tempo médio de entrega ao longo de 2019–2021.
@@ -3369,7 +3481,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Processo</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Processo</h2>
             </div>
             
             <div class="process-steps-list">
@@ -3409,7 +3521,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Demonstração</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Demonstração</h2>
             </div>
             <p class="detail-body-text">
               Dashboard interativo publicado no Looker Studio — explore as entregas, a frota e a evolução da média de dias S2D.
@@ -3437,7 +3549,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Tecnologias</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Tecnologias</h2>
             </div>
             <div class="project-techs" style="margin-top:0; padding-top:0; border-top:none;">
               <span>Looker Studio</span>
@@ -3451,7 +3563,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
           <article class="vg-card detail-section-card">
             <div class="detail-section-heading">
               <span class="heading-dot" aria-hidden="true"></span>
-              <h2 class="font-artistic" style="font-size:1.65rem; color:#ffffff; margin:0;">Resultados — leitura do problema e recomendação</h2>
+              <h2 class="font-artistic" style="font-size:1.65rem; color:var(--tx-strong); margin:0;">Resultados — leitura do problema e recomendação</h2>
             </div>
             <p class="detail-body-text" style="margin-bottom: 1.25rem;">
               A análise aponta que o ponto crítico da operação está no tempo de entrega (S2D) e no volume de atrasos, não na capacidade de demanda. A recomendação é atacar o gargalo em três frentes:
@@ -3721,7 +3833,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       if (!name || !email) return;
 
       feedback.style.display = 'block';
-      feedback.style.background = 'rgba(245, 197, 66, 0.15)';
+      feedback.style.background = 'rgba(var(--gold-rgb), 0.15)';
       feedback.style.border = '1px solid #f5c542';
       feedback.style.color = '#fde68a';
       // Monta um mailto com os dados do formulário (funciona sem backend)
@@ -3729,7 +3841,7 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
       const subject = encodeURIComponent(`Contato via portfólio — ${name}`);
       const body = encodeURIComponent(`Nome: ${name}\nE-mail: ${email}\n\n${msg}`);
       window.location.href = `mailto:amanda.duaibs@gmail.com?subject=${subject}&body=${body}`;
-      feedback.innerHTML = `🎨 Abrindo seu e-mail, <strong>${name}</strong>! Se não abrir automaticamente, escreva para <a href="mailto:amanda.duaibs@gmail.com" style="color:#ffffff; text-decoration:underline;">amanda.duaibs@gmail.com</a>.`;
+      feedback.innerHTML = `🎨 Abrindo seu e-mail, <strong>${name}</strong>! Se não abrir automaticamente, escreva para <a href="mailto:amanda.duaibs@gmail.com" style="color:var(--tx-strong); text-decoration:underline;">amanda.duaibs@gmail.com</a>.`;
 
       document.getElementById('contactForm').reset();
     }
@@ -3881,5 +3993,19 @@ table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 
 })();
 
 </script>
+  <script>
+    (function () {
+      var btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var html = document.documentElement;
+        var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', next === 'light' ? '#f6eeda' : '#060d1d');
+      });
+    })();
+  </script>
 </body>
 </html>
